@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { NewPostPage } from '../new-post/new-post';
-import { UploadImagePage } from '../upload-image/upload-image';
 import { HomePage } from '../home/home';
 import { JobInfoPage } from '../job-info/job-info';
 
