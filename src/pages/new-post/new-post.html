@@ -1,0 +1,56 @@
+<ion-content padding id="page4">
+  <form id="newPost-form18">
+    <h3 id="newPost-heading4" style="color:#000000;"></h3>
+    <ion-item id="newPost-input13">
+      <ion-label stacked>
+        Title:
+      </ion-label>
+      <ion-input type="text" placeholder="Give a title for your job"></ion-input>
+    </ion-item>
+    <ion-item id="newPost-input14">
+      <ion-label stacked>
+        Description:
+      </ion-label>
+      <ion-input type="text" placeholder="Explain what you need to be done"></ion-input>
+    </ion-item>
+    <ion-item id="newPost-select2">
+      <ion-label>
+        Category:
+      </ion-label>
+      <ion-select name="">
+        <ion-option>
+          Select a category
+        </ion-option>
+        <ion-option>
+          Home Renovatiob
+        </ion-option>
+        <ion-option>
+          Beauty & Health
+        </ion-option>
+        <ion-option>
+          Housekeeping
+        </ion-option>
+        <ion-option>
+          Child & Pet Care
+        </ion-option>
+        <ion-option>
+          IT& Web
+        </ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item color="none" on-click="goToUploadImage()" id="newPost-list-item41">
+      <ion-icon name="add-circle" item-left></ion-icon>
+      Add image
+    </ion-item>
+    <ion-item id="newPost-input16">
+      <ion-label stacked>
+        Deadline:
+      </ion-label>
+      <ion-input type="date" placeholder="Explain what you need to be done"></ion-input>
+    </ion-item>
+    <button id="newPost-button9" ion-button color="positive" block style="border-radius:50px 50px 50px 50px;" on-click="goToHome()">
+      <ion-icon name="checkmark-circle"></ion-icon>
+      Post it!
+    </button>
+  </form>
+</ion-content>

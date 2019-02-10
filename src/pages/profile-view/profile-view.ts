@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { JobInfoPage } from '../job-info/job-info';
+import { ReviewsPage } from '../reviews/reviews';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-profile-view',
+  templateUrl: 'profile-view.html'
 })
-export class HomePage {
+export class ProfileViewPage {
   // this tells the tabs component which Pages
   // should be each tab's root Page
   constructor(public navCtrl: NavController) {
   }
-  goToJobInfo(params){
+  goToReviews(params){
     if (!params) params = {};
-    this.navCtrl.push(JobInfoPage);
+    this.navCtrl.push(ReviewsPage);
   }
 }
