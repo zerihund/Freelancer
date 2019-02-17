@@ -1,3 +1,15 @@
 page-home {
-
+  .card {
+    width: 100vw;
+    margin: -16px 0 0 -16px;
+  }
+  .list {
+    margin-top: 10px;
+  }
+  .item {
+    padding-left: 0;
+  }
+  .price {
+    color: color($colors, secondary);
+  }
 }

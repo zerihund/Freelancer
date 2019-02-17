@@ -13,10 +13,11 @@ import { NewOfferPage } from '../pages/new-offer/new-offer';
 import { UploadImagePage } from '../pages/upload-image/upload-image';
 import { ProfileViewPage } from '../pages/profile-view/profile-view';
 import { ReviewsPage } from '../pages/reviews/reviews';
-
-
+import { HttpClientModule } from '@angular/common/http';
+import { PipesModule } from '../pipes/pipes.module';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { JobProvider } from '../providers/job/job';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    PipesModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -55,7 +58,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    JobProvider,
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
 export class AppModule {}
