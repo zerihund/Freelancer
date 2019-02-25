@@ -8,23 +8,25 @@
 <ion-content padding id="page3">
   <ion-card>
     <ion-slides autoplay="3000" [pager]="true">
-      <ion-slide>
+      <ion-slide (click)="goToCategory('IT and Tech ')">
         <img src="assets/img/1uWxOgDQguuaqpYRgCbj_2017-08-02-07-35-56-1000x667.jpg"/>
+        <p>IT and Tech</p>
       </ion-slide>
-      <ion-slide>
+      <ion-slide (click)="goToCategory('Housekeeping')">
         <img src="assets/img/1uWxOgDQguuaqpYRgCbj_2017-08-02-07-35-56-1000x667.jpg"/>
+        <p>Housekeeping</p>
       </ion-slide>
-      <ion-slide>
+      <ion-slide (click)="goToCategory('Home Renovation')">
         <img src="assets/img/1uWxOgDQguuaqpYRgCbj_2017-08-02-07-35-56-1000x667.jpg"/>
+        <p>Home Renovation</p>
       </ion-slide>
-      <ion-slide>
+      <ion-slide (click)="goToCategory('Children and Pet Care')">
         <img src="assets/img/1uWxOgDQguuaqpYRgCbj_2017-08-02-07-35-56-1000x667.jpg"/>
+        <p>Children and Pet Care</p>
       </ion-slide>
-      <ion-slide>
+      <ion-slide (click)="goToCategory('Beauty and Health')">
         <img src="assets/img/1uWxOgDQguuaqpYRgCbj_2017-08-02-07-35-56-1000x667.jpg"/>
-      </ion-slide>
-      <ion-slide>
-        <img src="assets/img/1uWxOgDQguuaqpYRgCbj_2017-08-02-07-35-56-1000x667.jpg"/>
+        <p>Beauty and Health</p>
       </ion-slide>
     </ion-slides>
   </ion-card>
@@ -38,13 +40,13 @@
       </div>
     </ion-item>
     <ion-item-sliding *ngFor="let job of jobArray | async">
-      <ion-item color="none" (click)="goToJobInfo()" id="home-list-item9">
+      <ion-item color="none" (click)="goToJobInfo(job)" id="home-list-item9">
         <ion-thumbnail item-left>
           <img [src]="(job.file_id | thumbnail: 'small' | async)">
         </ion-thumbnail>
         <h2>{{job.title}}</h2>
-        <p class="price">{{getPrice(job.description)}}</p>
-        <p>{{getDescription(job.description)}}</p>
+        <p class="price">{{getDescription(job.description).price}}</p>
+        <p>{{getDescription(job.description).description}}</p>
       </ion-item>
       <ion-item-options side="left">
         <button ion-button color="balanced">

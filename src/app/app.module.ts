@@ -18,6 +18,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { JobProvider } from '../providers/job/job';
+import { CategoryPage } from '../pages/category/category';
 
 @NgModule({
   declarations: [
@@ -32,13 +33,14 @@ import { JobProvider } from '../providers/job/job';
     NewOfferPage,
     UploadImagePage,
     ProfileViewPage,
-    ReviewsPage
+    ReviewsPage,
+    CategoryPage
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     PipesModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -53,13 +55,15 @@ import { JobProvider } from '../providers/job/job';
     NewOfferPage,
     UploadImagePage,
     ProfileViewPage,
-    ReviewsPage
+    ReviewsPage,
+    CategoryPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     JobProvider,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-  ]
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+  ],
 })
-export class AppModule {}
+export class AppModule {
+}

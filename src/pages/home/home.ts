@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { JobInfoPage } from '../job-info/job-info';
 import { JobProvider } from '../../providers/job/job';
 import { Observable } from 'rxjs';
+import { CategoryPage } from '../category/category';
 
 @Component({
   selector: 'page-home',
@@ -25,18 +26,16 @@ export class HomePage {
   };
 
   // go to job info page
-  goToJobInfo(params) {
-    if (!params) params = {};
-    this.navCtrl.push(JobInfoPage).catch();
+  goToJobInfo(job) {
+    this.navCtrl.push(JobInfoPage, { job: job }).catch();
   }
 
   // parse description json
   getDescription = (description) => {
-    return JSON.parse(description).description;
+    return JSON.parse(description);
   };
 
-  // parse price json
-  getPrice = (description) => {
-    return JSON.parse(description).price;
+  goToCategory = (category: string) => {
+    this.navCtrl.push(CategoryPage, {category: category}).catch();
   };
 }

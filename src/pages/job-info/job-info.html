@@ -8,23 +8,20 @@
 <ion-content padding id="page7">
   <ion-card id="jobInfo-card22">
     <ion-list>
-      <div style="width:100%;height:220px;margin:0px 0px;line-height:250px;background-color:#e8ebef;text-align:center;">
-        <i class="icon ion-image" style="font-size:64px;color:#888;vertical-align:middle;"></i>
-      </div>
       <div class="spacer" style="width:300px;height:20px;" id="jobInfo-spacer2"></div>
       <div id="jobInfo-markdown13" class="show-list-numbers-and-dots">
         <p style="color:#000000;font-size:20px;">
           <strong>
-            Old bed needs repairing
+            {{job.title}}
           </strong>
         </p>
       </div>
       <div class="spacer" style="width:300px;height:16px;" id="jobInfo-spacer4"></div>
-      <img src="assets/img/SSYhbhVCReq2Z7orA8hp_667654163_4e797d71ea_b.jpg" />
+      <img [src]="job.file_id | thumbnail: 'large' | async">
       <ion-item id="jobInfo-list-item-container7">
         <div id="jobInfo-markdown11" class="show-list-numbers-and-dots">
           <p style="margin-top:0px;color:#000000;">
-            Got this old bed from my grandma but it needs some fixing. It should be done during a weekend or after 18:00 during the week.
+            {{getDescription(job.description)}}
           </p>
         </div>
       </ion-item>
