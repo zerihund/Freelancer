@@ -32,7 +32,7 @@ export class HomePage {
     this.previous_page = 0;
     this.jobArray = [];
     this.jobProvider.getAllJobs().subscribe(res => {
-      this.totalJob = res;
+      this.totalJob = res.reverse();
       this.jobArray = this.jobArray.concat(
         this.totalJob.slice(this.previous_page, this.current_page * 3));
     });
@@ -55,12 +55,18 @@ export class HomePage {
 
   loadMoreJobs = (event) => {
     if (this.current_page < this.numPages()) {
-      this.previous_page = this.current_page * 3;
-      this.current_page++;
-      this.jobArray = this.jobArray.concat(
-        this.totalJob.slice(this.previous_page, this.current_page * 3));
-      event.complete();
-    } else event.enable(false);
+      setTimeout(() => {
+        console.log('if is called');
+        this.previous_page = this.current_page * 3;
+        this.current_page++;
+        this.jobArray = this.jobArray.concat(
+          this.totalJob.slice(this.previous_page, this.current_page * 3));
+        event.complete();
+      }, 1000);
+    } else {
+      console.log('false is called');
+      event.enable(false);
+    }
   };
 
   // calculate number of pages

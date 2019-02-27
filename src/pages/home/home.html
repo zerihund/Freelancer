@@ -10,7 +10,7 @@
     <ion-slides autoplay="3000" [pager]="true">
       <ion-slide (click)="goToCategory('IT and Tech ')">
         <img src="assets/img/1uWxOgDQguuaqpYRgCbj_2017-08-02-07-35-56-1000x667.jpg"/>
-        <p>IT and Tech</p>
+        <p>IT & Tech</p>
       </ion-slide>
       <ion-slide (click)="goToCategory('Housekeeping')">
         <img src="assets/img/1uWxOgDQguuaqpYRgCbj_2017-08-02-07-35-56-1000x667.jpg"/>
@@ -22,11 +22,11 @@
       </ion-slide>
       <ion-slide (click)="goToCategory('Children and Pet Care')">
         <img src="assets/img/1uWxOgDQguuaqpYRgCbj_2017-08-02-07-35-56-1000x667.jpg"/>
-        <p>Children and Pet Care</p>
+        <p>Children & Pet Care</p>
       </ion-slide>
       <ion-slide (click)="goToCategory('Beauty and Health')">
         <img src="assets/img/1uWxOgDQguuaqpYRgCbj_2017-08-02-07-35-56-1000x667.jpg"/>
-        <p>Beauty and Health</p>
+        <p>Beauty & Health</p>
       </ion-slide>
     </ion-slides>
   </ion-card>
@@ -57,7 +57,7 @@
 
   </ion-list>
 
-  <ion-infinite-scroll (ionInfinite)="loadMoreJobs($event)">
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreJobs($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="Loading more data...">

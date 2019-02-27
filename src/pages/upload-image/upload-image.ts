@@ -6,23 +6,29 @@ import { JobInfoPage } from '../job-info/job-info';
 
 @Component({
   selector: 'page-upload-image',
-  templateUrl: 'upload-image.html'
+  templateUrl: 'upload-image.html',
 })
 export class UploadImagePage {
-  // this tells the tabs component which Pages
-  // should be each tab's root Page
+
   constructor(public navCtrl: NavController) {
   }
-  goToNewPost(params){
+
+  goToNewPost(params) {
     if (!params) params = {};
     this.navCtrl.push(NewPostPage);
-  }goToUploadImage(params){
+  }
+
+  goToUploadImage(params) {
     if (!params) params = {};
     this.navCtrl.push(UploadImagePage);
-  }goToHome(params){
+  }
+
+  goToHome(params) {
     if (!params) params = {};
     this.navCtrl.push(HomePage);
-  }goToJobInfo(params){
+  }
+
+  goToJobInfo(params) {
     if (!params) params = {};
     this.navCtrl.push(JobInfoPage);
   }
