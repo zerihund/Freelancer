@@ -19,6 +19,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { JobProvider } from '../providers/job/job';
 import { CategoryPage } from '../pages/category/category';
+import { UserProvider } from '../providers/user/user';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { CategoryPage } from '../pages/category/category';
     SplashScreen,
     JobProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
+    UserProvider,
   ],
 })
 export class AppModule {
