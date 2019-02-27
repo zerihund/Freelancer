@@ -24,3 +24,7 @@ export interface User {
   full_name?: string;
   time_created?: Date;
 }
+export  interface UserExists {
+  username:string;
+  available:boolean;
+}

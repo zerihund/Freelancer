@@ -16,13 +16,6 @@ export class LoginPage {
   // this tells the tabs component which Pages
   // should be each tab's root Page
   user: User = { username: null };
-  showRegister = false;
-  confirmPassword = '';
-  validUsername = false; userInput = false;
-  validFullName = false;
-  validPassword = false; passwordInput = false;
-  validEmail =false; emailInput =false;
-
   constructor(public navCtrl: NavController, private mediaProvider:UserProvider) {
   }
   login() {

@@ -6,41 +6,49 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page6">
-  <form id="signup-form2">
+  <ion-card>
+  <form id="signup-form2" (ngSubmit)="registerUser()">
     <ion-list id="signup-list2">
       <ion-item id="signup-input5">
         <ion-label>
           Full name
         </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
+        <ion-input (ionBlur)="validName()" [(ngModel)]="user.full_name" name="full_name" placeholder=""></ion-input>
       </ion-item>
+      <ion-label *ngIf="validFullName" color="danger" >Use the correct format of name</ion-label>
       <ion-item id="signup-input8">
         <ion-label>
           Username
         </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
+        <ion-input (ionBlur)="checkUserExists()" [(ngModel)]="user.username" required name="username" placeholder=""></ion-input>
       </ion-item>
+      <ion-label *ngIf="userAlert" color="danger" >The user already exists</ion-label>
+      <ion-label *ngIf="validUsername" color="danger" >The username must be at least 3 characters</ion-label>
       <ion-item id="signup-input6">
         <ion-label>
           Email
         </ion-label>
-        <ion-input type="email" placeholder=""></ion-input>
+        <ion-input (ionBlur)="emailCheck()" [(ngModel)]="user.email" type="email" required name="email" placeholder=""></ion-input>
       </ion-item>
+      <ion-label *ngIf="validEmail" color="danger" >Email must be ithe correct format</ion-label>
       <ion-item id="signup-input7">
         <ion-label>
           Password
         </ion-label>
-        <ion-input type="password" placeholder=""></ion-input>
+        <ion-input (ionBlur)="passwordCheck()" [(ngModel)]="user.password" required name="password" type="password" placeholder=""></ion-input>
       </ion-item>
+      <ion-label *ngIf="validPassword" color="danger" >The password must be at least 5 characters</ion-label>
       <ion-item id="signup-input9">
         <ion-label>
           Confirm Password
         </ion-label>
-        <ion-input type="password" placeholder=""></ion-input>
+        <ion-input (ionBlur)="passWordMatch()" [(ngModel)]="confirmPassword" name="confirmPassword" type="password" placeholder=""></ion-input>
       </ion-item>
+      <ion-label *ngIf="passwordMatch" color="danger">The password must match!</ion-label>
     </ion-list>
-    <button id="signup-button3" ion-button color="balanced" block style="border-radius:50px 50px 50px 50px;" on-click="goToHome()">
+    <button id="signup-button3" ion-button color="balanced" block style="border-radius:50px 50px 50px 50px;" type="submit">
       Sign up
     </button>
   </form>
+  </ion-card>
 </ion-content>
