@@ -6,27 +6,29 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page5">
-  <form id="login-form1">
+  <ion-card>
+  <form id="login-form1" (ngSubmit)="login()">
     <ion-list id="login-list1">
       <ion-item id="login-input1">
         <ion-label>
           Username
         </ion-label>
-        <ion-input type="text" placeholder=""></ion-input>
+        <ion-input type="text" placeholder="Username" [(ngModel)] = "user.username" name="username"></ion-input>
       </ion-item>
       <ion-item id="login-input2">
         <ion-label>
           Password
         </ion-label>
-        <ion-input type="password" placeholder=""></ion-input>
+        <ion-input type="password" placeholder="Password" [(ngModel)]="user.password" name="password"></ion-input>
       </ion-item>
     </ion-list>
     <div class="spacer" style="height:40px;" id="login-spacer1"></div>
-    <button id="login-button1" ion-button color="positive" block style="border-radius:50px 50px 50px 50px;" on-click="goToHome()">
+    <button id="login-button1" ion-button color="positive" block style="border-radius:50px 50px 50px 50px;" type="submit">
       Login
     </button>
-    <button id="login-button2" ion-button clear color="positive" block on-click="goToSignup()">
+  </form>
+    <button id="login-button2" ion-button clear color="positive" block (click)="goSignUp()">
       Or create an account
     </button>
-  </form>
+  </ion-card>
 </ion-content>
