@@ -6,6 +6,7 @@ import { CategoryPage } from '../category/category';
 import { InfiniteScroll } from 'ionic-angular';
 import {LoginPage} from "../login/login";
 import {UploadImagePage} from "../upload-image/upload-image";
+import {UserProvider} from "../../providers/user/user";
 
 @Component({
   selector: 'page-home',
@@ -14,7 +15,7 @@ import {UploadImagePage} from "../upload-image/upload-image";
 export class HomePage {
   @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
 
-  constructor(public navCtrl: NavController, public jobProvider: JobProvider) {
+  constructor(public navCtrl: NavController, public jobProvider: JobProvider ,public userProvider:UserProvider) {
   }
 
   totalJob = [];
