@@ -29,7 +29,7 @@ export class LoginPage {
         localStorage.setItem('user_id', String(response.user.user_id));
         console.log('UserId');
         console.log(localStorage.getItem('user_id'));
-        this.navCtrl.push(JobInfoPage);
+        this.navCtrl.parent.select(1);
 
       },
       error => {
