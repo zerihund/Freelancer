@@ -20,6 +20,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { JobProvider } from '../providers/job/job';
 import { CategoryPage } from '../pages/category/category';
 import { UserProvider } from '../providers/user/user';
+import { SavedAddsPage } from '../pages/saved-adds/saved-adds'
+import { SentOffersPage } from '../pages/sent-offers/sent-offers'
+import { OwnJobsPage } from '../pages/own-jobs/own-jobs'
 
 @NgModule({
   declarations: [
@@ -35,7 +38,10 @@ import { UserProvider } from '../providers/user/user';
     UploadImagePage,
     ProfileViewPage,
     ReviewsPage,
-    CategoryPage
+    CategoryPage,
+    SavedAddsPage,
+    SentOffersPage,
+    OwnJobsPage,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +63,10 @@ import { UserProvider } from '../providers/user/user';
     UploadImagePage,
     ProfileViewPage,
     ReviewsPage,
-    CategoryPage
+    CategoryPage,
+    SavedAddsPage,
+    SentOffersPage,
+    OwnJobsPage,
   ],
   providers: [
     StatusBar,

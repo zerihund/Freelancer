@@ -2,6 +2,9 @@ import { Component } from '@angular/core'
 import { NavController } from 'ionic-angular'
 import { UserProvider } from '../../providers/user/user'
 import { User } from '../../interfaces/Media'
+import {SavedAddsPage} from '../saved-adds/saved-adds'
+import { OwnJobsPage } from '../own-jobs/own-jobs'
+import { SentOffersPage } from '../sent-offers/sent-offers'
 // import { MyOpenOffersPage } from '../my-open-offers/my-open-offers';
 // import { JobInfoOfferedPage } from '../job-info-offered/job-info-offered';
 // import { HomePage } from '../home/home';
@@ -102,4 +105,18 @@ export class ProfilePage {
       if (!params) params = {};
       this.navCtrl.push(MySavedAddsPage);
     }*/
+  goToSavedAdds (params) {
+    if (!params) params = {};
+    this.navCtrl.push(SavedAddsPage);
+  }
+
+  goToMyOwnJobs (params) {
+    if (!params) params = {};
+    this.navCtrl.push(OwnJobsPage);
+  }
+
+  goToMySentOffers (params) {
+    if (!params) params = {};
+    this.navCtrl.push(SentOffersPage);
+  }
 }
