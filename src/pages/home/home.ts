@@ -4,8 +4,8 @@ import { JobInfoPage } from '../job-info/job-info';
 import { JobProvider } from '../../providers/job/job';
 import { CategoryPage } from '../category/category';
 import { InfiniteScroll } from 'ionic-angular';
-import {LoginPage} from "../login/login";
-import {UploadImagePage} from "../upload-image/upload-image";
+import { LoginPage } from '../login/login';
+import { UploadImagePage } from '../upload-image/upload-image';
 
 @Component({
   selector: 'page-home',
@@ -54,9 +54,13 @@ export class HomePage {
   goToCategory = (category: string) => {
     this.navCtrl.push(CategoryPage, { category: category }).catch();
   };
-  goLogin=()=>{
-    this.navCtrl.push(LoginPage);
+
+  // go to log in page
+  goLogin = () => {
+    this.navCtrl.push(LoginPage).catch();
   };
+
+  // paging mechanism for ionic infinite scroll
   loadMoreJobs = (event) => {
     if (this.current_page < this.numPages()) {
       setTimeout(() => {
