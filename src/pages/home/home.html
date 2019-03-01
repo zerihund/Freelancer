@@ -1,13 +1,11 @@
 <ion-header>
     <ion-navbar>
     <ion-searchbar placeholder="What are you looking for?" name="Search" id="home-search1"></ion-searchbar>
+      <button ion-button block *ngIf="!userProvider.loggedIn" (click)="goLogin()">
+        <ion-icon name="log-in" align-items-end="1px" >Log In</ion-icon>
+      </button>
   </ion-navbar>
-  <button  ion-button >
-    <ion-icon name="log-in" (click)="goLogin()">  LogIn</ion-icon>
-  </button>
 </ion-header>
-
-
 <ion-content padding id="page3">
   <ion-card>
     <ion-slides autoplay="3000" [pager]="true">
