@@ -1,2 +1,16 @@
 page-my-profile {
+
+
+
+  ion-content {
+    .fixed-content {
+      @include linear-gradient(right, $dusk);
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      background-size: cover;
+    }
+
+  }
+
+
 }

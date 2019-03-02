@@ -3,12 +3,13 @@
   <ion-list id="myProfile-list5">
     <ion-item color="none" id="myProfile-list-item25">
       <ion-avatar item-left>
-        <img src="assets/img/Up8ireVvQ27IO93yg63P_profile03.jpg" />
+        <img [src]="mediaFilePath + (avatar | thumbnail: 'small' | async)" id="avatar">
       </ion-avatar>
       <h2>
         Samuel King
       </h2>
-      <ion-icon float-end name="create"> Edit</ion-icon>
+      <ion-buttons item-right><button ion-button clear color="dark"><ion-icon name="create"> Edit</ion-icon></button></ion-buttons>
+
     </ion-item>
 
   </ion-list>
