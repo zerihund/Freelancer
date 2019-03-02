@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { NavController } from 'ionic-angular'
 import { UserProvider } from '../../providers/user/user'
-import { TagReponse, User } from '../../interfaces/Media'
+import { Media, TagReponse, User } from '../../interfaces/Media'
 import { SavedAddsPage } from '../saved-adds/saved-adds'
 import { OwnJobsPage } from '../own-jobs/own-jobs'
 import { SentOffersPage } from '../sent-offers/sent-offers'
@@ -14,7 +14,7 @@ import { stringify } from 'querystring'
 })
 export class ProfilePage {
 
-  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
+  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/'
   private user: User
   private username: string
 //  private userId: string
@@ -23,7 +23,11 @@ export class ProfilePage {
   private projectFilesArray: TagReponse[]
   private userFilesArray: any
   private profileImage: TagReponse
-  avatar: string
+  private avatar: string
+//  private ownJobsArray: Media[]
+  private ownJobsArray = []
+  private numberOfOwnJobs: number
+  private userFiles: any
 
   constructor (
     public navCtrl: NavController,
@@ -31,10 +35,6 @@ export class ProfilePage {
     public mediaProvider: MediaProvider,
   ) {
   }
-
-  /*  ionViewDidLoad () {
-      this.getProfileInfo()
-    }*/
 
   ionViewWillEnter () {
     this.getProfileInfo()
@@ -48,9 +48,12 @@ export class ProfilePage {
     this.navCtrl.push(SavedAddsPage)
   }
 
-  goToMyOwnJobs (params) {
-    if (!params) params = {}
-    this.navCtrl.push(OwnJobsPage)
+  goToMyOwnJobs (files) {
+    this.navCtrl.push(OwnJobsPage, {
+      files: files,
+      avatar: this.avatar,
+
+    }).catch()
   }
 
   goToMySentOffers (params) {
@@ -76,8 +79,7 @@ export class ProfilePage {
     this.email = localStorage.getItem('email')
 
     this.getProfileImage()
-    this.getUserFilesByUserId()
-    //this.getProjectFiles()
+    this.getUserFiles()
   }
 
   private getProjectFiles () {
@@ -97,30 +99,39 @@ export class ProfilePage {
     )
   }
 
-  private getUserFilesByUserId () {
-    this.mediaProvider.getFilesByUserId(this.userId).subscribe(
-      result => {
-        this.userFilesArray = result
-        console.log(result)
-      }, error => {
+  private getProfileImage () {
+    this.mediaProvider.getFilesByTag('profile').subscribe(
+      (response: TagReponse[]) => {
+        response.forEach(file => {
+          if (file.user_id === this.userId) {
+            this.profileImage = file
+            this.avatar = file.file_id.toString()
+            console.log('Avatar id: ' + this.avatar)
+          }
+        })
+      },
+      error => {
         console.log(error)
       },
     )
   }
 
-  private getProfileImage () {
-    this.mediaProvider.getFilesByTag('profile').subscribe(
-      (response: TagReponse[]) => {
-          response.forEach(file => {
-            if(file.user_id === this.userId){
-              this.profileImage = file
-              this.avatar = file.file_id.toString();
-              console.log('avatar id: ' + this.avatar);
-            }
-          })
-      },
-      error => {
-        console.log(error)
+  private getUserFiles () {
+    new Promise((resolve, reject) => {
+      this.mediaProvider.getFilesByUserId(this.userId).subscribe(
+        result => {
+          this.userFilesArray = result
+          this.numberOfOwnJobs = Object.keys(result).length - 1
+          resolve(result)
+          console.log(
+            'Number of own jobs: ' + (Object.keys(result).length - 1))
+        }, error => {
+          console.log(error)
+        },
+      )
+    }).then(
+      result => {
+        this.userFiles = result
       },
     )
   }
