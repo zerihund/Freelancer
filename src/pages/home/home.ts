@@ -55,9 +55,13 @@ export class HomePage {
   goToCategory = (category: string) => {
     this.navCtrl.push(CategoryPage, { category: category }).catch();
   };
-  goLogin=()=>{
-    this.navCtrl.push(LoginPage);
+
+  // go to log in page
+  goLogin = () => {
+    this.navCtrl.push(LoginPage).catch();
   };
+
+  // paging mechanism for ionic infinite scroll
   loadMoreJobs = (event) => {
     if (this.current_page < this.numPages()) {
       setTimeout(() => {
