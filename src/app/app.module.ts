@@ -23,6 +23,7 @@ import { UserProvider } from '../providers/user/user';
 import { SavedAddsPage } from '../pages/saved-adds/saved-adds'
 import { SentOffersPage } from '../pages/sent-offers/sent-offers'
 import { OwnJobsPage } from '../pages/own-jobs/own-jobs'
+import { MediaProvider } from '../providers/media/media';
 
 @NgModule({
   declarations: [
@@ -72,8 +73,10 @@ import { OwnJobsPage } from '../pages/own-jobs/own-jobs'
     StatusBar,
     SplashScreen,
     JobProvider,
+    MediaProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UserProvider,
+    MediaProvider,
   ],
 })
 export class AppModule {

@@ -34,7 +34,7 @@ export class JobProvider {
     return this.http.post<any>('http://media.mw.metropolia.fi/wbma/media', data, httpOptions)
   };
 
-  // attach tag to media file
+  // attach "freelancer" tag to media file
   attachTag = (file_id) => {
     const param = {
       file_id: file_id,
