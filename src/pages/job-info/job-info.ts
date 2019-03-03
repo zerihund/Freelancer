@@ -18,7 +18,7 @@ export class JobInfoPage {
   descriptionJSON;
   userInfoJSON;
   priceOffer = 500;
-
+  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
   // parse description json
   getDescription = (description) => {

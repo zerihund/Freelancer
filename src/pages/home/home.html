@@ -43,7 +43,7 @@
     <ion-item-sliding *ngFor="let job of jobArray">
       <ion-item color="none" (click)="goToJobInfo(job)" id="home-list-item9">
         <ion-thumbnail item-left>
-          <img [src]="(job.file_id | thumbnail: 'small' | async)">
+          <img [src]="mediaFilePath + (job.file_id | thumbnail: 'small' | async)">
         </ion-thumbnail>
         <h2>{{job.title}}</h2>
         <p class="price">{{getDescription(job.description).price}}</p>

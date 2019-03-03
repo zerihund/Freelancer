@@ -14,7 +14,7 @@
         <P class="price">{{descriptionJSON.price}}</P>
       </div>
       <div class="spacer" style="width:300px;height:14px;" id="jobInfo-spacer4"></div>
-      <img [src]="job.file_id | thumbnail: 'large' | async">
+      <img [src]="mediaFilePath + (job.file_id | thumbnail: 'large' | async)">
       <ion-item id="jobInfo-list-item-container31">
         <div id="jobInfo-markdown49" class="show-list-numbers-and-dots">
           <p style="margin-top:0px;color:#000000;">

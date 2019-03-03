@@ -23,6 +23,7 @@ export class HomePage {
   jobs_per_page: number = 3;
   current_page = 1;
   previous_page = 0;
+  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
   ionViewDidEnter() {
     this.getAllJob();
@@ -65,7 +66,6 @@ export class HomePage {
   loadMoreJobs = (event) => {
     if (this.current_page < this.numPages()) {
       setTimeout(() => {
-        console.log('if is called');
         this.previous_page = this.current_page * 3;
         this.current_page++;
         this.jobArray = this.jobArray.concat(

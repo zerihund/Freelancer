@@ -37,7 +37,7 @@ export class LoginPage {
       });
   }
   goSignUp(){
-    this.navCtrl.push(SignupPage);
+    this.navCtrl.push(SignupPage).catch();
   }
 
 }

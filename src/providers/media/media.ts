@@ -11,7 +11,7 @@ import { Media, TagReponse, User } from '../../interfaces/Media'
 @Injectable()
 export class MediaProvider {
 
-  mediaAPI = 'http://media.mw.metropolia.fi/wbma/'
+  mediaAPI = 'http://media.mw.metropolia.fi/wbma/';
 
   constructor (public http: HttpClient) {
     console.log('Hello MediaProvider Provider')
@@ -30,7 +30,7 @@ export class MediaProvider {
       headers: new HttpHeaders({
         'x-access-token': localStorage.getItem('token'),
       }),
-    }
+    };
     return this.http.get<Media[]>(this.mediaAPI + 'media/user/' + id,
       httpOptions)
   }
@@ -40,7 +40,7 @@ export class MediaProvider {
       headers: new HttpHeaders({
         'x-access-token': localStorage.getItem('token'),
       }),
-    }
+    };
     return this.http.get<User>(this.mediaAPI + 'users/' + id,
       httpOtions)
   }

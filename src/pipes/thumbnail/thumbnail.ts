@@ -13,18 +13,18 @@ export class ThumbnailPipe implements PipeTransform {
   }
 
   async transform (id: number, ...args) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         this.mediaProvider.getSingleMedia(id).subscribe((response: Media) => {
             switch (args[0]) {
               case 'large':
-                resolve(response.thumbnails['w640'])
-                break
+                resolve(response.thumbnails['w640']);
+                break;
               case 'medium':
-                resolve(response.thumbnails['w320'])
-                break
+                resolve(response.thumbnails['w320']);
+                break;
               case 'screenshot':
-                resolve(response.screenshot)
-                break
+                resolve(response.screenshot);
+                break;
               default:
                 resolve(response.thumbnails['w160'])
             }

@@ -13,6 +13,7 @@ export class CategoryPage {
   }
 
   jobArray = [];
+  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
   ionViewDidEnter() {
     console.log('enter');
