@@ -23,6 +23,7 @@ export class LoginPage {
       (response: LoginResponse) => {
         console.log(response);
         this.mediaProvider.loggedIn = true;
+        localStorage.setItem('user', JSON.stringify(response.user))
         localStorage.setItem('token', response.token);
         localStorage.setItem('username', response.user.username);
         localStorage.setItem('email', response.user.email);

@@ -38,10 +38,10 @@ export class JobProvider {
   };
 
   // attach "freelancer" tag to media file
-  attachTag = (file_id) => {
+  attachTag = (file_id: number, tag: string) => {
     const param = {
       file_id: file_id,
-      tag: 'freelancer',
+      tag: tag,
     };
     const httpOptions = {
       headers: new HttpHeaders({
@@ -70,5 +70,15 @@ export class JobProvider {
   //
   //   // TODO calculate number of bids
   // }
+
+  uploadAvatar(data: any){
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'x-access-token': localStorage.getItem('token'),
+        }),
+      };
+    return this.http.post<any>('http://media.mw.metropolia.fi/wbma/media', data,
+      httpOptions)
+  };
 
 }
