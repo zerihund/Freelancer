@@ -1,13 +1,13 @@
-import { Component } from '@angular/core'
-import { NavController } from 'ionic-angular'
-import { UserProvider } from '../../providers/user/user'
-import { Media, TagReponse, User } from '../../interfaces/Media'
-import { SavedAddsPage } from '../saved-adds/saved-adds'
-import { OwnJobsPage } from '../own-jobs/own-jobs'
-import { SentOffersPage } from '../sent-offers/sent-offers'
-import { MediaProvider } from '../../providers/media/media'
-import { stringify } from 'querystring'
-import { JobProvider } from '../../providers/job/job'
+import { Component } from '@angular/core';
+import { NavController } from 'ionic-angular';
+import { UserProvider } from '../../providers/user/user';
+import { Media, TagReponse, User } from '../../interfaces/Media';
+import { SavedAddsPage } from '../saved-adds/saved-adds';
+import { OwnJobsPage } from '../own-jobs/own-jobs';
+import { SentOffersPage } from '../sent-offers/sent-offers';
+import { MediaProvider } from '../../providers/media/media';
+import { stringify } from 'querystring';
+import { JobProvider } from '../../providers/job/job';
 
 @Component({
   selector: 'page-my-profile',
@@ -15,19 +15,19 @@ import { JobProvider } from '../../providers/job/job'
 })
 export class ProfilePage {
 
-  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/'
-  private user: User
-  private username: string
-  private userId: number
-  private email: string
-  private projectFilesArray: TagReponse[]
-  private userFilesArray: any
-  private profileImage: TagReponse
-  private avatar: string
-  private numberOfOwnJobs: number
-  private userFiles: any
+  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
+  private user: User;
+  private username: string;
+  private userId: number;
+  private email: string;
+  private projectFilesArray: TagReponse[];
+  private userFilesArray: any;
+  private profileImage: TagReponse;
+  private avatar: string;
+  private numberOfOwnJobs: number;
+  private userFiles: any;
 
-  constructor (
+  constructor(
     public navCtrl: NavController,
     public userProvider: UserProvider,
     public mediaProvider: MediaProvider,
@@ -35,104 +35,104 @@ export class ProfilePage {
     this.user = JSON.parse(localStorage.getItem('user'));
   }
 
-  ionViewWillEnter () {
-    console.log('username is: ')
-    console.log(this.user.username)
-    this.getProfileInfo()
+  ionViewWillEnter() {
+    console.log('username is: ');
+    console.log(this.user.username);
+    this.getProfileInfo();
   }
 
   // ========================
   //        Navigation
   // ========================
-  goToSavedAdds (params) {
-    if (!params) params = {}
-    this.navCtrl.push(SavedAddsPage)
+  goToSavedAdds(params) {
+    if (!params) params = {};
+    this.navCtrl.push(SavedAddsPage);
   }
 
-  goToMyOwnJobs (files) {
+  goToMyOwnJobs(files) {
     this.navCtrl.push(OwnJobsPage, {
       files: files,
       avatar: this.avatar,
-    }).catch()
+    }).catch();
   }
 
-  goToMySentOffers (params) {
-    if (!params) params = {}
-    this.navCtrl.push(SentOffersPage)
+  goToMySentOffers(params) {
+    if (!params) params = {};
+    this.navCtrl.push(SentOffersPage);
   }
 
   // ========================
   //        Functions
   // ========================
-  logout () {
-    localStorage.clear()
-    this.userProvider.loggedIn = false
-    this.user = null
-    console.log('logout btn pressed')
-    console.log(this.userProvider.loggedIn)
-    this.navCtrl.parent.select(1)
+  logout() {
+    localStorage.clear();
+    this.userProvider.loggedIn = false;
+    this.user = null;
+    console.log('logout btn pressed');
+    console.log(this.userProvider.loggedIn);
+    this.navCtrl.parent.select(1);
   }
 
-  getProfileInfo () {
-    this.username = localStorage.getItem('username')
-    this.userId = parseInt(localStorage.getItem('user_id'))
-    this.email = localStorage.getItem('email')
+  getProfileInfo() {
+    this.username = localStorage.getItem('username');
+    this.userId = parseInt(localStorage.getItem('user_id'));
+    this.email = localStorage.getItem('email');
 
-    this.getProfileImage()
-    this.getUserFiles()
+    this.getProfileImage();
+    this.getUserFiles();
   }
 
-  private getProjectFiles () {
+  private getProjectFiles() {
     this.mediaProvider.getFilesByTag('freelancer').subscribe(
       (response: TagReponse[]) => {
-        this.projectFilesArray = response
-        console.log('User id in profile page = ' + this.user.user_id)
+        this.projectFilesArray = response;
+        console.log('User id in profile page = ' + this.user.user_id);
       },
-    )
+    );
   }
 
   // get user files from all project files
-  private getUserFilesFromProjectFiles () {
-    this.getProjectFiles()
+  private getUserFilesFromProjectFiles() {
+    this.getProjectFiles();
     this.userFilesArray = this.projectFilesArray.filter(file =>
       file.user_id === this.user.user_id,
-    )
+    );
   }
 
-  private getProfileImage () {
+  private getProfileImage() {
     this.mediaProvider.getFilesByTag('profile_freelancer').subscribe(
       (response: TagReponse[]) => {
         response.forEach(file => {
           if (file.user_id === this.user.user_id) {
-            this.profileImage = file
-            this.avatar = file.file_id.toString()
-            console.log('Avatar id: ' + this.avatar)
+            this.profileImage = file;
+            this.avatar = file.file_id.toString();
+            console.log('Avatar id: ' + this.avatar);
           }
-        })
+        });
       },
       error => {
-        console.log(error)
+        console.log(error);
       },
-    )
+    );
   }
 
-  private getUserFiles () {
+  private getUserFiles() {
     new Promise((resolve, reject) => {
       this.mediaProvider.getFilesByUserId(this.user.user_id).subscribe(
         result => {
-          this.userFilesArray = result
-          this.numberOfOwnJobs = Object.keys(result).length
-          resolve(result)
+          this.userFilesArray = result;
+          this.numberOfOwnJobs = Object.keys(result).length;
+          resolve(result);
           console.log(
-            'Number of own jobs: ' + (Object.keys(result).length))
+            'Number of own jobs: ' + (Object.keys(result).length));
         }, error => {
-          console.log(error)
+          console.log(error);
         },
-      )
+      );
     }).then(
       result => {
-        this.userFiles = result
+        this.userFiles = result;
       },
-    )
+    );
   }
 }

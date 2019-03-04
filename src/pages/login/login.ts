@@ -3,27 +3,29 @@ import { NavController } from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { JobInfoPage } from '../job-info/job-info';
 import { SignupPage } from '../signup/signup';
-import {UserProvider} from "../../providers/user/user";
-import {LoginResponse, RegisterResponse, User} from '../../interfaces/Media';
-import {NewPostPage} from "../new-post/new-post";
-
+import { UserProvider } from '../../providers/user/user';
+import { LoginResponse, RegisterResponse, User } from '../../interfaces/Media';
+import { NewPostPage } from '../new-post/new-post';
 
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html'
+  templateUrl: 'login.html',
 })
 export class LoginPage {
   // this tells the tabs component which Pages
   // should be each tab's root Page
-  user: User = { username: null };
-  constructor(public navCtrl: NavController, private mediaProvider:UserProvider) {
+  user: User = {username: null};
+
+  constructor(
+    public navCtrl: NavController, private mediaProvider: UserProvider) {
   }
+
   login() {
     this.mediaProvider.login(this.user).subscribe(
       (response: LoginResponse) => {
         console.log(response);
         this.mediaProvider.loggedIn = true;
-        localStorage.setItem('user', JSON.stringify(response.user))
+        localStorage.setItem('user', JSON.stringify(response.user));
         localStorage.setItem('token', response.token);
         localStorage.setItem('username', response.user.username);
         localStorage.setItem('email', response.user.email);
@@ -37,7 +39,8 @@ export class LoginPage {
         console.log(error);
       });
   }
-  goSignUp(){
+
+  goSignUp() {
     this.navCtrl.push(SignupPage).catch();
   }
 

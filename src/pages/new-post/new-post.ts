@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { LoadingController, NavController } from 'ionic-angular';
 import { JobProvider } from '../../providers/job/job';
+import { getErrorLogger } from '@angular/core/src/errors'
 
 @Component({
   selector: 'page-new-post',
@@ -12,7 +13,7 @@ export class NewPostPage {
     public loadingCtrl: LoadingController, public navCtrl: NavController,
     public jobProvider: JobProvider) {
     //DELETE THIS WHEN LOG IN PAGE IS DONE
-    const user = {
+    /*const user = {
       username: 'Ron Weasley',
       password: 'ronweasley1',
     };
@@ -25,14 +26,14 @@ export class NewPostPage {
       localStorage.setItem('user_id', String(res.user.user_id));
     }, error => {
       console.log(error)
-    });
+    });*/
   }
 
-  title: string = 'Floor Replacement';
-  description: string = 'We need an experienced person to replace our house’s hardwood floor, including bathroom, kitchen, entryway, basement, laundry and living room';
+  title: string = '';
+  description: string = '';
   place: string = 'Vantaa';
   price: string = '1000 euros';
-  deadline: string = '30/2/2019';
+  deadline: string = '28/2/2019';
   category: string = 'Home Renovation';
   fileData = '';
   file: File;
@@ -55,7 +56,7 @@ export class NewPostPage {
     this.jobProvider.upload(formData).subscribe((res) => {
       //this.presentLoadingDefault();
       console.log(res);
-      this.jobProvider.attachTag(res.file_id).subscribe(res => {
+      this.jobProvider.attachTag(res.file_id, 'freelancer').subscribe(res => {
         console.log(res);
       });
     });
@@ -94,4 +95,20 @@ export class NewPostPage {
   goToHome = () => {
     this.navCtrl.parent.select(1);
   };
+
+
+  // move this to edit profile page
+  uploadAvatar(){
+    const formData = new FormData();
+    formData.append('title', '754');
+    formData.append('description', '');
+    formData.append('file', this.file);
+    this.jobProvider.uploadAvatar(formData).subscribe(res => {
+      this.jobProvider.attachTag(res.file_id, 'profile_freelancer').subscribe(res => {
+        console.log(res);
+      });
+    })
+  }
+
+
 }
