@@ -14,3 +14,26 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+.alertCustomCss {
+  // text color for basic alerts
+  color: black;
+
+  // alert modal page bg color. Warning this will remove the alert transparency
+  //background-color: color($colors, dark, base);
+
+  button {
+    color: white !important; // button text color
+    background-color: color($colors, secondary, base) !important;
+    //button bg color
+  }
+
+  .alert-message {
+    color: white; // text color for confirm alerts;
+  }
+
+  .alert-wrapper {
+    border-radius: 10px;
+    height: 125px;
+    //background-color: color($colors, dark, base); // bg color of alert content
+  }
+}

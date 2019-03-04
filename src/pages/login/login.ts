@@ -1,46 +1,58 @@
-import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {AlertController, NavController} from 'ionic-angular';
 import { HomePage } from '../home/home';
 import { JobInfoPage } from '../job-info/job-info';
 import { SignupPage } from '../signup/signup';
-import { UserProvider } from '../../providers/user/user';
-import { LoginResponse, RegisterResponse, User } from '../../interfaces/Media';
-import { NewPostPage } from '../new-post/new-post';
+import {UserProvider} from "../../providers/user/user";
+import {LoginResponse, RegisterResponse, User} from '../../interfaces/Media';
+import {NewPostPage} from "../new-post/new-post";
+import {NgForm} from "@angular/forms";
+
 
 @Component({
   selector: 'page-login',
-  templateUrl: 'login.html',
+  templateUrl: 'login.html'
 })
 export class LoginPage {
   // this tells the tabs component which Pages
   // should be each tab's root Page
-  user: User = {username: null};
-
-  constructor(
-    public navCtrl: NavController, private mediaProvider: UserProvider) {
+  @ViewChild('lf') loginForm: NgForm;
+  user: User = { username: null };
+  loginError;
+  constructor(public navCtrl: NavController, private mediaProvider:UserProvider,  private alertController:AlertController) {
   }
-
-  login() {
+  ionViewDidEnter() {
+    //this.login();
+  }
+  login( automatic = false) {
     this.mediaProvider.login(this.user).subscribe(
       (response: LoginResponse) => {
         console.log(response);
         this.mediaProvider.loggedIn = true;
-        localStorage.setItem('user', JSON.stringify(response.user));
         localStorage.setItem('token', response.token);
         localStorage.setItem('username', response.user.username);
         localStorage.setItem('email', response.user.email);
         localStorage.setItem('user_id', String(response.user.user_id));
         console.log('UserId');
         console.log(localStorage.getItem('user_id'));
+        if (!automatic) this.loginForm.reset();
         this.navCtrl.parent.select(1);
 
       },
       error => {
         console.log(error);
+        this.showAlert();
       });
   }
-
-  goSignUp() {
+  showAlert = () => {
+    let alert = this.alertController.create({
+      subTitle: 'Wrong username or password, Please try again!',
+      buttons: ['OK'],
+      cssClass:'alertCustomCss'
+    });
+    alert.present();
+  };
+  goSignUp(){
     this.navCtrl.push(SignupPage).catch();
   }
   goHome(){
