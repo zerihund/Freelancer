@@ -5,6 +5,7 @@ import { JobInfoPage } from '../job-info/job-info';
 import {UserProvider} from "../../providers/user/user";
 import {RegisterResponse, User, UserExists} from "../../interfaces/Media";
 import {NewPostPage} from "../new-post/new-post";
+import {LoginPage} from "../login/login";
 
 @Component({
   selector: 'page-signup',
@@ -30,7 +31,7 @@ export class SignupPage {
       (response: RegisterResponse) => {
         console.log(response);
         this.mediaProvider.loggedIn = true;
-        this.navCtrl.push(NewPostPage);
+        this.navCtrl.parent.select(1);
       },
       error => {
         console.log(error);
@@ -88,5 +89,8 @@ export class SignupPage {
     }else {
       this.passwordMatch =false;
     }
+  }
+  goToLogin(){
+    this.navCtrl.pop()
   }
 }

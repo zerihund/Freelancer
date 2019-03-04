@@ -43,5 +43,8 @@ export class LoginPage {
   goSignUp() {
     this.navCtrl.push(SignupPage).catch();
   }
+  goHome(){
+    this.navCtrl.pop();
+  }
 
 }

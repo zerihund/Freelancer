@@ -1,9 +1,9 @@
 <ion-header>
     <ion-navbar>
-    <ion-searchbar placeholder="What are you looking for?" name="Search" id="home-search1"></ion-searchbar>
-      <button ion-button block *ngIf="!userProvider.loggedIn" (click)="goLogin()">
-        <ion-icon name="log-in" align-items-end="1px" >Log In</ion-icon>
-      </button>
+    <ion-searchbar color="secondary" placeholder="What are you looking for?" name="Search" id="home-search1"></ion-searchbar>
+      <ion-item item-left  color="secondary" *ngIf="!userProvider.loggedIn" (click)="goLogin()">
+        <ion-icon name="log-in" item-left>  </ion-icon> Login
+      </ion-item>
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page3">
