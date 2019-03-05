@@ -35,7 +35,7 @@ export class LoginPage {
         localStorage.setItem('user_id', String(response.user.user_id));
         console.log('UserId');
         console.log(localStorage.getItem('user_id'));
-        if (!automatic) this.loginForm.reset();
+        //if (!automatic) this.loginForm.reset();
         this.navCtrl.parent.select(1);
 
       },
