@@ -24,6 +24,7 @@ import { SavedAddsPage } from '../pages/saved-adds/saved-adds'
 import { SentOffersPage } from '../pages/sent-offers/sent-offers'
 import { OwnJobsPage } from '../pages/own-jobs/own-jobs'
 import { MediaProvider } from '../providers/media/media';
+import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MediaProvider } from '../providers/media/media';
     SavedAddsPage,
     SentOffersPage,
     OwnJobsPage,
+    EditProfilePage,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +70,7 @@ import { MediaProvider } from '../providers/media/media';
     SavedAddsPage,
     SentOffersPage,
     OwnJobsPage,
+    EditProfilePage,
   ],
   providers: [
     StatusBar,

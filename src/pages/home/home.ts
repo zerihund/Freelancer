@@ -4,9 +4,12 @@ import { JobInfoPage } from '../job-info/job-info';
 import { JobProvider } from '../../providers/job/job';
 import { CategoryPage } from '../category/category';
 import { InfiniteScroll } from 'ionic-angular';
-import {LoginPage} from "../login/login";
-import {UploadImagePage} from "../upload-image/upload-image";
-import {UserProvider} from "../../providers/user/user";
+import { LoginPage } from '../login/login';
+import { UploadImagePage } from '../upload-image/upload-image';
+import { UserProvider } from '../../providers/user/user';
+import { LoginResponse, TagReponse, User } from '../../interfaces/Media';
+import { MediaProvider } from '../../providers/media/media';
+import { EditProfilePage } from '../edit-profile/edit-profile';
 
 @Component({
   selector: 'page-home',
@@ -15,7 +18,12 @@ import {UserProvider} from "../../providers/user/user";
 export class HomePage {
   @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
 
-  constructor(public navCtrl: NavController, public jobProvider: JobProvider ,public userProvider:UserProvider) {
+  constructor(
+    public navCtrl: NavController,
+    public jobProvider: JobProvider,
+    public userProvider: UserProvider,
+    public mediaProvider: MediaProvider,
+  ) {
   }
 
   totalJob = [];
@@ -28,6 +36,63 @@ export class HomePage {
   ionViewDidEnter() {
     this.getAllJob();
   }
+
+  // REMOVE THIS LATER
+  // Only for debugging, faster navigation
+  // ======================================================
+  avatar: string;
+  user: User;
+
+  doAllTheseStuff(params) {
+
+    // user info
+    this.user = {
+      username: 'Ron Weasley',
+      password: 'ronweasley1',
+    };
+
+    // logging in
+    this.userProvider.login(this.user).subscribe(
+      (response: LoginResponse) => {
+        this.userProvider.loggedIn = true;
+        this.user = response.user;
+        localStorage.setItem('user', JSON.stringify(response.user));
+        localStorage.setItem('token', response.token);
+        localStorage.setItem('username', response.user.username);
+        localStorage.setItem('email', response.user.email);
+        localStorage.setItem('user_id', String(response.user.user_id));
+
+        // get avatar
+        this.mediaProvider.getFilesByTag('profile_freelancer').subscribe(
+          (response: TagReponse[]) => {
+            response.forEach(file => {
+              if (file.user_id === this.user.user_id) {
+                //this.profileImage = file;
+                this.avatar = file.file_id.toString();
+                console.log('Got user: ');
+                console.log(this.user);
+                console.log('Got avatar: ' + this.avatar);
+
+                // go to target page
+                this.navCtrl.push(EditProfilePage, {
+                  user: this.user,
+                  avatar: this.avatar,
+                }).catch();
+              }
+            });
+          },
+          error => {
+            console.log(error);
+          },
+        );
+      },
+      error => {
+        console.log(error);
+      });
+  };
+
+  // ======================================================
+  // REMOVE TILL HERE
 
   // fetch all jobs with freelancer tag
   getAllJob = () => {
@@ -44,7 +109,7 @@ export class HomePage {
 
   // go to job info page
   goToJobInfo = (job) => {
-    this.navCtrl.push(JobInfoPage, { job: job }).catch();
+    this.navCtrl.push(JobInfoPage, {job: job}).catch();
   };
 
   // parse description json
@@ -54,7 +119,7 @@ export class HomePage {
 
   // go to Category page
   goToCategory = (category: string) => {
-    this.navCtrl.push(CategoryPage, { category: category }).catch();
+    this.navCtrl.push(CategoryPage, {category: category}).catch();
   };
 
   // go to log in page
