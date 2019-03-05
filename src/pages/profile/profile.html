@@ -5,8 +5,13 @@
       <ion-avatar item-left>
         <img [src]="mediaFilePath + (avatar | thumbnail: 'small' | async)" id="avatar">
       </ion-avatar>
-      <h2>{{user.username}}</h2>
-      <ion-buttons item-right><button ion-button clear color="dark"><ion-icon name="create"> Edit</ion-icon></button></ion-buttons>
+      <ng-container
+        *ngIf="user.full_name != null; then showFullname; else showUsername">
+      </ng-container>
+
+      <ng-template #showFullname><h2>{{user.full_name}}</h2></ng-template>
+      <ng-template #showUsername><h2>{{user.username}}</h2></ng-template>
+      <ion-buttons (click)="goToEditProfile()" item-right><button ion-button clear color="dark"><ion-icon name="create"> Edit</ion-icon></button></ion-buttons>
 
     </ion-item>
 

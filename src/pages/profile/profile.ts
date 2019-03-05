@@ -8,6 +8,7 @@ import { SentOffersPage } from '../sent-offers/sent-offers';
 import { MediaProvider } from '../../providers/media/media';
 import { stringify } from 'querystring';
 import { JobProvider } from '../../providers/job/job';
+import { EditProfilePage } from '../edit-profile/edit-profile';
 
 @Component({
   selector: 'page-my-profile',
@@ -36,6 +37,9 @@ export class ProfilePage {
   }
 
   ionViewWillEnter() {
+    if (this.user === null) {
+      this.user = JSON.parse(localStorage.getItem('user'));
+    }
     console.log('username is: ');
     console.log(this.user.username);
     this.getProfileInfo();
@@ -59,6 +63,13 @@ export class ProfilePage {
   goToMySentOffers(params) {
     if (!params) params = {};
     this.navCtrl.push(SentOffersPage);
+  }
+
+  goToEditProfile(params) {
+    this.navCtrl.push(EditProfilePage, {
+      user: this.user,
+      avatar: this.avatar,
+    }).catch();
   }
 
   // ========================
@@ -135,4 +146,5 @@ export class ProfilePage {
       },
     );
   }
+
 }

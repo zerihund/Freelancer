@@ -1,4 +1,13 @@
 <ion-header>
+
+    <!-- Just for debugging, REMOVE later -->
+    <!-- faster navigation button -->
+    <ion-toolbar>
+      <button ion-button (click)="doAllTheseStuff()">Go to page I'm working on</button>
+    </ion-toolbar>
+    <!-- till here -->
+
+
     <ion-navbar>
     <ion-searchbar color="secondary" placeholder="What are you looking for?" name="Search" id="home-search1"></ion-searchbar>
       <ion-item item-left  color="secondary" *ngIf="!userProvider.loggedIn" (click)="goLogin()">
