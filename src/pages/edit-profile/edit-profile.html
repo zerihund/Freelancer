@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Edit Profile
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding id="page31">
+
+
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3></ion-col>
+      <ion-col col-6>
+        <ion-row>
+          <ion-avatar class="image-cropper">
+            <img [src]="mediaFilePath + (avatar | thumbnail: 'small' | async)" id="avatar">
+          </ion-avatar>
+        </ion-row>
+        <ion-row>
+          <button ion-button color="dark" clear block style="font-size: 16px">Change Photo</button>
+        </ion-row>
+      </ion-col>
+      <ion-col col-3></ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="spacer" style="width:300px;height:29px;" id="editProfile-spacer12"></div>
+  <h4 id="editProfile-heading11" style="color:#000000;">
+    Personal info
+  </h4>
+  <form id="editProfile-form20">
+    <ion-item id="editProfile-input23">
+      <ion-label>
+        Full name
+      </ion-label>
+      <ion-input type="text" placeholder=""></ion-input>
+    </ion-item>
+    <ion-item id="editProfile-input24">
+      <ion-label>
+        Username
+      </ion-label>
+      <ion-input type="text" placeholder=""></ion-input>
+    </ion-item>
+    <ion-item id="editProfile-input25">
+      <ion-label>
+        Email
+      </ion-label>
+      <ion-input type="email" placeholder=""></ion-input>
+    </ion-item>
+    <ion-item id="editProfile-input26">
+      <ion-label>
+        Phone
+      </ion-label>
+      <ion-input type="tel" placeholder=""></ion-input>
+    </ion-item>
+  </form>
+  <h4 id="editProfile-heading12" style="color:#000000;">
+    Skills
+  </h4>
+  <form id="editProfile-form21">
+    <ion-item id="editProfile-input27">
+      <ion-label>
+        list of skills
+      </ion-label>
+      <ion-input type="text" placeholder=""></ion-input>
+    </ion-item>
+    <div class="spacer" style="width:300px;height:29px;" id="editProfile-spacer15"></div>
+    <button id="editProfile-button11" ion-button color="positive" block>
+      Save
+    </button>
+  </form>
+</ion-content>

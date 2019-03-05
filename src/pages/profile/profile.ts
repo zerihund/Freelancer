@@ -65,6 +65,13 @@ export class ProfilePage {
     this.navCtrl.push(SentOffersPage);
   }
 
+  goToEditProfile(params) {
+    this.navCtrl.push(EditProfilePage, {
+      user: this.user,
+      avatar: this.avatar,
+    }).catch();
+  }
+
   // ========================
   //        Functions
   // ========================
