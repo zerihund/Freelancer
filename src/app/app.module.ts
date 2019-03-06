@@ -20,10 +20,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { JobProvider } from '../providers/job/job';
 import { CategoryPage } from '../pages/category/category';
 import { UserProvider } from '../providers/user/user';
-import { SavedAddsPage } from '../pages/saved-adds/saved-adds'
-import { SentOffersPage } from '../pages/sent-offers/sent-offers'
-import { OwnJobsPage } from '../pages/own-jobs/own-jobs'
+import { SavedAddsPage } from '../pages/saved-adds/saved-adds';
+import { SentOffersPage } from '../pages/sent-offers/sent-offers';
+import { OwnJobsPage } from '../pages/own-jobs/own-jobs';
 import { MediaProvider } from '../providers/media/media';
+import { OffersPage } from '../pages/offers/offers';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
 
@@ -45,6 +46,7 @@ import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
     SavedAddsPage,
     SentOffersPage,
     OwnJobsPage,
+    OffersPage,
     EditProfilePage,
     AutoHideDirective,
   ],
@@ -72,6 +74,7 @@ import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
     SavedAddsPage,
     SentOffersPage,
     OwnJobsPage,
+    OffersPage,
     EditProfilePage,
   ],
   providers: [
@@ -81,7 +84,6 @@ import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
     MediaProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UserProvider,
-    MediaProvider,
   ],
 })
 export class AppModule {

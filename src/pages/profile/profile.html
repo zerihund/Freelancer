@@ -2,7 +2,7 @@
   <div class="spacer" style="width:320px;height:50px;" id="myProfile-spacer7"></div>
   <ion-list id="myProfile-list5">
     <ion-item color="none" id="myProfile-list-item25">
-      <ion-avatar item-left>
+      <ion-avatar item-left *ngIf="avatar">
         <img [src]="mediaFilePath + (avatar | thumbnail: 'small' | async)" id="avatar">
       </ion-avatar>
       <ng-container

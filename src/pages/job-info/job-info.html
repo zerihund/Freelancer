@@ -59,10 +59,15 @@
                 </ion-label>
               </ion-range>
             </ion-item>
+            <ion-item>
+              <ion-input name="comment" placeholder="Say something to the job owner" [(ngModel)]="comment">
+
+              </ion-input>
+            </ion-item>
             <button id="jobInfo-button15" ion-button clear color="balanced" block style="font-weight:600;font-size:20px;">
               {{priceOffer}} €
             </button>
-            <button id="jobInfo-button6" ion-button color="balanced" block style="border-radius:10px 10px 10px 10px;" on-click="goToSendOffer()">
+            <button id="jobInfo-button6" ion-button color="balanced" block style="border-radius:10px 10px 10px 10px;" (click)="goToSendOffer()">
               <ion-icon name="checkmark-circle-outline"></ion-icon>
               Offer!
             </button>

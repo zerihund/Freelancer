@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { ThumbnailPipe } from './thumbnail/thumbnail';
+import { BidnumberPipe } from './bidnumber/bidnumber';
 @NgModule({
 	declarations: [ThumbnailPipe,
-    ThumbnailPipe],
+    ThumbnailPipe,
+    BidnumberPipe],
 	imports: [],
 	exports: [ThumbnailPipe,
-    ThumbnailPipe]
+    ThumbnailPipe,
+    BidnumberPipe]
 })
 export class PipesModule {}

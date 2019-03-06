@@ -16,7 +16,6 @@ export class CategoryPage {
   mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
   ionViewDidEnter() {
-    console.log('enter');
     this.jobArray = [];
     this.getAllJob();
   }

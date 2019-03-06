@@ -28,7 +28,7 @@ export class ProfilePage {
   private numberOfOwnJobs: number;
   private userFiles: any;
 
-  constructor(
+  constructor (
     public navCtrl: NavController,
     public userProvider: UserProvider,
     public mediaProvider: MediaProvider,
@@ -53,6 +53,7 @@ export class ProfilePage {
     this.navCtrl.push(SavedAddsPage);
   }
 
+  //go to own jobs page
   goToMyOwnJobs(files) {
     this.navCtrl.push(OwnJobsPage, {
       files: files,
@@ -88,63 +89,52 @@ export class ProfilePage {
     this.username = localStorage.getItem('username');
     this.userId = parseInt(localStorage.getItem('user_id'));
     this.email = localStorage.getItem('email');
-
     this.getProfileImage();
     this.getUserFiles();
   }
 
-  private getProjectFiles() {
+  private getProjectFiles () {
     this.mediaProvider.getFilesByTag('freelancer').subscribe(
       (response: TagReponse[]) => {
         this.projectFilesArray = response;
-        console.log('User id in profile page = ' + this.user.user_id);
+        console.log('User id in profile page = ' + this.userId);
       },
     );
   }
 
   // get user files from all project files
-  private getUserFilesFromProjectFiles() {
-    this.getProjectFiles();
-    this.userFilesArray = this.projectFilesArray.filter(file =>
-      file.user_id === this.user.user_id,
-    );
-  }
+  // private getUserFilesFromProjectFiles() {
+  //   this.getProjectFiles();
+  //   this.userFilesArray = this.projectFilesArray.filter(file =>
+  //     file.user_id === this.userId,
+  //   );
+  // }
 
+  // get user avatar
   private getProfileImage() {
     this.mediaProvider.getFilesByTag('profile_freelancer').subscribe(
       (response: TagReponse[]) => {
         response.forEach(file => {
-          if (file.user_id === this.user.user_id) {
-            this.profileImage = file;
+          if (file.user_id === this.userId) {
             this.avatar = file.file_id.toString();
-            console.log('Avatar id: ' + this.avatar);
           }
-        });
+        })
       },
       error => {
-        console.log(error);
+        console.log(error)
       },
-    );
+    )
   }
 
+  // get user's own jobs
   private getUserFiles() {
-    new Promise((resolve, reject) => {
-      this.mediaProvider.getFilesByUserId(this.user.user_id).subscribe(
+      this.mediaProvider.getFilesByUserId(this.userId).subscribe(
         result => {
-          this.userFilesArray = result;
-          this.numberOfOwnJobs = Object.keys(result).length;
-          resolve(result);
-          console.log(
-            'Number of own jobs: ' + (Object.keys(result).length));
+          this.numberOfOwnJobs = Object.keys(result).length - 1;
+          this.userFiles = result;
         }, error => {
           console.log(error);
         },
       );
-    }).then(
-      result => {
-        this.userFiles = result;
-      },
-    );
   }
-
 }

@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { JobProvider } from '../../providers/job/job';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-job-info',
-  templateUrl: 'job-info.html'
+  templateUrl: 'job-info.html',
 })
 export class JobInfoPage {
-  // this tells the tabs component which Pages
-  // should be each tab's root Page
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public jobProvider: JobProvider, private alertController: AlertController) {
     this.job = this.navParams.get('job');
     this.descriptionJSON = this.getDescription(this.job.description);
     this.userInfoJSON = this.getUser(this.descriptionJSON.user);
@@ -18,6 +18,7 @@ export class JobInfoPage {
   descriptionJSON;
   userInfoJSON;
   priceOffer = 500;
+  comment = '';
   mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
   // parse description json
@@ -30,8 +31,37 @@ export class JobInfoPage {
     return JSON.parse(user);
   };
 
+  // got to home page
   goToHome = () => {
     this.navCtrl.pop().catch();
   };
 
+  // send offer to server
+  goToSendOffer = () => {
+    const comment = {
+      user_id: localStorage.getItem('user_id'),
+      price: this.priceOffer,
+      comment: this.comment
+    };
+    console.log(localStorage.getItem('token'));
+    const bid = {
+      file_id: this.job.file_id,
+      comment: JSON.stringify(comment)
+    };
+    this.jobProvider.bidJob(bid).subscribe(res => {
+      console.log(res);
+      this.showAlert('Bidding successfully');
+      this.goToHome();
+    });
+  };
+
+  // showing alert when bidding successfully
+  showAlert = (notice: string) => {
+    let alert = this.alertController.create({
+      title: 'NOTICE',
+      subTitle: notice,
+      buttons: ['OK'],
+    });
+    alert.present().catch();
+  };
 }
