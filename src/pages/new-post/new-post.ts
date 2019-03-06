@@ -11,21 +11,6 @@ export class NewPostPage {
   constructor(
     public loadingCtrl: LoadingController, public navCtrl: NavController,
     public jobProvider: JobProvider) {
-    //DELETE THIS WHEN LOG IN PAGE IS DONE
-    const user = {
-      username: 'Ron Weasley',
-      password: 'ronweasley1',
-    };
-    this.jobProvider.logInUser(user).subscribe((res) => {
-      console.log(res);
-      localStorage.setItem('user', JSON.stringify(res));
-      localStorage.setItem('token', res.token);
-      localStorage.setItem('username', res.user.email);
-      localStorage.setItem('email', res.user.username);
-      localStorage.setItem('user_id', String(res.user.user_id));
-    }, error => {
-      console.log(error)
-    });
   }
 
   title: string = 'Floor Replacement';

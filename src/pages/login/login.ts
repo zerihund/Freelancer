@@ -13,16 +13,17 @@ import {NewPostPage} from "../new-post/new-post";
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  // this tells the tabs component which Pages
-  // should be each tab's root Page
-  user: User = { username: null };
   constructor(public navCtrl: NavController, private mediaProvider:UserProvider) {
   }
+
+  user: User = { username: null };
+
   login() {
     this.mediaProvider.login(this.user).subscribe(
       (response: LoginResponse) => {
         console.log(response);
         this.mediaProvider.loggedIn = true;
+        localStorage.setItem('user', JSON.stringify(response));
         localStorage.setItem('token', response.token);
         localStorage.setItem('username', response.user.username);
         localStorage.setItem('email', response.user.email);

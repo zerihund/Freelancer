@@ -12,7 +12,6 @@ import {LoginResponse, RegisterResponse, User, UserExists} from '../../interface
 @Injectable()
 export class UserProvider {
   mediaAPI = 'http://media.mw.metropolia.fi/wbma/';
-  imageUrl ='http://media.mw.metropolia.fi/wbma/uploads/';
   loggedIn = false;
 
   constructor(public http: HttpClient) {
@@ -40,4 +39,16 @@ export class UserProvider {
   checkUser(username){
     return this.http.get<UserExists>(this.mediaAPI +'users/username/' + username);
   }
+
+  //////// HUNG'S CODES
+  // request user info
+  requestUserInfo = (user_id) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.get<User>(this.mediaAPI + 'users/' + user_id, httpOptions);
+  };
+  //////////////////////
 }

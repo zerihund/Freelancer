@@ -1,0 +1,28 @@
+<ion-content padding id="page14" style="background-color:#E3FFDF;">
+  <div class="spacer" style="width:300px;height:33px;" id="offers-spacer55"></div>
+  <ion-list id="offers-list21">
+    <ion-item color="none" (click)="goToOwnJobs()" id="offers-list-item68">
+      <ion-icon name="close" item-right></ion-icon>
+    </ion-item>
+  </ion-list>
+  <ion-list id="offers-list22">
+    <ion-item color="none" id="offers-list-item71">
+      You got {{bidsArray.length}} offers:
+    </ion-item>
+    <ion-item *ngFor="let bid of bidsArray">
+      <ion-item-sliding>
+        <ion-item *ngIf="bid.user" color="positive" id="offers-list-item72">
+          <ion-icon name="contact" item-left></ion-icon>
+          {{bid.user.username}}
+          <p item-right="">{{bid.comment.price}} euros</p>
+        </ion-item>
+        <ion-item-options side="left">
+          <button ion-button color="balanced">
+            Accept
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+      <p>{{bid.comment.comment}}</p>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -20,10 +20,11 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { JobProvider } from '../providers/job/job';
 import { CategoryPage } from '../pages/category/category';
 import { UserProvider } from '../providers/user/user';
-import { SavedAddsPage } from '../pages/saved-adds/saved-adds'
-import { SentOffersPage } from '../pages/sent-offers/sent-offers'
-import { OwnJobsPage } from '../pages/own-jobs/own-jobs'
+import { SavedAddsPage } from '../pages/saved-adds/saved-adds';
+import { SentOffersPage } from '../pages/sent-offers/sent-offers';
+import { OwnJobsPage } from '../pages/own-jobs/own-jobs';
 import { MediaProvider } from '../providers/media/media';
+import { OffersPage } from '../pages/offers/offers';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { MediaProvider } from '../providers/media/media';
     SavedAddsPage,
     SentOffersPage,
     OwnJobsPage,
+    OffersPage
   ],
   imports: [
     BrowserModule,
@@ -68,6 +70,7 @@ import { MediaProvider } from '../providers/media/media';
     SavedAddsPage,
     SentOffersPage,
     OwnJobsPage,
+    OffersPage
   ],
   providers: [
     StatusBar,
@@ -76,7 +79,6 @@ import { MediaProvider } from '../providers/media/media';
     MediaProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UserProvider,
-    MediaProvider,
   ],
 })
 export class AppModule {

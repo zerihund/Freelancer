@@ -8,17 +8,15 @@
 <ion-content padding id="page12" style="background-color:#E3FFDF;">
   <div class="spacer" style="width:300px;height:14px;" id="myOpenJobs-spacer52"></div>
   <ion-list>
-    <ion-list *ngFor="let job of ownJobsArray" color="none" on-click="goToMyJobInfo()" id="myOpenJobs-list14">
-      <ion-item id="myOpenJobs-list-item16">
+    <ion-list *ngFor="let job of ownJobsArray" color="none" id="myOpenJobs-list14">
+      <ion-item id="myOpenJobs-list-item16" (click)="goToJobInfo(job)">
         <ion-thumbnail item-left>
           <img [src]="mediaFilePath + (job.file_id | thumbnail: 'small' | async)" [alt]="job.title"/>
         </ion-thumbnail>
         <h2>{{job.title}}</h2>
       </ion-item>
-      <ion-item color="positive" on-click="goToOffers()" id="myOpenJobs-list-item84">
-        ?? Bids
-        <!--TODO number of bids -->
-        <ion-icon name="notifications" item-right></ion-icon>
+      <ion-item color="positive" (click)="goToOffers(job.file_id)" id="myOpenJobs-list-item84">
+        {{job.file_id | bidnumber | async}} bid(s)
       </ion-item>
     </ion-list>
   </ion-list>

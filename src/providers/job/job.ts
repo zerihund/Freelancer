@@ -2,12 +2,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Media } from '../../interfaces/Media'
 
-/*
-  Generated class for the JobProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class JobProvider {
 
@@ -63,6 +57,36 @@ export class JobProvider {
       httpOptions)
   };
 
+  // bid job function
+  bidJob = (bid) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.post<any>('http://media.mw.metropolia.fi/wbma/comments', bid, httpOptions)
+  };
+
+  // delete bid
+  deleteBid = (id) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.delete<any>(`http://media.mw.metropolia.fi/wbma/comments/${id}`, httpOptions)
+  };
+
+  // delete job
+  deleteJob = () => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.delete<any>('http://media.mw.metropolia.fi/wbma/media/699', httpOptions)
+  };
+
   // // generateDetailedJobs (job: Media) {
   // //   const jobObj = job;
   // //   jobObj.description = JSON.parse(job.description);
@@ -71,4 +95,8 @@ export class JobProvider {
   //   // TODO calculate number of bids
   // }
 
+  // calculate number of bids
+  getNumBid = (id) => {
+    return this.http.get<any>(`http://media.mw.metropolia.fi/wbma/comments/file/${id}`)
+  }
 }

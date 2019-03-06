@@ -34,14 +34,4 @@ export class MediaProvider {
     return this.http.get<Media[]>(this.mediaAPI + 'media/user/' + id,
       httpOptions)
   }
-
-  requestUserInfo (id: number) {
-    const httpOtions = {
-      headers: new HttpHeaders({
-        'x-access-token': localStorage.getItem('token'),
-      }),
-    };
-    return this.http.get<User>(this.mediaAPI + 'users/' + id,
-      httpOtions)
-  }
 }
