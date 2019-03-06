@@ -14,30 +14,34 @@ import {NgForm} from "@angular/forms";
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  // this tells the tabs component which Pages
-  // should be each tab's root Page
   @ViewChild('lf') loginForm: NgForm;
   user: User = { username: null };
-  loginError;
+  tokenExist;
+
   constructor(public navCtrl: NavController, private mediaProvider:UserProvider,  private alertController:AlertController) {
   }
-  ionViewDidEnter() {
-    //this.login();
+  ionViewWillEnter() {
+      /*this.mediaProvider.login(this.user).subscribe((res)=>{
+        this.tokenExist=localStorage.setItem('token',res.token);
+      });
+    if(this.tokenExist){
+      this.mediaProvider.loggedIn=true;
+      this.navCtrl.parent.select(1);
+    }*/
   }
-  login( automatic = false) {
+  login() {
     this.mediaProvider.login(this.user).subscribe(
       (response: LoginResponse) => {
         console.log(response);
         this.mediaProvider.loggedIn = true;
         localStorage.setItem('token', response.token);
+
         localStorage.setItem('username', response.user.username);
         localStorage.setItem('email', response.user.email);
         localStorage.setItem('user_id', String(response.user.user_id));
         console.log('UserId');
         console.log(localStorage.getItem('user_id'));
-        //if (!automatic) this.loginForm.reset();
         this.navCtrl.parent.select(1);
-
       },
       error => {
         console.log(error);

@@ -40,4 +40,5 @@ export class UserProvider {
   checkUser(username){
     return this.http.get<UserExists>(this.mediaAPI +'users/username/' + username);
   }
+
 }

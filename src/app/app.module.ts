@@ -25,6 +25,7 @@ import { SentOffersPage } from '../pages/sent-offers/sent-offers'
 import { OwnJobsPage } from '../pages/own-jobs/own-jobs'
 import { MediaProvider } from '../providers/media/media';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
+import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
     SentOffersPage,
     OwnJobsPage,
     EditProfilePage,
+    AutoHideDirective,
   ],
   imports: [
     BrowserModule,

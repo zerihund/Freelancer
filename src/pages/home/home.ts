@@ -147,4 +147,5 @@ export class HomePage {
   numPages = () => {
     return Math.ceil(this.totalJob.length / this.jobs_per_page);
   };
+
 }
