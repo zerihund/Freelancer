@@ -23,7 +23,7 @@ export class LoginPage {
       (response: LoginResponse) => {
         console.log(response);
         this.mediaProvider.loggedIn = true;
-        localStorage.setItem('user', JSON.stringify(response));
+        localStorage.setItem('user', JSON.stringify(response.user));
         localStorage.setItem('token', response.token);
         localStorage.setItem('username', response.user.username);
         localStorage.setItem('email', response.user.email);
@@ -37,8 +37,15 @@ export class LoginPage {
         console.log(error);
       });
   }
-  goSignUp(){
+
+  // go to sign up page
+  goSignUp() {
     this.navCtrl.push(SignupPage).catch();
+  }
+
+  // go to home page
+  goHome(){
+    this.navCtrl.pop();
   }
 
 }

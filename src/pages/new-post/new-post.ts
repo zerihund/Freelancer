@@ -13,11 +13,11 @@ export class NewPostPage {
     public jobProvider: JobProvider) {
   }
 
-  title: string = 'Floor Replacement';
-  description: string = 'We need an experienced person to replace our house’s hardwood floor, including bathroom, kitchen, entryway, basement, laundry and living room';
+  title: string = '';
+  description: string = '';
   place: string = 'Vantaa';
   price: string = '1000 euros';
-  deadline: string = '30/2/2019';
+  deadline: string = '28/2/2019';
   category: string = 'Home Renovation';
   fileData = '';
   file: File;
@@ -40,7 +40,7 @@ export class NewPostPage {
     this.jobProvider.upload(formData).subscribe((res) => {
       //this.presentLoadingDefault();
       console.log(res);
-      this.jobProvider.attachTag(res.file_id).subscribe(res => {
+      this.jobProvider.attachTag(res.file_id, 'freelancer').subscribe(res => {
         console.log(res);
       });
     });
@@ -79,4 +79,19 @@ export class NewPostPage {
   goToHome = () => {
     this.navCtrl.parent.select(1);
   };
+
+  // move this to edit profile page
+  uploadAvatar(){
+    const formData = new FormData();
+    formData.append('title', '754');
+    formData.append('description', '');
+    formData.append('file', this.file);
+    this.jobProvider.uploadAvatar(formData).subscribe(res => {
+      this.jobProvider.attachTag(res.file_id, 'profile_freelancer').subscribe(res => {
+        console.log(res);
+      });
+    })
+  }
+
+
 }

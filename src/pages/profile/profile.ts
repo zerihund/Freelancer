@@ -7,6 +7,8 @@ import { OwnJobsPage } from '../own-jobs/own-jobs';
 import { SentOffersPage } from '../sent-offers/sent-offers';
 import { MediaProvider } from '../../providers/media/media';
 import { stringify } from 'querystring';
+import { JobProvider } from '../../providers/job/job';
+import { EditProfilePage } from '../edit-profile/edit-profile';
 
 @Component({
   selector: 'page-my-profile',
@@ -23,19 +25,23 @@ export class ProfilePage {
   private userFilesArray: any;
   private profileImage: TagReponse;
   private avatar: string;
-//  private ownJobsArray: Media[]
-  private ownJobsArray = [];
   private numberOfOwnJobs: number;
   private userFiles: any;
 
-  constructor(
+  constructor (
     public navCtrl: NavController,
     public userProvider: UserProvider,
     public mediaProvider: MediaProvider,
   ) {
+    this.user = JSON.parse(localStorage.getItem('user'));
   }
 
   ionViewWillEnter() {
+    if (this.user === null) {
+      this.user = JSON.parse(localStorage.getItem('user'));
+    }
+    console.log('username is: ');
+    console.log(this.user.username);
     this.getProfileInfo();
   }
 
@@ -60,6 +66,13 @@ export class ProfilePage {
     this.navCtrl.push(SentOffersPage);
   }
 
+  goToEditProfile(params) {
+    this.navCtrl.push(EditProfilePage, {
+      user: this.user,
+      avatar: this.avatar,
+    }).catch();
+  }
+
   // ========================
   //        Functions
   // ========================
@@ -80,7 +93,7 @@ export class ProfilePage {
     this.getUserFiles();
   }
 
-  private getProjectFiles() {
+  private getProjectFiles () {
     this.mediaProvider.getFilesByTag('freelancer').subscribe(
       (response: TagReponse[]) => {
         this.projectFilesArray = response;
@@ -105,12 +118,12 @@ export class ProfilePage {
           if (file.user_id === this.userId) {
             this.avatar = file.file_id.toString();
           }
-        });
+        })
       },
       error => {
-        console.log(error);
+        console.log(error)
       },
-    );
+    )
   }
 
   // get user's own jobs
