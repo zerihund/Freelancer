@@ -1,7 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // @ts-ignore
-import {LoginResponse, RegisterResponse, User, UserExists} from '../../interfaces/Media';
+import {
+  LoginResponse,
+  ModifyUser,
+  RegisterResponse,
+  User,
+  UserExists,
+} from '../../interfaces/Media';
 
 /*
   Generated class for the UserProvider provider.
@@ -39,5 +45,15 @@ export class UserProvider {
   }
   checkUser(username){
     return this.http.get<UserExists>(this.mediaAPI +'users/username/' + username);
+  }
+
+  modifyUser = (data: ModifyUser) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+        'Content-type': 'application/json',
+      }),
+    };
+    this.http.put(this.mediaAPI + 'users', data, httpOptions);
   }
 }

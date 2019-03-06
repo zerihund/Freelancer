@@ -9,6 +9,7 @@ import { MediaProvider } from '../../providers/media/media';
 import { stringify } from 'querystring';
 import { JobProvider } from '../../providers/job/job';
 import { EditProfilePage } from '../edit-profile/edit-profile';
+import { _if } from 'rxjs/observable/if';
 
 @Component({
   selector: 'page-my-profile',
@@ -23,8 +24,7 @@ export class ProfilePage {
   private email: string;
   private projectFilesArray: TagReponse[];
   private userFilesArray: any;
-  private profileImage: TagReponse;
-  private avatar: string;
+  private avatar = '785'; // id for placeholder
   private numberOfOwnJobs: number;
   private userFiles: any;
 
@@ -79,11 +79,13 @@ export class ProfilePage {
     localStorage.clear();
     this.userProvider.loggedIn = false;
     this.user = null;
+    this.avatar = null;
     console.log('logout btn pressed');
     console.log(this.userProvider.loggedIn);
     this.navCtrl.parent.select(1);
   }
 
+  // fetches all profile info
   getProfileInfo() {
     this.username = localStorage.getItem('username');
     this.userId = parseInt(localStorage.getItem('user_id'));
@@ -93,29 +95,15 @@ export class ProfilePage {
     this.getUserFiles();
   }
 
-  private getProjectFiles() {
-    this.mediaProvider.getFilesByTag('freelancer').subscribe(
-      (response: TagReponse[]) => {
-        this.projectFilesArray = response;
-        console.log('User id in profile page = ' + this.user.user_id);
-      },
-    );
-  }
-
-  // get user files from all project files
-  private getUserFilesFromProjectFiles() {
-    this.getProjectFiles();
-    this.userFilesArray = this.projectFilesArray.filter(file =>
-      file.user_id === this.user.user_id,
-    );
-  }
-
+  // fetches users profile image
   private getProfileImage() {
     this.mediaProvider.getFilesByTag('profile_freelancer').subscribe(
       (response: TagReponse[]) => {
         response.forEach(file => {
           if (file.user_id === this.user.user_id) {
-            this.profileImage = file;
+            //this.avatarArray.push(file);
+            //console.log('pushed Avatar to avatarArray')
+            //this.profileImage = file;
             this.avatar = file.file_id.toString();
             console.log('Avatar id: ' + this.avatar);
           }
@@ -146,5 +134,29 @@ export class ProfilePage {
       },
     );
   }
+
+  // ========================
+  //    Not used functions
+  // ========================
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ start
+
+  // get user files from all project files
+  private getUserFilesFromProjectFiles() {
+    this.getProjectFiles();
+    this.userFilesArray = this.projectFilesArray.filter(file =>
+      file.user_id === this.user.user_id,
+    );
+  }
+
+  private getProjectFiles() {
+    this.mediaProvider.getFilesByTag('freelancer').subscribe(
+      (response: TagReponse[]) => {
+        this.projectFilesArray = response;
+        console.log('User id in profile page = ' + this.user.user_id);
+      },
+    );
+  }
+
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ end
 
 }

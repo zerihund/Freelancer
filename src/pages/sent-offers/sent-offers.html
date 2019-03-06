@@ -8,29 +8,12 @@
 <ion-content padding id="page15" style="background-color:#E3FFDF;">
   <div class="spacer" style="width:300px;height:33px;" id="myOpenOffers-spacer54"></div>
   <ion-list id="myOpenOffers-list23">
-    <ion-item color="none" on-click="goToJobInfoOffered()" id="myOpenOffers-list-item90">
+    <ion-item *ngFor="let job of sentOffersJobsArray" color="none" on-click="goToJobInfoOffered()"
+              id="myOpenOffers-list-item90">
       <ion-thumbnail item-left>
-        <img src="assets/img/qwCc557PTqWDdk1G3mqG_667654163_4e797d71ea_b.jpg" />
+        <img [src]="mediaFilePath + (job.file_id | thumbnail: 'small' | async)" [alt]="job.title"/>
       </ion-thumbnail>
-      <h2>
-        Old bed needs repairing
-      </h2>
-    </ion-item>
-    <ion-item color="none" id="myOpenOffers-list-item92">
-      <ion-thumbnail item-left>
-        <img src="assets/img/LFVZelMXTLC8nXHK5bZC_download.jpg" />
-      </ion-thumbnail>
-      <h2>
-        Huge mirror installment
-      </h2>
-    </ion-item>
-    <ion-item color="none" id="myOpenOffers-list-item128">
-      <ion-thumbnail item-left>
-        <img src="assets/img/EvLbAoloSkG25UfhsvEJ_no-image1.png" />
-      </ion-thumbnail>
-      <h2>
-        Babysitter for 5yo
-      </h2>
+      <h2>{{job.title}}</h2>
     </ion-item>
   </ion-list>
 </ion-content>

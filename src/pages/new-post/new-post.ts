@@ -96,19 +96,26 @@ export class NewPostPage {
     this.navCtrl.parent.select(1);
   };
 
+  // upload without freelancer tag
+  onUploadGeneral = () => {
+    const myObject = {
+      description: this.description,
+      user: localStorage.getItem('user'),
+    };
+    console.log(myObject);
 
-  // move this to edit profile page
-  uploadAvatar(){
     const formData = new FormData();
-    formData.append('title', '754');
-    formData.append('description', '');
+    formData.append('title', this.title);
+    formData.append('description', JSON.stringify(myObject));
     formData.append('file', this.file);
-    this.jobProvider.uploadAvatar(formData).subscribe(res => {
-      this.jobProvider.attachTag(res.file_id, 'profile_freelancer').subscribe(res => {
+    this.jobProvider.upload(formData).subscribe((res) => {
+      //this.presentLoadingDefault();
+      console.log(res);
+      this.jobProvider.attachTag(res.file_id, 'placeholder_freelancer').subscribe(res => {
         console.log(res);
       });
-    })
-  }
+    });
+  };
 
 
 }

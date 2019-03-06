@@ -7,7 +7,6 @@
 </ion-header>
 <ion-content padding id="page31">
 
-
   <ion-grid>
     <ion-row>
       <ion-col col-3></ion-col>
@@ -18,7 +17,7 @@
           </ion-avatar>
         </ion-row>
         <ion-row>
-          <button ion-button color="dark" clear block style="font-size: 16px">Change Photo</button>
+          <button ion-button color="dark" clear block (click)=presentModal() style="font-size: 16px">Change Photo</button>
         </ion-row>
       </ion-col>
       <ion-col col-3></ion-col>
@@ -29,36 +28,41 @@
   <h4 id="editProfile-heading11" style="color:#000000;">
     Personal info
   </h4>
-  <form id="editProfile-form20">
+  <form (ngSubmit)=saveProfile() id="editProfile-form20">
     <ion-item id="editProfile-input23">
       <ion-label>
         Full name
       </ion-label>
-      <ion-input type="text" placeholder=""></ion-input>
+      <p type="text" placeholder="">{{user.full_name}} </p>
     </ion-item>
     <ion-item id="editProfile-input24">
       <ion-label>
         Username
       </ion-label>
-      <ion-input type="text" placeholder=""></ion-input>
+      <p type="text" placeholder="">{{user.username}}</p>
     </ion-item>
     <ion-item id="editProfile-input25">
+    <ion-label>
+      Password
+    </ion-label>
+    <p type="text" placeholder="">{{user.password}}</p>
+  </ion-item>
+    <ion-item id="editProfile-input26">
       <ion-label>
         Email
       </ion-label>
-      <ion-input type="email" placeholder=""></ion-input>
+      <ion-input type="email" placeholder="" [(ngModel)]="editEmail" name="editEmail"></ion-input>
     </ion-item>
-    <ion-item id="editProfile-input26">
+    <!--ion-item id="editProfile-input26">
       <ion-label>
         Phone
       </ion-label>
-      <ion-input type="tel" placeholder=""></ion-input>
-    </ion-item>
-  </form>
+      <ion-input type="tel" placeholder="" [(ngModel)]="editPhone"></ion-input>
+    </ion-item-->
+
   <h4 id="editProfile-heading12" style="color:#000000;">
     Skills
   </h4>
-  <form id="editProfile-form21">
     <ion-item id="editProfile-input27">
       <ion-label>
         list of skills
@@ -66,7 +70,7 @@
       <ion-input type="text" placeholder=""></ion-input>
     </ion-item>
     <div class="spacer" style="width:300px;height:29px;" id="editProfile-spacer15"></div>
-    <button id="editProfile-button11" ion-button color="positive" block>
+    <button id="editProfile-button11" ion-button color="positive" block type="submit">
       Save
     </button>
   </form>

@@ -17,7 +17,7 @@ export class MediaProvider {
     console.log('Hello MediaProvider Provider');
   }
 
-  getSingleMedia(id) {
+  getSingleMedia(id: string) {
     return this.http.get<Media>(this.mediaAPI + 'media/' + id);
   }
 
@@ -44,4 +44,24 @@ export class MediaProvider {
     return this.http.get<User>(this.mediaAPI + 'users/' + id,
       httpOtions);
   }
+
+  deleteFile(id: string) {
+    const fileId = parseInt(id);
+    const httpOtions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.delete(this.mediaAPI + 'media/' + fileId,
+      httpOtions);
+  }
+  uploadAvatar(data: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.post<any>('http://media.mw.metropolia.fi/wbma/media', data,
+      httpOptions)
+  };
 }

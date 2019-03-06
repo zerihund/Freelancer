@@ -33,7 +33,6 @@ export class LoginPage {
         console.log('UserId');
         console.log(localStorage.getItem('user_id'));
         this.navCtrl.parent.select(1);
-
       },
       error => {
         console.log(error);

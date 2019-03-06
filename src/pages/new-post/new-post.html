@@ -11,7 +11,8 @@
       <ion-label stacked>
         Description:
       </ion-label>
-      <ion-input name="Description" [(ngModel)]="description" type="text" placeholder="Explain what you need to be done"></ion-input>
+      <ion-input name="Description" [(ngModel)]="description" type="text"
+                 placeholder="Explain what you need to be done"></ion-input>
     </ion-item>
     <ion-item id="newPost-input15">
       <ion-label stacked>
@@ -46,7 +47,8 @@
       </ion-label>
       <ion-input name="Deadline" [(ngModel)]="deadline" type="date"></ion-input>
     </ion-item>
-    <button type="submit" id="newPost-button9" ion-button color="positive" block style="border-radius:50px 50px 50px 50px;" (click)="goToHome()">
+    <button type="submit" id="newPost-button9" ion-button color="positive" block
+            style="border-radius:50px 50px 50px 50px;" (click)="goToHome()">
       <ion-icon name="checkmark-circle"></ion-icon>
       Post it!
     </button>

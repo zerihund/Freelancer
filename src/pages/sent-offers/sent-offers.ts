@@ -7,9 +7,17 @@ import { NavController } from 'ionic-angular';
   templateUrl: 'sent-offers.html'
 })
 export class SentOffersPage {
-  // this tells the tabs component which Pages
-  // should be each tab's root Page
-  constructor(public navCtrl: NavController) {
+
+  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/'
+  sentOffersJobsArray: any
+
+  constructor(
+    public navCtrl: NavController,
+    ) {
+  }
+
+  ionViewWillenter(){
+
   }
 
 }

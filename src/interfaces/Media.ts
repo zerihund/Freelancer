@@ -6,6 +6,7 @@ export interface User {
   full_name?: string;
   time_created?: Date;
 }
+
 export interface LoginResponse {
   message: string;
   token: string;
@@ -16,6 +17,7 @@ export interface RegisterResponse {
   message: string;
   user_id: number;
 }
+
 export interface User {
   user_id?: number;
   username: string;
@@ -24,9 +26,10 @@ export interface User {
   full_name?: string;
   time_created?: Date;
 }
-export  interface UserExists {
-  username:string;
-  available:boolean;
+
+export interface UserExists {
+  username: string;
+  available: boolean;
 }
 
 export interface Media {
@@ -62,4 +65,11 @@ export interface TagReponse {
   media_type: string;
   mime_type: string;
   time_added: string;
+}
+
+export interface ModifyUser {
+  username?: string;
+  password?: string;
+  email?: string;
+  phone?: string;
 }

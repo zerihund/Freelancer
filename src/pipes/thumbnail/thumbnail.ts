@@ -12,7 +12,7 @@ export class ThumbnailPipe implements PipeTransform {
   ) {
   }
 
-  async transform (id: number, ...args) {
+  async transform (id: string, ...args) {
     return new Promise((resolve) => {
         this.mediaProvider.getSingleMedia(id).subscribe((response: Media) => {
             switch (args[0]) {
