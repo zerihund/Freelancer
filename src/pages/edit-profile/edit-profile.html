@@ -14,7 +14,7 @@
       <ion-col col-6>
         <ion-row>
           <ion-avatar class="image-cropper">
-            <img [src]="mediaFilePath + (avatar | thumbnail: 'small' | async)" id="avatar">
+            <img [src]="avatar | thumbnail: 'small' | async" id="avatar">
           </ion-avatar>
         </ion-row>
         <ion-row>

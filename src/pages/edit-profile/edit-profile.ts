@@ -18,17 +18,26 @@ export class EditProfilePage {
   ) {
     // gets current user object passed from profile page
     this.user = this.navParams.get('user');
-    console.log('user: ')
+    this.avatar = this.navParams.get('avatar');
+    console.log('EditProfilePage constructor');
+    console.log('user: ');
     console.log(this.user);
-    console.log(typeof this.user);
+    console.log('avatar: ' + this.avatar);
+    //console.log('type: ' + typeof this.user);
   }
 
   ionViewWillEnter() {
+    /*if (this.user === null) {
+      this.user = this.navParams.get('user');
+    }
     console.log('ionViewWillEnter EditProfilePage');
     this.avatar = this.navParams.get('avatar');
-    console.log('avatar: ');
-    console.log(this.avatar);
-
+    */
   }
 
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad EditProfilePage');
+    //console.log('avatar: ' + this.avatar);
+    //console.log('type: ' + typeof this.avatar);
+  }
 }
