@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import { ProfilePage } from '../profile/profile';
 import { HomePage } from '../home/home';
 import { NewPostPage } from '../new-post/new-post';
+import {UserProvider} from "../../providers/user/user";
+import {LoginPage} from "../login/login";
 
 @Component({
   selector: 'page-tabs-controller',
@@ -13,8 +15,9 @@ export class TabsControllerPage {
   // should be each tab's root Page
   tab1Root: any = ProfilePage;
   tab2Root: any = HomePage;
-  tab3Root: any = NewPostPage;
-  constructor(public navCtrl: NavController) {
+  tab3Root: any = LoginPage;
+  constructor(public navCtrl: NavController, public userProvider:UserProvider) {
+
   }
-  
+
 }

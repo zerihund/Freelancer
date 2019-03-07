@@ -68,7 +68,7 @@ export class LoginPage {
 
   // go to home page
   goHome() {
-    this.navCtrl.pop();
+    this.navCtrl.popTo(HomePage).catch();
   }
 
 }

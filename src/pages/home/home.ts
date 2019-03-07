@@ -10,6 +10,7 @@ import { UserProvider } from '../../providers/user/user';
 import { LoginResponse, TagReponse, User } from '../../interfaces/Media';
 import { MediaProvider } from '../../providers/media/media';
 import { EditProfilePage } from '../edit-profile/edit-profile';
+import {NewPostPage} from "../new-post/new-post";
 
 @Component({
   selector: 'page-home',
@@ -147,5 +148,12 @@ export class HomePage {
   numPages = () => {
     return Math.ceil(this.totalJob.length / this.jobs_per_page);
   };
-
+  goLoginOrNewPost = () => {
+    if(!this.userProvider.loggedIn){
+      this.navCtrl.push(LoginPage).catch();
+    }
+    else {
+      this.navCtrl.push(NewPostPage).catch();
+    }
+  };
 }
