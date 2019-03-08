@@ -7,8 +7,6 @@ import { InfiniteScroll } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { UserProvider } from '../../providers/user/user';
 import { LoginResponse, TagReponse, User } from '../../interfaces/Media';
-import { MediaProvider } from '../../providers/media/media';
-import { EditProfilePage } from '../edit-profile/edit-profile';
 import { NewPostPage } from "../new-post/new-post";
 
 @Component({

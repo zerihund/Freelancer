@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // @ts-ignore
 import {
-  LoginResponse,
+  LoginResponse, Media,
   RegisterResponse,
   User,
   UserExists,
@@ -52,6 +52,7 @@ export class UserProvider {
     return this.http.get<User>(this.mediaAPI + 'users/' + user_id, httpOptions);
   };
 
+  // Modifies profile image info
   updateAvatarInfo(data: Object, avatarId: number) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -63,6 +64,7 @@ export class UserProvider {
       httpOptions);
   }
 
+  // Modifies user information
   updateUserInfo(data: Object) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -71,5 +73,10 @@ export class UserProvider {
       }),
     };
     return this.http.put(this.mediaAPI + 'users/', data, httpOptions);
+  }
+
+  // Fetches profile image
+  getProfileImage (id: number) {
+    return this.http.get<Media>(this.mediaAPI + 'media/' + id)
   }
 }

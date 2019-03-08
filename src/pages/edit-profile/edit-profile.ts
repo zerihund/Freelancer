@@ -10,7 +10,6 @@ import { ActionSheetController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { stringify, unescape } from 'querystring';
 import { JobProvider } from '../../providers/job/job';
-import { MediaProvider } from '../../providers/media/media';
 import { UserProvider } from '../../providers/user/user';
 
 @Component({
@@ -33,7 +32,6 @@ export class EditProfilePage {
     public actionSheetCtrl: ActionSheetController,
     public camera: Camera,
     public jobProvider: JobProvider,
-    public mediaProvider: MediaProvider,
     public loadingCtrl: LoadingController,
     public userProvider: UserProvider,
     public alertCtrl: AlertController,
@@ -137,25 +135,13 @@ export class EditProfilePage {
 
   // Uploads image to server
   private uploadNewAvatar() {
-    console.log('uploadAvatar():');
-    console.log('uploadAvatar() / skills here: ' + this.skills);
-
     const formData = new FormData();
     formData.append('title', 'avatar');
     formData.append('description', this.skills);
     formData.append('file', this.file);
     this.jobProvider.uploadAvatar(formData).subscribe(res => {
       console.log('File uploaded. file id: ' + res.file_id);
-
-      // test: checking what was uploaded
-      // =========================================
-      this.mediaProvider.getSingleMedia(res.file_id).subscribe(res => {
-        console.log('uploadAvatar() / uploaded file info:');
-        console.log(res);
-        console.log('uploadAvatar() / uploaded desc: ' + res.description);
-      });
-      // =========================================
-
+      // Attaching the profile tag
       this.jobProvider.attachTag(res.file_id, 'profile_freelancer').
         subscribe(res => {
           console.log(res);
@@ -182,7 +168,7 @@ export class EditProfilePage {
   // Gets skills of current user
   private getSkills(id: number) {
     // getting description property of old avatar
-    this.mediaProvider.getSingleMedia(id).subscribe(
+    this.userProvider.getProfileImage(id).subscribe(
       (response: Media) => {
         this.skills = response.description;
       }, error => {
@@ -248,7 +234,7 @@ export class EditProfilePage {
   // Requests user information from serve
   private fetchUserData() {
     let id = this.navParams.get('userId');
-    this.mediaProvider.requestUserInfo(id).
+    this.userProvider.requestUserInfo(id).
       subscribe(
         result => {
             this.editEmail = result.email;
