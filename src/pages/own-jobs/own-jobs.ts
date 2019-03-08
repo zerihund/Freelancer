@@ -43,13 +43,13 @@ export class OwnJobsPage {
   // go to job info page
   goToJobInfo = (job) => {
     console.log(job);
-    this.navCtrl.push(JobInfoPage, { job: job }).catch();
+    this.navCtrl.push(JobInfoPage,{ job: job }).catch();
   };
 
   // go to Offer page
-  goToOffers = (file_id) => {
-    this.jobProvider.getNumBid(file_id).subscribe(res => {
-      this.navCtrl.push(OffersPage, { bidsArray: res }).catch();
+  goToOffers = (job) => {
+    this.jobProvider.getNumBid(job.file_id).subscribe(res => {
+      this.navCtrl.push(OffersPage, { bidsArray: res, job: job}).catch();
     });
   };
 }

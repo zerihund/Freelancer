@@ -37,62 +37,8 @@ export class HomePage {
     this.getAllJob();
   }
 
-  // REMOVE THIS LATER
-  // Only for debugging, faster navigation
-  // ======================================================
   avatar: string;
   user: User;
-
-  doAllTheseStuff(params) {
-
-    // user info
-    this.user = {
-      username: 'Ron Weasley',
-      password: 'ronweasley1',
-    };
-
-    // logging in
-    this.userProvider.login(this.user).subscribe(
-      (response: LoginResponse) => {
-        this.userProvider.loggedIn = true;
-        this.user = response.user;
-        localStorage.setItem('user', JSON.stringify(response.user));
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('username', response.user.username);
-        localStorage.setItem('email', response.user.email);
-        localStorage.setItem('user_id', String(response.user.user_id));
-
-        // get avatar
-        this.mediaProvider.getFilesByTag('profile_freelancer').subscribe(
-          (response: TagReponse[]) => {
-            response.forEach(file => {
-              if (file.user_id === this.user.user_id) {
-                //this.profileImage = file;
-                this.avatar = file.file_id.toString();
-                console.log('Got user: ');
-                console.log(this.user);
-                console.log('Got avatar: ' + this.avatar);
-
-                // go to target page
-                this.navCtrl.push(EditProfilePage, {
-                  user: this.user,
-                  avatar: this.avatar,
-                }).catch();
-              }
-            });
-          },
-          error => {
-            console.log(error);
-          },
-        );
-      },
-      error => {
-        console.log(error);
-      });
-  };
-
-  // ======================================================
-  // REMOVE TILL HERE
 
   // fetch all jobs with freelancer tag
   getAllJob = () => {
@@ -101,7 +47,7 @@ export class HomePage {
     this.previous_page = 0;
     this.jobArray = [];
     this.jobProvider.getAllJobs().subscribe(res => {
-      this.totalJob = res.reverse();
+      this.totalJob = res.reverse().filter(job => !job.title.includes('_accepted'));
       this.jobArray = this.jobArray.concat(
         this.totalJob.slice(this.previous_page, this.current_page * 3));
     });

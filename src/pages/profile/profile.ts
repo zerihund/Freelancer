@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
-import { Media, TagReponse, User } from '../../interfaces/Media';
+import { TagReponse, User } from '../../interfaces/Media';
 import { SavedAddsPage } from '../saved-adds/saved-adds';
 import { OwnJobsPage } from '../own-jobs/own-jobs';
 import { SentOffersPage } from '../sent-offers/sent-offers';
 import { MediaProvider } from '../../providers/media/media';
 import { stringify } from 'querystring';
-import { JobProvider } from '../../providers/job/job';
 import { EditProfilePage } from '../edit-profile/edit-profile';
 
 @Component({
@@ -101,14 +100,6 @@ export class ProfilePage {
       },
     );
   }
-
-  // get user files from all project files
-  // private getUserFilesFromProjectFiles() {
-  //   this.getProjectFiles();
-  //   this.userFilesArray = this.projectFilesArray.filter(file =>
-  //     file.user_id === this.userId,
-  //   );
-  // }
 
   // get user avatar
   private getProfileImage() {

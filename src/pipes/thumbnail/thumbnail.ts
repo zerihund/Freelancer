@@ -1,18 +1,19 @@
-import { Pipe, PipeTransform } from '@angular/core'
-import { Media } from '../../interfaces/Media'
-import { MediaProvider } from '../../providers/media/media'
+import { Pipe, PipeTransform } from '@angular/core';
+import { Media } from '../../interfaces/Media';
+import { MediaProvider } from '../../providers/media/media';
 
 @Pipe({
   name: 'thumbnail',
 })
 export class ThumbnailPipe implements PipeTransform {
 
-  constructor (
+  constructor(
     private mediaProvider: MediaProvider,
   ) {
   }
 
-  async transform (id: number, ...args) {
+  transform(id: number, ...args) {
+    if (id === null) return;
     return new Promise((resolve) => {
         this.mediaProvider.getSingleMedia(id).subscribe((response: Media) => {
             switch (args[0]) {
@@ -26,14 +27,14 @@ export class ThumbnailPipe implements PipeTransform {
                 resolve(response.screenshot);
                 break;
               default:
-                resolve(response.thumbnails['w160'])
+                resolve(response.thumbnails['w160']);
             }
           },
           error => {
-            console.log(error)
+            console.log(error);
           },
-        )
+        );
       },
-    )
+    );
   }
 }
