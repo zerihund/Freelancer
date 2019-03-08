@@ -1,13 +1,13 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { Media } from '../../interfaces/Media';
-import { MediaProvider } from '../../providers/media/media';
+import { Pipe, PipeTransform } from '@angular/core'
+import { Media } from '../../interfaces/Media'
+import { MediaProvider } from '../../providers/media/media'
 
 @Pipe({
   name: 'thumbnail',
 })
 export class ThumbnailPipe implements PipeTransform {
 
-  constructor(
+  constructor (
     private mediaProvider: MediaProvider,
   ) {
   }

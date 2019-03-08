@@ -11,7 +11,7 @@
     <ion-list *ngFor="let job of ownJobsArray" color="none" id="myOpenJobs-list14">
       <ion-item id="myOpenJobs-list-item16" (click)="goToJobInfo(job)">
         <ion-thumbnail item-left>
-          <img [src]="mediaFilePath + (job.file_id | thumbnail: 'small' | async)" [alt]="job.title"/>
+          <img [src]="job.file_id | thumbnail: 'small' | async" [alt]="job.title"/>
         </ion-thumbnail>
         <h2 *ngIf="job.title.includes('_accepted') ;else other_content">
           {{job.title | acceptTitle}}

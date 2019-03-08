@@ -1,5 +1,5 @@
-<ion-tabs selectedIndex="1" id="tabsController-tabs1">
-  <ion-tab [root]="tab1Root" tabTitle="Profile" tabIcon="person" id="tabsController-tab1"></ion-tab>
+<ion-tabs   selectedIndex="1" id="tabsController-tabs1">
+  <ion-tab [show]="userProvider.loggedIn" [root]="tab1Root" tabTitle="Profile" tabIcon="person" id="tabsController-tab1"></ion-tab>
   <ion-tab [root]="tab2Root" tabTitle="Home" tabIcon="home" id="tabsController-tab2"></ion-tab>
-  <ion-tab [root]="tab3Root" tabTitle="Add post" tabIcon="add-circle" id="tabsController-tab3"></ion-tab>
+  <ion-tab [show]="!userProvider.loggedIn" [root]="tab3Root" tabTitle="login" tabIcon="log-in" id="tabsController-tab3"></ion-tab>-->
 </ion-tabs>

@@ -3,10 +3,10 @@
   <ion-list id="myProfile-list5">
     <ion-item color="none" id="myProfile-list-item25">
       <ion-avatar item-left *ngIf="avatar">
-        <img [src]="mediaFilePath + (avatar | thumbnail: 'small' | async)" id="avatar">
+        <img [src]="avatar | thumbnail: 'small' | async" id="avatar">
       </ion-avatar>
       <ng-container
-        *ngIf="user.full_name != null; then showFullname; else showUsername">
+        *ngIf="user != null && user.full_name != null; then showFullname; else showUsername">
       </ng-container>
 
       <ng-template #showFullname><h2>{{user.full_name}}</h2></ng-template>

@@ -1,12 +1,9 @@
 <ion-header >
     <ion-navbar>
     <ion-searchbar color="secondary" placeholder="What are you looking for?" name="Search" id="home-search1"></ion-searchbar>
-      <ion-item item-left  color="secondary" *ngIf="!userProvider.loggedIn" (click)="goLogin()">
-        <ion-icon name="log-in" item-left>  </ion-icon> Login
-      </ion-item>
   </ion-navbar>
 </ion-header>
-<ion-content auto-hide padding id="page3" class="background">
+<ion-content auto-hide padding id="page3">
   <ion-card>
     <ion-slides autoplay="3000" [pager]="true">
       <ion-slide (click)="goToCategory('IT and Tech ')">
@@ -43,7 +40,7 @@
     <ion-item-sliding *ngFor="let job of jobArray">
       <ion-item color="none" (click)="goToJobInfo(job)" id="home-list-item9">
         <ion-thumbnail item-left>
-          <img [src]="mediaFilePath + (job.file_id | thumbnail: 'small' | async)">
+          <img [src]="job.file_id | thumbnail: 'small' | async">
         </ion-thumbnail>
         <h2>{{job.title}}</h2>
         <p class="price">{{getDescription(job.description).price}}</p>
@@ -64,9 +61,14 @@
       loadingText="Loading more data...">
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
-  <ion-fab bottom right #fab (click)="goLogin()">
+  <ion-fab bottom right #fab (click)="goLoginOrNewPost()">
     <button ion-fab mini color="secondary">
       <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+  <ion-fab bottom left #fab >
+    <button ion-fab mini color="secondary">
+      <ion-icon name="log-in"></ion-icon>
     </button>
   </ion-fab>
 </ion-content>
