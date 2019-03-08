@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { MediaProvider } from '../../providers/media/media';
 import { JobProvider } from '../../providers/job/job';
 import { OffersPage } from '../offers/offers';
 import { JobInfoPage } from '../job-info/job-info';
@@ -14,12 +13,10 @@ export class OwnJobsPage {
   avatar: string;
   private ownJobsArray = [];
   filesObject: Object;
-  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public mediaProvider: MediaProvider,
     public jobProvider: JobProvider,
   ) {
   }
@@ -43,13 +40,13 @@ export class OwnJobsPage {
   // go to job info page
   goToJobInfo = (job) => {
     console.log(job);
-    this.navCtrl.push(JobInfoPage, { job: job }).catch();
+    this.navCtrl.push(JobInfoPage,{ job: job }).catch();
   };
 
   // go to Offer page
-  goToOffers = (file_id) => {
-    this.jobProvider.getNumBid(file_id).subscribe(res => {
-      this.navCtrl.push(OffersPage, { bidsArray: res }).catch();
+  goToOffers = (job) => {
+    this.jobProvider.getNumBid(job.file_id).subscribe(res => {
+      this.navCtrl.push(OffersPage, { bidsArray: res, job: job}).catch();
     });
   };
 }
