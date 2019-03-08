@@ -1,8 +1,8 @@
-<ion-content padding id="page7" style="background-color:#E3FFDF;">
+<ion-content padding id="page7" class="background">
   <ion-card id="jobInfo-card22">
     <ion-list>
       <ion-item color="none" (click)="goToHome()" id="jobInfo-list-item95">
-        <ion-icon name="close" item-right></ion-icon>
+        <ion-icon color="secondary" name="close-circle" item-right></ion-icon>
       </ion-item>
       <div class="spacer" style="width:300px;height:18px;" id="jobInfo-spacer2"></div>
       <div id="jobInfo-markdown13" style="text-align:center;" class="show-list-numbers-and-dots">
@@ -17,18 +17,17 @@
       <img [src]="job.file_id | thumbnail: 'large' | async">
       <ion-item id="jobInfo-list-item-container31">
         <div id="jobInfo-markdown49" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">
+          <div text-wrap style="margin-top:1px;color:#000000;" text-justify="">
             {{descriptionJSON.description}}
-          </p>
+          </div>
         </div>
       </ion-item>
       <ion-item color="none" on-click="goToViewer()" id="jobInfo-list-item118">
         <ion-note item-right></ion-note>
-        <ion-icon name="search" item-right></ion-icon>
       </ion-item>
       <ion-item color="none" on-click="goToProfileView2()" id="jobInfo-list-item14">
-        <ion-avatar item-left>
-          <img src="assets/img/STog9RfMSr207feF73NF_profile01.jpg" />
+        <ion-avatar *ngIf="avatar" item-left>
+          <img [src]="(avatar | thumbnail: 'small' | async)" id="avatar">
         </ion-avatar>
         <h2>
           {{userInfoJSON.user.username}}
@@ -36,24 +35,24 @@
       </ion-item>
       <ion-item color="none" id="jobInfo-list-item10">
         Valid until: {{descriptionJSON.deadline}}
-        <ion-icon name="calendar" item-right></ion-icon>
+        <ion-icon color="secondary" name="calendar" item-right></ion-icon>
       </ion-item>
       <ion-item color="none" id="jobInfo-list-item87">
         Show on map
-        <ion-icon name="map" item-right></ion-icon>
+        <ion-icon color="secondary" name="map" item-right></ion-icon>
       </ion-item>
     </ion-list>
   </ion-card>
   <ion-card id="jobInfo-card23">
     <ion-list>
-      <h4 id="jobInfo-heading1" style="color:#437943;text-align:center;">
+      <h2 id="jobInfo-heading1" style="color:#437943;text-align:center;">
         Set your price:
-      </h4>
+      </h2>
       <form id="jobInfo-form15">
         <div id="jobInfo-container2">
           <form id="jobInfo-form16">
             <ion-item id="jobInfo-range5">
-              <ion-range min="0" max="1000" step="1" color="balanced" name="offer price" [(ngModel)]="priceOffer">
+              <ion-range min="0" max="1000" step="1" color="secondary" name="offer price" [(ngModel)]="priceOffer">
                 <ion-label range-left>
                   €
                 </ion-label>
@@ -64,10 +63,10 @@
 
               </ion-input>
             </ion-item>
-            <button id="jobInfo-button15" ion-button clear color="balanced" block style="font-weight:600;font-size:20px;">
+            <button id="jobInfo-button15" ion-button clear color="secondary" block style="font-weight:600;font-size:20px;">
               {{priceOffer}} €
             </button>
-            <button id="jobInfo-button6" ion-button color="balanced" block style="border-radius:10px 10px 10px 10px;" (click)="goToSendOffer()">
+            <button id="jobInfo-button6" ion-button color="secondary" block style="border-radius:10px 10px 10px 10px;" (click)="goToSendOffer()">
               <ion-icon name="checkmark-circle-outline"></ion-icon>
               Offer!
             </button>

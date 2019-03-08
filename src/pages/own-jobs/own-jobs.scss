@@ -7,9 +7,11 @@ page-my-open-jobs {
       -moz-background-size: cover;
       background-size: cover;
     }
-
   }
 
+  .accept {
+    color: color($colors, danger);
+  }
 
 }
 

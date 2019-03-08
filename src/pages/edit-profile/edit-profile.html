@@ -5,9 +5,7 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page31">
-
-
+<ion-content padding id="page31 " class="background">
   <ion-grid>
     <ion-row>
       <ion-col col-3></ion-col>
@@ -16,8 +14,8 @@
           <ion-avatar class="image-cropper">
             <img [src]="avatar | thumbnail: 'small' | async" id="avatar">
           </ion-avatar>
-          <ion-fab bottom right #fab>
-            <button ion-fab mini color="secondary" (click)="showChangePhotoMenu()">
+          <ion-fab bottom right #fab >
+            <button ion-fab mini color="secondary">
               <ion-icon name="camera"></ion-icon>
             </button>
           </ion-fab>
@@ -57,9 +55,6 @@
       <ion-textarea rows="1" name="skills" [(ngModel)]="skills" autosize></ion-textarea>
       <!--ion-input type="text" placeholder="" [(ngModel)]="skills" name="skills" [value]="skills"></ion-input-->
     </ion-item>
-
-
-
     <div class="spacer" style="width:300px;height:29px;" id="editProfile-spacer15"></div>
     <button (click)="updateProfile()" id="editProfile-button11" ion-button color="positive" block>
       Save

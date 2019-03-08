@@ -2,4 +2,9 @@ page-category {
   .price {
     color: color($colors, secondary);
   }
+  .background{
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(10deg, #f4f4f4,#32db64);
+  }
 }
