@@ -1,6 +1,13 @@
-<ion-content padding id="page4">
+<ion-content padding id="page4" class="background">
+  <ion-card>
+    <ion-item color="none"  id="jobInfo-list-item95">
+      <ion-title color="secondary">
+        New Post
+      </ion-title>
+      <ion-icon color="secondary" name="close-circle" item-right (click)="goToHome()"></ion-icon>
+    </ion-item>
+
   <form id="newPost-form18" (ngSubmit)="onUpload()">
-    <h3 id="newPost-heading4" style="color:#000000;">NEW POST</h3>
     <ion-item id="newPost-input13">
       <ion-label stacked>
         Title:
@@ -37,8 +44,8 @@
         <ion-option>Beauty & Health</ion-option>
       </ion-select>
     </ion-item>
-    <ion-item id="newPost-input17">
-      <ion-input accept="image/*" (change)="handleChange($event)" name="File" type="file">Choose file</ion-input>
+    <ion-item id="newPost-input17" >
+      <ion-input color="secondary" accept="image/*" (change)="handleChange($event)" name="File" type="file">Choose file</ion-input>
     </ion-item>
     <ion-item id="newPost-input18">
       <ion-label stacked>
@@ -46,12 +53,13 @@
       </ion-label>
       <ion-input name="Deadline" [(ngModel)]="deadline" type="date"></ion-input>
     </ion-item>
-    <button type="submit" id="newPost-button9" ion-button color="positive" block style="border-radius:50px 50px 50px 50px;" (click)="goToHome()">
+    <button  type="submit" id="newPost-button9" ion-button color="secondary" block style="border-radius:50px 50px 50px 50px;" (click)="goToHome()">
       <ion-icon name="checkmark-circle"></ion-icon>
       Post it!
     </button>
   </form>
   <ion-card>
     <img [src]="fileData">
+  </ion-card>
   </ion-card>
 </ion-content>

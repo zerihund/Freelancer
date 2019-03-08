@@ -1,9 +1,9 @@
 <ion-content id="page2" class="background">
+  <ion-card class="profile-pic">
   <div class="spacer" style="width:320px;height:50px;" id="myProfile-spacer7"></div>
-  <ion-list id="myProfile-list5">
     <ion-item color="none" id="myProfile-list-item25">
       <ion-avatar item-left *ngIf="avatar">
-        <img [src]="avatar | thumbnail: 'small' | async" id="avatar">
+        <img [src]="avatar | thumbnail: 'medium' | async" id="avatar">
       </ion-avatar>
       <ng-container
         *ngIf="user != null && user.full_name != null; then showFullname; else showUsername">
@@ -11,37 +11,30 @@
 
       <ng-template #showFullname><h2>{{user.full_name}}</h2></ng-template>
       <ng-template #showUsername><h2>{{user.username}}</h2></ng-template>
-      <ion-buttons (click)="goToEditProfile()" item-right><button ion-button clear color="dark"><ion-icon name="create"> Edit</ion-icon></button></ion-buttons>
+      <ion-buttons (click)="goToEditProfile()" item-end><button ion-button clear color="dark"><ion-icon name="create" color="primary"> Edit</ion-icon></button></ion-buttons>
 
     </ion-item>
-
-  </ion-list>
   <div class="spacer" style="width:320px;height:35px;" id="myProfile-spacer26"></div>
-  <ion-list id="myProfile-list20">
-    <ion-item color="none" (click)="goToSavedAdds()" id="myProfile-list-item148">
-      Saved job adds
-      <ion-note item-right></ion-note>
+  </ion-card>
+  <ion-card class="saved-job">
+    <ion-item (click)="goToSavedAdds()" id="myProfile-list-item148" >
+     Saved job adds
     </ion-item>
-  </ion-list>
-  <div class="spacer" style="width:320px;height:35px;" id="myProfile-spacer16"></div>
-  <ion-list id="myProfile-list31">
+  </ion-card>
+  <ion-card class="own-job">
     <ion-item color="none" id="myProfile-list-item147" (click)="goToMyOwnJobs(userFiles)">
       My own jobs
-      <ion-note item-right></ion-note>
     </ion-item>
-  </ion-list>
-  <div class="spacer" style="width:320px;height:35px;" id="myProfile-spacer38"></div>
-  <ion-list id="myProfile-list30">
+  </ion-card>
+  <ion-card class="sent-offer">
     <ion-item color="none" (click)="goToMySentOffers()" id="myProfile-list-item89">
       My sent offers
-      <ion-note item-right></ion-note>
     </ion-item>
-  </ion-list>
-  <div class="spacer" style="width:320px;height:35px;" id="myProfile-spacer37"></div>
-  <ion-list id="myProfile-list27">
-    <ion-item color="none" (click)="logout()" id="myProfile-list-item132">
-      <ion-icon name="log-out" item-left></ion-icon>
+  </ion-card>
+  <ion-card class="sign-out">
+    <ion-item color="none"  (click)="logout()" id="myProfile-list-item132">
+      <ion-icon color="secondary" name="log-out" item-left size="small"> </ion-icon>
       Sign out
     </ion-item>
-  </ion-list>
+  </ion-card>
 </ion-content>

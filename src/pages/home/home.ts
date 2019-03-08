@@ -10,7 +10,7 @@ import { UserProvider } from '../../providers/user/user';
 import { LoginResponse, TagReponse, User } from '../../interfaces/Media';
 import { MediaProvider } from '../../providers/media/media';
 import { EditProfilePage } from '../edit-profile/edit-profile';
-import {NewPostPage} from "../new-post/new-post";
+import { NewPostPage } from "../new-post/new-post";
 
 @Component({
   selector: 'page-home',
@@ -18,7 +18,6 @@ import {NewPostPage} from "../new-post/new-post";
 })
 export class HomePage {
   @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
-
   constructor(
     public navCtrl: NavController,
     public jobProvider: JobProvider,
@@ -37,7 +36,6 @@ export class HomePage {
   ionViewDidEnter() {
     this.getAllJob();
   }
-
   // REMOVE THIS LATER
   // Only for debugging, faster navigation
   // ======================================================
