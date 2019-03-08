@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Media } from '../../interfaces/Media';
+import { Media, TagReponse } from '../../interfaces/Media';
 
 @Injectable()
 export class JobProvider {
@@ -9,10 +9,9 @@ export class JobProvider {
     console.log('Hello JobProvider Provider');
   }
 
-  // fetch all jobs with freelancer tag
-  getAllJobs = () => {
-    return this.http.get<any>(
-      'http://media.mw.metropolia.fi/wbma/tags/freelancer');
+  // fetch all jobs with tag
+  getFilesByTag = (tag: string) => {
+    return this.http.get<TagReponse[]>('http://media.mw.metropolia.fi/wbma/tags/' + tag)
   };
 
   // fetch single job with media id
@@ -114,7 +113,18 @@ export class JobProvider {
         'x-access-token': localStorage.getItem('token'),
       }),
     };
-    return this.http.put<any>('http://media.mw.metropolia.fi/wbma/media/'+file_id, json,
+    return this.http.put<any>('http://media.mw.metropolia.fi/wbma/media/' + file_id, json,
       httpOptions);
   };
+
+  // get jobs by user's id
+  getJobByUserId (id: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.get<Media[]>('http://media.mw.metropolia.fi/wbma/media/user/' + id,
+      httpOptions)
+  }
 }

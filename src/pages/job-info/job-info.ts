@@ -3,7 +3,6 @@ import { NavController, NavParams } from 'ionic-angular';
 import { JobProvider } from '../../providers/job/job';
 import { AlertController } from 'ionic-angular';
 import { TagReponse } from '../../interfaces/Media';
-import { MediaProvider } from '../../providers/media/media';
 
 @Component({
   selector: 'page-job-info',
@@ -13,14 +12,13 @@ export class JobInfoPage {
 
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
-    public jobProvider: JobProvider, private alertController: AlertController, public mediaProvider: MediaProvider) {
+    public jobProvider: JobProvider, private alertController: AlertController) {
     this.job = this.navParams.get('job');
     this.getProfileImage();
     this.descriptionJSON = this.getDescription(this.job.description);
     this.userInfoJSON = this.getUser(this.descriptionJSON.user);
   }
 
-  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
   job;
   descriptionJSON;
   userInfoJSON;
@@ -64,7 +62,7 @@ export class JobInfoPage {
 
   // get user avatar
   getProfileImage = () => {
-    this.mediaProvider.getFilesByTag('profile_freelancer').subscribe(
+    this.jobProvider.getFilesByTag('profile_freelancer').subscribe(
       (response: TagReponse[]) => {
         response.forEach(file => {
           if (file.user_id === this.job.user_id) {

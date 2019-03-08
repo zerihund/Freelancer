@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { JobProvider } from '../../providers/job/job';
-import { MediaProvider } from '../../providers/media/media';
 
 @Pipe({
   name: 'bidnumber',

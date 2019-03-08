@@ -13,7 +13,7 @@
       <ion-item-sliding>
         <ion-item *ngIf="bid.user" color="positive" id="offers-list-item72">
           <ion-avatar item-left>
-            <img [src]="mediaFilePath + ((bid.user_id | avatarId | async ) | thumbnail: 'small' | async)" id="avatar">
+            <img [src]="((bid.user_id | avatarId | async ) | thumbnail: 'small' | async)" id="avatar">
           </ion-avatar>
           {{bid.user.username}}
           <p item-right="">{{bid.comment.price}} euros</p>

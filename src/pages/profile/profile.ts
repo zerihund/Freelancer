@@ -5,9 +5,9 @@ import { TagReponse, User } from '../../interfaces/Media';
 import { SavedAddsPage } from '../saved-adds/saved-adds';
 import { OwnJobsPage } from '../own-jobs/own-jobs';
 import { SentOffersPage } from '../sent-offers/sent-offers';
-import { MediaProvider } from '../../providers/media/media';
 import { stringify } from 'querystring';
 import { EditProfilePage } from '../edit-profile/edit-profile';
+import { JobProvider } from '../../providers/job/job';
 
 @Component({
   selector: 'page-my-profile',
@@ -15,22 +15,19 @@ import { EditProfilePage } from '../edit-profile/edit-profile';
 })
 export class ProfilePage {
 
-  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
   private user: User;
   private username: string;
   private userId: number;
   private email: string;
   private projectFilesArray: TagReponse[];
-  private userFilesArray: any;
-  private profileImage: TagReponse;
   private avatar: string;
   private numberOfOwnJobs: number;
   private userFiles: any;
 
-  constructor (
+  constructor(
     public navCtrl: NavController,
     public userProvider: UserProvider,
-    public mediaProvider: MediaProvider,
+    public jobProvider: JobProvider,
   ) {
     this.user = JSON.parse(localStorage.getItem('user'));
   }
@@ -44,12 +41,10 @@ export class ProfilePage {
     this.getProfileInfo();
   }
 
-  // ========================
-  //        Navigation
-  // ========================
+  // go to saved add
   goToSavedAdds(params) {
     if (!params) params = {};
-    this.navCtrl.push(SavedAddsPage);
+    this.navCtrl.push(SavedAddsPage).catch();
   }
 
   //go to own jobs page
@@ -72,9 +67,6 @@ export class ProfilePage {
     }).catch();
   }
 
-  // ========================
-  //        Functions
-  // ========================
   logout() {
     localStorage.clear();
     this.userProvider.loggedIn = false;
@@ -92,8 +84,8 @@ export class ProfilePage {
     this.getUserFiles();
   }
 
-  private getProjectFiles () {
-    this.mediaProvider.getFilesByTag('freelancer').subscribe(
+  private getProjectFiles() {
+    this.jobProvider.getFilesByTag('freelancer').subscribe(
       (response: TagReponse[]) => {
         this.projectFilesArray = response;
         console.log('User id in profile page = ' + this.userId);
@@ -103,29 +95,29 @@ export class ProfilePage {
 
   // get user avatar
   private getProfileImage() {
-    this.mediaProvider.getFilesByTag('profile_freelancer').subscribe(
+    this.jobProvider.getFilesByTag('profile_freelancer').subscribe(
       (response: TagReponse[]) => {
         response.forEach(file => {
           if (file.user_id === this.userId) {
             this.avatar = file.file_id.toString();
           }
-        })
+        });
       },
       error => {
-        console.log(error)
+        console.log(error);
       },
-    )
+    );
   }
 
   // get user's own jobs
   private getUserFiles() {
-      this.mediaProvider.getFilesByUserId(this.userId).subscribe(
-        result => {
-          this.numberOfOwnJobs = Object.keys(result).length - 1;
-          this.userFiles = result;
-        }, error => {
-          console.log(error);
-        },
-      );
+    this.jobProvider.getJobByUserId(this.userId).subscribe(
+      result => {
+        this.numberOfOwnJobs = Object.keys(result).length - 1;
+        this.userFiles = result;
+      }, error => {
+        console.log(error);
+      },
+    );
   }
 }

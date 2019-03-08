@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { MediaProvider } from '../../providers/media/media';
 import { TagReponse } from '../../interfaces/Media';
+import { JobProvider } from '../../providers/job/job';
 
 @Pipe({
   name: 'avatarId',
@@ -8,14 +8,14 @@ import { TagReponse } from '../../interfaces/Media';
 export class AvatarIdPipe implements PipeTransform {
 
   constructor(
-    private mediaProvider: MediaProvider,
+    private jobProvider: JobProvider,
   ) {
   }
 
   transform(value: number, ...args) {
-    if(value === null) return;
+    if (value === null) return;
     return new Promise((resolve) => {
-      this.mediaProvider.getFilesByTag('profile_freelancer').subscribe(
+      this.jobProvider.getFilesByTag('profile_freelancer').subscribe(
         (response: TagReponse[]) => {
           response.forEach(file => {
             if (file.user_id === value) {
@@ -28,6 +28,6 @@ export class AvatarIdPipe implements PipeTransform {
           console.log(error);
         },
       );
-    })
+    });
   }
 }

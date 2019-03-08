@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { MediaProvider } from '../../providers/media/media';
 import { JobProvider } from '../../providers/job/job';
 import { OffersPage } from '../offers/offers';
 import { JobInfoPage } from '../job-info/job-info';
@@ -14,12 +13,10 @@ export class OwnJobsPage {
   avatar: string;
   private ownJobsArray = [];
   filesObject: Object;
-  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public mediaProvider: MediaProvider,
     public jobProvider: JobProvider,
   ) {
   }

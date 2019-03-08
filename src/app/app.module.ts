@@ -23,7 +23,6 @@ import { UserProvider } from '../providers/user/user';
 import { SavedAddsPage } from '../pages/saved-adds/saved-adds';
 import { SentOffersPage } from '../pages/sent-offers/sent-offers';
 import { OwnJobsPage } from '../pages/own-jobs/own-jobs';
-import { MediaProvider } from '../providers/media/media';
 import { OffersPage } from '../pages/offers/offers';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
@@ -81,7 +80,6 @@ import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
     StatusBar,
     SplashScreen,
     JobProvider,
-    MediaProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UserProvider,
   ],

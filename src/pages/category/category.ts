@@ -22,7 +22,7 @@ export class CategoryPage {
 
   // fetch all jobs with freelancer tag
   getAllJob = () => {
-    this.jobProvider.getAllJobs().subscribe(res => {
+    this.jobProvider.getFilesByTag('freelancer').subscribe(res => {
       res.forEach(job => {
         if(this.getDescription(job.description).category === this.navParams.get('category'))
           this.jobArray.push(job);

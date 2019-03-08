@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
 import { JobProvider } from '../../providers/job/job';
-import { TagReponse } from '../../interfaces/Media';
-import { MediaProvider } from '../../providers/media/media';
 
 @Component({
   selector: 'page-offers',
@@ -13,8 +11,7 @@ export class OffersPage {
 
   constructor(
     public navCtrl: NavController, public navParams: NavParams,
-    public userProvider: UserProvider, public jobProvider: JobProvider,
-    public mediaProvider: MediaProvider) {
+    public userProvider: UserProvider, public jobProvider: JobProvider) {
     this.bidsArray = this.navParams.get('bidsArray');
     console.log(this.bidsArray);
     this.bidsArray.forEach(bid => {
@@ -29,7 +26,6 @@ export class OffersPage {
   }
 
   bidsArray;
-  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
 
   // go back to own jobs
   goToOwnJobs = () => {
