@@ -10,8 +10,6 @@ page-edit-profile {
     }
   }
 
-
-
   .image-cropper {
     margin: 0 auto;
     display: inline-block;
@@ -25,6 +23,13 @@ page-edit-profile {
   .image-cropper img {
     width: 100%;
     height: auto;
+  }
+
+  #mySkills {
+    width: calc(100% - 10px);
+    border: 0;
+    border-radius: 0;
+    background: transparent;
   }
 
 }

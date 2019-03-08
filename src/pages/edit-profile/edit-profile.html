@@ -16,8 +16,8 @@
           <ion-avatar class="image-cropper">
             <img [src]="avatar | thumbnail: 'small' | async" id="avatar">
           </ion-avatar>
-          <ion-fab bottom right #fab >
-            <button ion-fab mini color="secondary">
+          <ion-fab bottom right #fab>
+            <button ion-fab mini color="secondary" (click)="showChangePhotoMenu()">
               <ion-icon name="camera"></ion-icon>
             </button>
           </ion-fab>
@@ -39,13 +39,13 @@
       <ion-label>
         Email
       </ion-label>
-      <ion-input type="email" placeholder=""></ion-input>
+      <ion-input type="email" placeholder="" [(ngModel)]="editEmail" [value]="editEmail" name="email"></ion-input>
     </ion-item>
     <ion-item id="editProfile-input26">
       <ion-label>
         Phone
       </ion-label>
-      <ion-input type="tel" placeholder=""></ion-input>
+      <ion-input type="tel" placeholder="" [(ngModel)]="editPhone" [value]="editPhone" name="phone"></ion-input>
     </ion-item>
   </form>
   <h4 id="editProfile-heading12" style="color:#000000;">
@@ -53,13 +53,15 @@
   </h4>
   <form id="editProfile-form21">
     <ion-item id="editProfile-input27">
-      <ion-label>
-        list of skills
-      </ion-label>
-      <ion-input type="text" placeholder=""></ion-input>
+
+      <ion-textarea rows="1" name="skills" [(ngModel)]="skills" autosize></ion-textarea>
+      <!--ion-input type="text" placeholder="" [(ngModel)]="skills" name="skills" [value]="skills"></ion-input-->
     </ion-item>
+
+
+
     <div class="spacer" style="width:300px;height:29px;" id="editProfile-spacer15"></div>
-    <button id="editProfile-button11" ion-button color="positive" block>
+    <button (click)="updateProfile()" id="editProfile-button11" ion-button color="positive" block>
       Save
     </button>
   </form>

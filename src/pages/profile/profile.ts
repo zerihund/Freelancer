@@ -68,7 +68,7 @@ export class ProfilePage {
 
   goToEditProfile(params) {
     this.navCtrl.push(EditProfilePage, {
-      user: this.user,
+      userId: this.user.user_id,
       avatar: this.avatar,
     }).catch();
   }
@@ -117,6 +117,7 @@ export class ProfilePage {
         response.forEach(file => {
           if (file.user_id === this.userId) {
             this.avatar = file.file_id.toString();
+            console.log('avatar id is: ' + this.avatar);
           }
         })
       },

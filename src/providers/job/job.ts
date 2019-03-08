@@ -78,13 +78,13 @@ export class JobProvider {
   };
 
   // delete job
-  deleteJob = () => {
+  deleteJob = (id: number) => {
     const httpOptions = {
       headers: new HttpHeaders({
         'x-access-token': localStorage.getItem('token'),
       }),
     };
-    return this.http.delete<any>('http://media.mw.metropolia.fi/wbma/media/699', httpOptions)
+    return this.http.delete<any>('http://media.mw.metropolia.fi/wbma/media/'+id, httpOptions)
   };
 
   // // generateDetailedJobs (job: Media) {

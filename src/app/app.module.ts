@@ -27,6 +27,8 @@ import { MediaProvider } from '../providers/media/media';
 import { OffersPage } from '../pages/offers/offers';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { AutoSize} from '../components/auto-size/auto-size';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,7 @@ import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
     OffersPage,
     EditProfilePage,
     AutoHideDirective,
+    AutoSize,
   ],
   imports: [
     BrowserModule,
@@ -84,6 +87,7 @@ import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
     MediaProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UserProvider,
+    Camera,
   ],
 })
 export class AppModule {

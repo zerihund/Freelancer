@@ -17,7 +17,7 @@ export class MediaProvider {
     console.log('Hello MediaProvider Provider')
   }
 
-  getSingleMedia (id) {
+  getSingleMedia (id: number) {
     return this.http.get<Media>(this.mediaAPI + 'media/' + id)
   }
 
