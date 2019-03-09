@@ -6,6 +6,7 @@ import { CategoryPage } from '../category/category';
 import { InfiniteScroll } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { UserProvider } from '../../providers/user/user';
+import { ToastController } from 'ionic-angular';
 import {
   AddFavourite,
   FavouriteResponse,
@@ -23,6 +24,7 @@ export class HomePage {
   @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
 
   constructor(
+    private toastCtrl: ToastController,
     public navCtrl: NavController,
     public jobProvider: JobProvider,
     public userProvider: UserProvider,
@@ -106,19 +108,28 @@ export class HomePage {
     let id = {'file_id': fileId};
     this.jobProvider.saveJob(id).subscribe(
       (result: AddFavourite) => {
-        console.log(result.message);
         if (result.message === 'Favourite added') {
-          console.log('*** Item saved! ***');
+          this.showToast('Saved to your list!');
         }
       },
+      // shows error reason in case of error
       error => {
         console.log(error);
         if (error.error.reason.includes('Duplicate entry')) {
-          console.log('*** Item is already in your list ***');
+          this.showToast('Item is already in your list!');
         } else {
-          console.log('*** Try again! item was not saved. ***');
+          this.showToast('Try again! item was not saved.');
         }
       },
     );
+  };
+
+  // shows a toast with provided message
+  showToast = (msg: string) => {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+    });
+    toast.present().catch();
   };
 }
