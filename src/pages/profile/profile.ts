@@ -44,7 +44,9 @@ export class ProfilePage {
   // go to saved add
   goToSavedAdds(params) {
     if (!params) params = {};
-    this.navCtrl.push(SavedAddsPage).catch();
+    this.navCtrl.push(SavedAddsPage, {
+      userId: this.user.user_id,
+    }).catch();
   }
 
   //go to own jobs page

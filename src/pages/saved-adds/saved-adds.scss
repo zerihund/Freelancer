@@ -1,3 +1,9 @@
 page-my-saved-adds {
-ion-navbar {color: #0CE847;}
+  ion-navbar {
+    color: #0CE847;
+  }
+
+  .price {
+    color: color($colors, secondary);
+  }
 }
