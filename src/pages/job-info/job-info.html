@@ -4,7 +4,7 @@
       <ion-item color="none" (click)="goToHome()" id="jobInfo-list-item95">
         <ion-icon color="secondary" name="close-circle" item-right></ion-icon>
       </ion-item>
-      <div class="spacer" style="width:300px;height:18px;" id="jobInfo-spacer2"></div>
+
       <div id="jobInfo-markdown13" style="text-align:center;" class="show-list-numbers-and-dots">
         <p style="color:#000000;font-size:24px;">
           <strong>
@@ -13,7 +13,7 @@
         </p>
         <P class="price">{{descriptionJSON.price}}</P>
       </div>
-      <div class="spacer" style="width:300px;height:14px;" id="jobInfo-spacer4"></div>
+
       <img [src]="job.file_id | thumbnail: 'large' | async">
       <ion-item id="jobInfo-list-item-container31">
         <div id="jobInfo-markdown49" class="show-list-numbers-and-dots">
@@ -22,9 +22,7 @@
           </div>
         </div>
       </ion-item>
-      <ion-item color="none" on-click="goToViewer()" id="jobInfo-list-item118">
-        <ion-note item-right></ion-note>
-      </ion-item>
+
       <ion-item color="none" on-click="goToProfileView2()" id="jobInfo-list-item14">
         <ion-avatar *ngIf="avatar" item-left>
           <img [src]="(avatar | thumbnail: 'small' | async)" id="avatar">
