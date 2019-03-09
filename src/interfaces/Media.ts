@@ -74,3 +74,7 @@ export interface  AddFavourite {
   message: string;
   favourite_id: number;
 }
+
+export interface  DeleteFavourite {
+  message: string;
+}
