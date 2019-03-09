@@ -6,8 +6,14 @@ import { CategoryPage } from '../category/category';
 import { InfiniteScroll } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { UserProvider } from '../../providers/user/user';
-import { LoginResponse, TagReponse, User } from '../../interfaces/Media';
-import { NewPostPage } from "../new-post/new-post";
+import {
+  AddFavourite,
+  FavouriteResponse,
+  LoginResponse,
+  TagReponse,
+  User,
+} from '../../interfaces/Media';
+import { NewPostPage } from '../new-post/new-post';
 
 @Component({
   selector: 'page-home',
@@ -52,7 +58,7 @@ export class HomePage {
 
   // go to job info page
   goToJobInfo = (job) => {
-    this.navCtrl.push(JobInfoPage, { job: job }).catch();
+    this.navCtrl.push(JobInfoPage, {job: job}).catch();
   };
 
   // parse description json
@@ -62,7 +68,7 @@ export class HomePage {
 
   // go to Category page
   goToCategory = (category: string) => {
-    this.navCtrl.push(CategoryPage, { category: category }).catch();
+    this.navCtrl.push(CategoryPage, {category: category}).catch();
   };
 
   // paging mechanism for ionic infinite scroll
@@ -90,9 +96,29 @@ export class HomePage {
   goLoginOrNewPost = () => {
     if (!this.userProvider.loggedIn) {
       this.navCtrl.push(LoginPage).catch();
-    }
-    else {
+    } else {
       this.navCtrl.push(NewPostPage).catch();
     }
+  };
+
+  // save a job for later review
+  saveJob = (fileId) => {
+    let id = {'file_id': fileId};
+    this.jobProvider.saveJob(id).subscribe(
+      (result: AddFavourite) => {
+        console.log(result.message);
+        if (result.message === 'Favourite added') {
+          console.log('*** Item saved! ***');
+        }
+      },
+      error => {
+        console.log(error);
+        if (error.error.reason.includes('Duplicate entry')) {
+          console.log('*** Item is already in your list ***');
+        } else {
+          console.log('*** Try again! item was not saved. ***');
+        }
+      },
+    );
   };
 }

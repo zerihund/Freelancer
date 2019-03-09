@@ -63,3 +63,14 @@ export interface TagReponse {
   mime_type: string;
   time_added: string;
 }
+
+export interface FavouriteResponse {
+  favourite_id: number;
+  file_id: number;
+  user_id: number;
+}
+
+export interface  AddFavourite {
+  message: string;
+  favourite_id: number;
+}

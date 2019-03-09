@@ -46,9 +46,9 @@
         <p class="price">{{getDescription(job.description).price}}</p>
         <p>{{getDescription(job.description).description}}</p>
       </ion-item>
-      <ion-item-options side="left">
-        <button ion-button color="balanced">
-          Offer
+      <ion-item-options side="left" (ionSwipe)="saveJob(job.file_id)">
+        <button (click)="saveJob(job.file_id)" ion-button expandable color="balanced">
+          <ion-icon name="star"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>

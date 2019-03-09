@@ -15,7 +15,7 @@
             <img [src]="avatar | thumbnail: 'small' | async" id="avatar">
           </ion-avatar>
           <ion-fab bottom right #fab >
-            <button ion-fab mini color="secondary">
+            <button (click)="showChangePhotoMenu()" ion-fab mini color="secondary">
               <ion-icon name="camera"></ion-icon>
             </button>
           </ion-fab>
