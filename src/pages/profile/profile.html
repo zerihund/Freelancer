@@ -1,35 +1,35 @@
 <ion-content id="page2" class="background">
   <ion-card class="profile-pic">
-  <div class="spacer" style="width:320px;height:50px;" id="myProfile-spacer7"></div>
     <ion-item color="none" id="myProfile-list-item25">
-      <ion-avatar item-left *ngIf="avatar">
-        <img [src]="avatar | thumbnail: 'medium' | async" id="avatar">
+      <ion-avatar  *ngIf="avatar">
+        <img [src]="avatar | thumbnail: 'small' | async" id="avatar">
       </ion-avatar>
+      </ion-item>
+      <ion-item myProfile-list-item26>
       <ng-container
         *ngIf="user != null && user.full_name != null; then showFullname; else showUsername">
       </ng-container>
 
       <ng-template #showFullname><h2>{{user.full_name}}</h2></ng-template>
       <ng-template #showUsername><h2>{{user.username}}</h2></ng-template>
-      <ion-buttons (click)="goToEditProfile()" item-end><button ion-button clear color="dark"><ion-icon name="create" color="primary"> Edit</ion-icon></button></ion-buttons>
+      <ion-buttons item-right (click)="goToEditProfile()" ><button ion-button clear color="dark"><ion-icon name="create" color="primary"> Edit</ion-icon></button></ion-buttons>
 
     </ion-item>
-  <div class="spacer" style="width:320px;height:35px;" id="myProfile-spacer26"></div>
   </ion-card>
-  <ion-card class="saved-job">
-    <ion-item (click)="goToSavedAdds()" id="myProfile-list-item148" >
+  <ion-card class="saved-job " >
+    <div (click)="goToSavedAdds()" class="job-title" >
      Saved job adds
-    </ion-item>
+    </div>
   </ion-card>
-  <ion-card class="own-job">
-    <ion-item color="none" id="myProfile-list-item147" (click)="goToMyOwnJobs(userFiles)">
+  <ion-card class="own-job ">
+    <div class="job-title" (click)="goToMyOwnJobs(userFiles)">
       My own jobs
-    </ion-item>
+    </div>
   </ion-card>
-  <ion-card class="sent-offer">
-    <ion-item color="none" (click)="goToMySentOffers()" id="myProfile-list-item89">
+  <ion-card class="sent-offer ">
+    <div class="job-title" (click)="goToMySentOffers()">
       My sent offers
-    </ion-item>
+    </div>
   </ion-card>
   <ion-card class="sign-out">
     <ion-item color="none"  (click)="logout()" id="myProfile-list-item132">

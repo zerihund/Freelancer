@@ -14,8 +14,8 @@ page-edit-profile {
     margin: 0 auto;
     display: inline-block;
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: auto;
+    height: auto;
     overflow: hidden;
     border-radius: 50%;
   }
@@ -27,7 +27,7 @@ page-edit-profile {
 
   #mySkills {
     width: calc(100% - 10px);
-    border: 0;
+    border: 1px solid !important;
     border-radius: 0;
     background: transparent;
   }
