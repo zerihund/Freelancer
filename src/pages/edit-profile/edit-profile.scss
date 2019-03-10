@@ -2,22 +2,20 @@ page-edit-profile {
 
 
   ion-content {
-    .fixed-content {
+    /*.fixed-content {
       @include linear-gradient(right, $dusk);
       -webkit-background-size: cover;
       -moz-background-size: cover;
       background-size: cover;
-    }
+    }*/
   }
-
-
 
   .image-cropper {
     margin: 0 auto;
     display: inline-block;
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: auto;
+    height: auto;
     overflow: hidden;
     border-radius: 50%;
   }
@@ -25,6 +23,13 @@ page-edit-profile {
   .image-cropper img {
     width: 100%;
     height: auto;
+  }
+
+  #mySkills {
+    width: calc(100% - 10px);
+    border: 1px solid !important;
+    border-radius: 0;
+    background: transparent;
   }
 
 }

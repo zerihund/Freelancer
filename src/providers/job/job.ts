@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Media, TagReponse } from '../../interfaces/Media';
+import { FavouriteResponse, Media, TagReponse } from '../../interfaces/Media';
 
 @Injectable()
 export class JobProvider {
@@ -45,17 +45,6 @@ export class JobProvider {
       param, httpOptions);
   };
 
-  // log user in
-  logInUser = (user) => {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-      }),
-    };
-    return this.http.post<any>('http://media.mw.metropolia.fi/wbma/login', user,
-      httpOptions);
-  };
-
   // bid job function
   bidJob = (bid) => {
     const httpOptions = {
@@ -79,7 +68,7 @@ export class JobProvider {
   };
 
   // delete job
-  deleteJob = () => {
+  deleteJob = (id: number) => {
     const httpOptions = {
       headers: new HttpHeaders({
         'x-access-token': localStorage.getItem('token'),
@@ -96,7 +85,7 @@ export class JobProvider {
   };
 
   // upload user avatar
-  uploadAvatar(data: any) {
+  uploadAvatar = (data: any) => {
     const httpOptions = {
       headers: new HttpHeaders({
         'x-access-token': localStorage.getItem('token'),
@@ -118,18 +107,50 @@ export class JobProvider {
   };
 
   // get jobs by user's id
-  getJobByUserId (id: number) {
+  getJobByUserId = (id: number) => {
     const httpOptions = {
       headers: new HttpHeaders({
         'x-access-token': localStorage.getItem('token'),
       }),
     };
-    return this.http.get<Media[]>('http://media.mw.metropolia.fi/wbma/media/user/' + id,
-      httpOptions)
-  }
+    return this.http.get<Media[]>(
+      'http://media.mw.metropolia.fi/wbma/media/user/' + id,
+      httpOptions);
+  };
+
+  // Fetching all saved jobs for a user
+  getSavedJobs = () => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.get<FavouriteResponse[]>('http://media.mw.metropolia.fi/wbma/favourites',
+      httpOptions);
+  };
+
+  // Saves a job for later (creates favourite)
+  saveJob = (fileId: any) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.post('http://media.mw.metropolia.fi/wbma/favourites', fileId, httpOptions);
+  };
+
+  // Removes a job from saved jobs (deletes favorite)
+  unSaveJob = (fileId: number) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.delete('http://media.mw.metropolia.fi/wbma/favourites/file/'+ fileId, httpOptions);
+  };
 
   // get offers sent by user
-  getOffers () {
+  getOffers = () => {
     const httpOptions = {
       headers: new HttpHeaders({
         'x-access-token': localStorage.getItem('token'),

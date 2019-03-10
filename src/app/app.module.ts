@@ -25,7 +25,11 @@ import { SentOffersPage } from '../pages/sent-offers/sent-offers';
 import { OwnJobsPage } from '../pages/own-jobs/own-jobs';
 import { OffersPage } from '../pages/offers/offers';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
-import { AutoHideDirective } from '../directives/auto-hide/auto-hide';
+import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { AutoSize} from '../components/auto-size/auto-size';
+import { OnMapPage } from '../pages/on-map/on-map';
+import { GoogleMaps } from '@ionic-native/google-maps';
 import { SearchPage } from '../pages/search/search';
 import { JobInfo2Page } from '../pages/job-info2/job-info2';
 
@@ -51,7 +55,9 @@ import { JobInfo2Page } from '../pages/job-info2/job-info2';
     EditProfilePage,
     AutoHideDirective,
     SearchPage,
-    JobInfo2Page
+    JobInfo2Page,
+    AutoSize,
+    OnMapPage,
   ],
   imports: [
     BrowserModule,
@@ -80,7 +86,8 @@ import { JobInfo2Page } from '../pages/job-info2/job-info2';
     OffersPage,
     EditProfilePage,
     SearchPage,
-    JobInfo2Page
+    JobInfo2Page,
+    OnMapPage,
   ],
   providers: [
     StatusBar,
@@ -88,6 +95,8 @@ import { JobInfo2Page } from '../pages/job-info2/job-info2';
     JobProvider,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UserProvider,
+    Camera,
+    GoogleMaps,
   ],
 })
 export class AppModule {

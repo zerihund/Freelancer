@@ -2,4 +2,14 @@ page-job-info {
   .price {
     color: color($colors, secondary);
   }
+  ion-card.card{
+    margin: 1%;
+    margin-top: 8%;
+    width: 98%;
+    font-family: sans-serif;
+    border-radius: 10px;
+  }
+  img{
+    height: 20%;
+  }
 }

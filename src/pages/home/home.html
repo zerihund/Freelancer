@@ -37,7 +37,7 @@
         </p>
       </div>
     </ion-item>
-    <ion-item-sliding *ngFor="let job of jobArray">
+    <ion-item-sliding *ngFor="let job of jobArray" #slidingItem>
       <ion-item color="none" (click)="goToJobInfo(job)" id="home-list-item9">
         <ion-thumbnail item-left>
           <img [src]="job.file_id | thumbnail: 'small' | async">
@@ -46,9 +46,9 @@
         <p class="price">{{getDescription(job.description).price}}</p>
         <p>{{getDescription(job.description).description}}</p>
       </ion-item>
-      <ion-item-options side="left">
-        <button ion-button color="balanced">
-          Save
+      <ion-item-options side="left"  icon-only  >
+        <button (click)="saveJob(job.file_id, slidingItem)" ion-button expandable color="balanced">
+          <ion-icon name="star"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>
@@ -64,11 +64,6 @@
   <ion-fab bottom right #fab (click)="goLoginOrNewPost()">
     <button ion-fab mini color="secondary">
       <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-fab>
-  <ion-fab bottom left #fab >
-    <button ion-fab mini color="secondary">
-      <ion-icon name="log-in"></ion-icon>
     </button>
   </ion-fab>
 </ion-content>

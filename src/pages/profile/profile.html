@@ -1,47 +1,40 @@
 <ion-content id="page2" class="background">
-  <div class="spacer" style="width:320px;height:50px;" id="myProfile-spacer7"></div>
-  <ion-list id="myProfile-list5">
+  <ion-card class="profile-pic">
     <ion-item color="none" id="myProfile-list-item25">
-      <ion-avatar item-left *ngIf="avatar">
+      <ion-avatar  *ngIf="avatar">
         <img [src]="avatar | thumbnail: 'small' | async" id="avatar">
       </ion-avatar>
+      </ion-item>
+      <ion-item myProfile-list-item26>
       <ng-container
         *ngIf="user != null && user.full_name != null; then showFullname; else showUsername">
       </ng-container>
 
       <ng-template #showFullname><h2>{{user.full_name}}</h2></ng-template>
       <ng-template #showUsername><h2>{{user.username}}</h2></ng-template>
-      <ion-buttons (click)="goToEditProfile()" item-right><button ion-button clear color="dark"><ion-icon name="create"> Edit</ion-icon></button></ion-buttons>
+      <ion-buttons item-right (click)="goToEditProfile()" ><button ion-button clear color="dark"><ion-icon name="create" color="primary"> Edit</ion-icon></button></ion-buttons>
 
     </ion-item>
-
-  </ion-list>
-  <div class="spacer" style="width:320px;height:35px;" id="myProfile-spacer26"></div>
-  <ion-list id="myProfile-list20">
-    <ion-item color="none" (click)="goToSavedAdds()" id="myProfile-list-item148">
-      Saved job adds
-      <ion-note item-right></ion-note>
-    </ion-item>
-  </ion-list>
-  <div class="spacer" style="width:320px;height:35px;" id="myProfile-spacer16"></div>
-  <ion-list id="myProfile-list31">
-    <ion-item color="none" id="myProfile-list-item147" (click)="goToMyOwnJobs(userFiles)">
+  </ion-card>
+  <ion-card class="saved-job " >
+    <div (click)="goToSavedAdds()" class="job-title" >
+     Saved job adds
+    </div>
+  </ion-card>
+  <ion-card class="own-job ">
+    <div class="job-title" (click)="goToMyOwnJobs(userFiles)">
       My own jobs
-      <ion-note item-right></ion-note>
-    </ion-item>
-  </ion-list>
-  <div class="spacer" style="width:320px;height:35px;" id="myProfile-spacer38"></div>
-  <ion-list id="myProfile-list30">
-    <ion-item color="none" (click)="goToMySentOffers()" id="myProfile-list-item89">
+    </div>
+  </ion-card>
+  <ion-card class="sent-offer ">
+    <div class="job-title" (click)="goToMySentOffers()">
       My sent offers
-      <ion-note item-right></ion-note>
-    </ion-item>
-  </ion-list>
-  <div class="spacer" style="width:320px;height:35px;" id="myProfile-spacer37"></div>
-  <ion-list id="myProfile-list27">
-    <ion-item color="none" (click)="logout()" id="myProfile-list-item132">
-      <ion-icon name="log-out" item-left></ion-icon>
+    </div>
+  </ion-card>
+  <ion-card class="sign-out">
+    <ion-item color="none"  (click)="logout()" id="myProfile-list-item132">
+      <ion-icon color="secondary" name="log-out" item-left size="small"> </ion-icon>
       Sign out
     </ion-item>
-  </ion-list>
+  </ion-card>
 </ion-content>

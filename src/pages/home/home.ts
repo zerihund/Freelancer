@@ -1,12 +1,19 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { ItemSliding, NavController } from 'ionic-angular';
 import { JobInfoPage } from '../job-info/job-info';
 import { JobProvider } from '../../providers/job/job';
 import { CategoryPage } from '../category/category';
 import { InfiniteScroll } from 'ionic-angular';
 import { LoginPage } from '../login/login';
 import { UserProvider } from '../../providers/user/user';
-import { User } from '../../interfaces/Media';
+import { ToastController } from 'ionic-angular';
+import {
+  AddFavourite, DeleteFavourite,
+  FavouriteResponse,
+  LoginResponse,
+  TagReponse,
+  User,
+} from '../../interfaces/Media';
 import { NewPostPage } from '../new-post/new-post';
 import { SearchPage } from '../search/search';
 
@@ -18,6 +25,7 @@ export class HomePage {
   @ViewChild(InfiniteScroll) infiniteScroll: InfiniteScroll;
 
   constructor(
+    private toastCtrl: ToastController,
     public navCtrl: NavController,
     public jobProvider: JobProvider,
     public userProvider: UserProvider,
@@ -92,8 +100,7 @@ export class HomePage {
   goLoginOrNewPost = () => {
     if (!this.userProvider.loggedIn) {
       this.navCtrl.push(LoginPage).catch();
-    }
-    else {
+    } else {
       this.navCtrl.push(NewPostPage).catch();
     }
   };
@@ -108,5 +115,42 @@ export class HomePage {
       });
     this.searchQuery = '';
     this.navCtrl.push(SearchPage, { searchFiles: searchFiles }).catch();
+  };
+
+  // save a job for later review
+  saveJob = (fileId: number, slidingItem: ItemSliding) => {
+    // check if user is logged in
+    // only logged in user can save a job
+    if (!this.userProvider.loggedIn) {
+      this.showToast('Sign in first, then save it!');
+    } else {
+      let id = {'file_id': fileId};
+      this.jobProvider.saveJob(id).subscribe(
+        (result: AddFavourite) => {
+          if (result.message === 'Favourite added') {
+            this.showToast('Saved to your list!');
+          }
+        },
+        // shows error reason in case of error
+        error => {
+          console.log(error);
+          if (error.error.reason.includes('Duplicate entry')) {
+            this.showToast('Item is already in your list!');
+          } else {
+            this.showToast('Try again! item was not saved.');
+          }
+        },
+      );
+    }
+    slidingItem.close();
+  };
+
+  // shows a toast with provided message
+  showToast = (msg: string) => {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+    });
+    toast.present().catch();
   };
 }

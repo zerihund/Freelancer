@@ -42,3 +42,10 @@
   height: 100%;
   background: linear-gradient(10deg, #f4f4f4,#32db64);
 }
+ion-title{
+  color:#32db64 ;
+}
+
+ion-app .nav-decor {
+  background-color: transparent !important;
+}

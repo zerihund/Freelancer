@@ -1,14 +1,13 @@
-import { Pipe, PipeTransform } from '@angular/core'
-import { JobProvider } from '../../providers/job/job'
+import { Pipe, PipeTransform } from '@angular/core';
+import { JobProvider } from '../../providers/job/job';
 
 @Pipe({
   name: 'thumbnail',
 })
 export class ThumbnailPipe implements PipeTransform {
 
-  constructor (
-    private jobProvider: JobProvider,
-  ) {
+  constructor(private jobProvider: JobProvider) {
+
   }
 
   url = 'https://media.mw.metropolia.fi/wbma/uploads/';

@@ -1,14 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // @ts-ignore
-import {LoginResponse, RegisterResponse, User, UserExists} from '../../interfaces/Media';
+import {
+  LoginResponse, Media,
+  RegisterResponse,
+  User,
+  UserExists,
+} from '../../interfaces/Media';
 
-/*
-  Generated class for the UserProvider provider.
-
-  See https://angular.io/guide/dependency-injection for more info on providers
-  and Angular DI.
-*/
 @Injectable()
 export class UserProvider {
   mediaAPI = 'http://media.mw.metropolia.fi/wbma/';
@@ -17,6 +16,7 @@ export class UserProvider {
   constructor(public http: HttpClient) {
     console.log('Hello UserProvider Provider');
   }
+
   login(user: User) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -36,8 +36,10 @@ export class UserProvider {
     return this.http.post<RegisterResponse>(this.mediaAPI + 'users',
       user, httpOptions);
   }
-  checkUser(username){
-    return this.http.get<UserExists>(this.mediaAPI +'users/username/' + username);
+
+  checkUser(username) {
+    return this.http.get<UserExists>(
+      this.mediaAPI + 'users/username/' + username);
   }
 
   // request user info
@@ -49,4 +51,32 @@ export class UserProvider {
     };
     return this.http.get<User>(this.mediaAPI + 'users/' + user_id, httpOptions);
   };
+
+  // Modifies profile image info
+  updateAvatarInfo(data: Object, avatarId: number) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+        'Content-type': 'application/json',
+      }),
+    };
+    return this.http.put(this.mediaAPI + 'media/' + avatarId, data,
+      httpOptions);
+  }
+
+  // Modifies user information
+  updateUserInfo(data: Object) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+        'Content-type': 'application/json',
+      }),
+    };
+    return this.http.put(this.mediaAPI + 'users/', data, httpOptions);
+  }
+
+  // Fetches profile image
+  getProfileImage (id: number) {
+    return this.http.get<Media>(this.mediaAPI + 'media/' + id)
+  }
 }

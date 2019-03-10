@@ -5,9 +5,7 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-<ion-content padding id="page31">
-
-
+<ion-content padding id="page31 " color="light">
   <ion-grid>
     <ion-row>
       <ion-col col-3></ion-col>
@@ -16,15 +14,15 @@
           <ion-avatar class="image-cropper">
             <img [src]="avatar | thumbnail: 'small' | async" id="avatar">
           </ion-avatar>
-          <ion-fab bottom right #fab >
-            <button ion-fab mini color="secondary">
+          <ion-fab bottom center right margin-left="2px" margin-top="2px" #fab >
+            <button (click)="showChangePhotoMenu()" ion-fab mini color="secondary">
               <ion-icon name="camera"></ion-icon>
             </button>
           </ion-fab>
         </ion-row>
-        <ion-row>
+        <!--<ion-row>
           <button ion-button color="light" clear block style="font-size: 16px"> change photo</button>
-        </ion-row>
+        </ion-row>-->
       </ion-col>
       <ion-col col-3></ion-col>
     </ion-row>
@@ -37,15 +35,15 @@
   <form id="editProfile-form20">
     <ion-item id="editProfile-input25">
       <ion-label>
-        Email
+        <ion-icon name="mail" color="primary"></ion-icon>
       </ion-label>
-      <ion-input type="email" placeholder=""></ion-input>
+      <ion-input type="email" placeholder="" [(ngModel)]="editEmail" [value]="editEmail" name="email"></ion-input>
     </ion-item>
     <ion-item id="editProfile-input26">
       <ion-label>
-        Phone
+        <ion-icon name="call" color="primary"></ion-icon>
       </ion-label>
-      <ion-input type="tel" placeholder=""></ion-input>
+      <ion-input type="tel" placeholder="" [(ngModel)]="editPhone" [value]="editPhone" name="phone"></ion-input>
     </ion-item>
   </form>
   <h4 id="editProfile-heading12" style="color:#000000;">
@@ -53,13 +51,12 @@
   </h4>
   <form id="editProfile-form21">
     <ion-item id="editProfile-input27">
-      <ion-label>
-        list of skills
-      </ion-label>
-      <ion-input type="text" placeholder=""></ion-input>
+
+      <ion-textarea rows="4" name="skills" [(ngModel)]="skills" autosize placeholder="Add your skills"></ion-textarea>
+      <!--ion-input type="text" placeholder="" [(ngModel)]="skills" name="skills" [value]="skills"></ion-input-->
     </ion-item>
     <div class="spacer" style="width:300px;height:29px;" id="editProfile-spacer15"></div>
-    <button id="editProfile-button11" ion-button color="positive" block>
+    <button (click)="updateProfile()" id="editProfile-button11" ion-button color="positive" block>
       Save
     </button>
   </form>
