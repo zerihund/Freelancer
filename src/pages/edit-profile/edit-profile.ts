@@ -157,8 +157,7 @@ export class EditProfilePage {
     console.log('old avatar: ' + oldAvatar + ' type: ' + typeof oldAvatar);
 
     this.jobProvider.deleteJob(oldAvatar).subscribe(res => {
-        console.log('deleteOldAvatar() / res:');
-        console.log(res);
+        console.log('Old avatar Deleted');
       },
       error => {
         console.log(error);
