@@ -144,7 +144,7 @@ export class JobProvider {
       httpOptions);
   };
 
-  // Saves a job for later (favourites)
+  // Saves a job for later (creates favourite)
   saveJob = (fileId: any) => {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -152,5 +152,15 @@ export class JobProvider {
       }),
     };
     return this.http.post(this.mediaAPI + 'favourites', fileId, httpOptions);
+  };
+
+  // Removes a job from saved jobs (deletes favorite)
+  unSaveJob = (fileId: number) => {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.delete(this.mediaAPI + 'favourites/file/'+ fileId, httpOptions);
   };
 }

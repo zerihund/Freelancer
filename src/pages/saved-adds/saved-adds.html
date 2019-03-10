@@ -7,8 +7,9 @@
 </ion-header>
 <ion-content padding id="page25" class="background">
   <div class="spacer" style="width:300px;height:33px;" id="mySavedAdds-spacer17"></div>
-  <ion-list *ngFor="let job of savedJobsArray" id="mySavedAdds-list29">
-    <ion-item color="none" on-click="goToJobInfo()" id="mySavedAdds-list-item149">
+  <ion-list  id="mySavedAdds-list29">
+    <ion-item-sliding *ngFor="let job of savedJobsArray" #slidingItem>
+    <ion-item color="none" on-click="goToJobInfo(job)" id="mySavedAdds-list-item149">
       <ion-thumbnail item-left>
         <img [src]="job.file_id | thumbnail: 'small' | async" [alt]="job.title"/>
       </ion-thumbnail>
@@ -16,5 +17,11 @@
       <p class="price">{{getDescription(job.description).price}}</p>
       <p>{{getDescription(job.description).description}}</p>
     </ion-item>
+      <ion-item-options side="left"  icon-only  >
+        <button (click)="unSaveJob(job.file_id, slidingItem, savedJobsArray.indexOf(job))" ion-button expandable color="danger">
+          <ion-icon name="trash"></ion-icon>
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>

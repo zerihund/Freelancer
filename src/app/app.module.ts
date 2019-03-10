@@ -28,6 +28,9 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AutoSize} from '../components/auto-size/auto-size';
+import { OnMapPage } from '../pages/on-map/on-map';
+import { GoogleMaps } from '@ionic-native/google-maps';
+
 
 @NgModule({
   declarations: [
@@ -51,6 +54,7 @@ import { AutoSize} from '../components/auto-size/auto-size';
     EditProfilePage,
     AutoHideDirective,
     AutoSize,
+    OnMapPage,
   ],
   imports: [
     BrowserModule,
@@ -78,6 +82,7 @@ import { AutoSize} from '../components/auto-size/auto-size';
     OwnJobsPage,
     OffersPage,
     EditProfilePage,
+    OnMapPage,
   ],
   providers: [
     StatusBar,
@@ -86,6 +91,8 @@ import { AutoSize} from '../components/auto-size/auto-size';
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     UserProvider,
     Camera,
+    GoogleMaps,
+
   ],
 })
 export class AppModule {
