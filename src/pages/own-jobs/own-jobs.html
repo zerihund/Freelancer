@@ -1,14 +1,14 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
+    <ion-title font-color="primary">
       My Own Jobs
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page12" class="background">
   <div class="spacer" style="width:300px;height:14px;" id="myOpenJobs-spacer52"></div>
-  <ion-list>
-    <ion-list *ngFor="let job of ownJobsArray" color="none" id="myOpenJobs-list14">
+  <ion-card id="main-card">
+    <ion-card *ngFor="let job of ownJobsArray" color="none" id="myOpenJobs-list14">
       <ion-item id="myOpenJobs-list-item16" (click)="goToJobInfo(job)">
         <ion-thumbnail item-left>
           <img [src]="job.file_id | thumbnail: 'small' | async" [alt]="job.title"/>
@@ -20,9 +20,9 @@
         <p class="accept" *ngIf="job.title.includes('_accepted')">Accepted</p>
       </ion-item>
       <ion-item color="positive" (click)="goToOffers(job)" id="myOpenJobs-list-item84">
-        {{job.file_id | bidnumber | async}} bid(s)
+        <div class="my-font">{{job.file_id | bidnumber | async}} bid(s)</div>
       </ion-item>
-    </ion-list>
-  </ion-list>
+    </ion-card>
+  </ion-card>
 
 </ion-content>

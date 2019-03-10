@@ -28,8 +28,8 @@ import { EditProfilePage } from '../pages/edit-profile/edit-profile';
 import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AutoSize} from '../components/auto-size/auto-size';
-import { OnMapPage } from '../pages/on-map/on-map';
-import { GoogleMaps } from '@ionic-native/google-maps';
+import { OnMapPage } from "../pages/on-map/on-map";
+import { GoogleMaps } from "@ionic-native/google-maps";
 import { SearchPage } from '../pages/search/search';
 import { JobInfo2Page } from '../pages/job-info2/job-info2';
 
