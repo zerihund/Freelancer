@@ -1,0 +1,31 @@
+<!--
+  Generated template for the SearchPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>Search result</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list id="home-list4">
+    <ion-item-sliding *ngFor="let job of searchFiles">
+      <ion-item color="none" (click)="goToJobInfo(job)" id="home-list-item9">
+        <ion-thumbnail item-left>
+          <img [src]="job.file_id | thumbnail: 'small' | async">
+        </ion-thumbnail>
+        <h2>{{job.title}}</h2>
+        <p class="price">{{getDescription(job.description).price}}</p>
+        <p>{{getDescription(job.description).description}}</p>
+      </ion-item>
+      <ion-item-options side="left">
+        <button ion-button color="balanced">
+          Save
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

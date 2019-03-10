@@ -15,6 +15,7 @@ import {
   User,
 } from '../../interfaces/Media';
 import { NewPostPage } from '../new-post/new-post';
+import { SearchPage } from '../search/search';
 
 @Component({
   selector: 'page-home',
@@ -36,6 +37,7 @@ export class HomePage {
   jobs_per_page: number = 3;
   current_page = 1;
   previous_page = 0;
+  searchQuery = '';
 
   ionViewDidEnter() {
     this.getAllJob();
@@ -60,7 +62,7 @@ export class HomePage {
 
   // go to job info page
   goToJobInfo = (job) => {
-    this.navCtrl.push(JobInfoPage, {job: job}).catch();
+    this.navCtrl.push(JobInfoPage, { job: job }).catch();
   };
 
   // parse description json
@@ -70,7 +72,7 @@ export class HomePage {
 
   // go to Category page
   goToCategory = (category: string) => {
-    this.navCtrl.push(CategoryPage, {category: category}).catch();
+    this.navCtrl.push(CategoryPage, { category: category }).catch();
   };
 
   // paging mechanism for ionic infinite scroll
@@ -101,6 +103,18 @@ export class HomePage {
     } else {
       this.navCtrl.push(NewPostPage).catch();
     }
+  };
+
+  // filter job with searchQuery and go to Search page
+  searchJobs = (event) => {
+    const searchFiles = this.totalJob.filter(
+      job => {
+        return job.title.includes(this.searchQuery.toLowerCase()) ||
+          this.getDescription(job.description).dscription.
+            includes(this.searchQuery.toLowerCase()) || job.title === this.searchQuery.trim()
+      });
+    this.searchQuery = '';
+    this.navCtrl.push(SearchPage, { searchFiles: searchFiles }).catch();
   };
 
   // save a job for later review

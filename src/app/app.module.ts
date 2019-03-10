@@ -30,7 +30,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { AutoSize} from '../components/auto-size/auto-size';
 import { OnMapPage } from '../pages/on-map/on-map';
 import { GoogleMaps } from '@ionic-native/google-maps';
-
+import { SearchPage } from '../pages/search/search';
+import { JobInfo2Page } from '../pages/job-info2/job-info2';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     OffersPage,
     EditProfilePage,
     AutoHideDirective,
+    SearchPage,
+    JobInfo2Page,
     AutoSize,
     OnMapPage,
   ],
@@ -82,6 +85,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     OwnJobsPage,
     OffersPage,
     EditProfilePage,
+    SearchPage,
+    JobInfo2Page,
     OnMapPage,
   ],
   providers: [
@@ -92,7 +97,6 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     UserProvider,
     Camera,
     GoogleMaps,
-
   ],
 })
 export class AppModule {
