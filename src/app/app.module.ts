@@ -25,7 +25,9 @@ import { SentOffersPage } from '../pages/sent-offers/sent-offers';
 import { OwnJobsPage } from '../pages/own-jobs/own-jobs';
 import { OffersPage } from '../pages/offers/offers';
 import { EditProfilePage } from '../pages/edit-profile/edit-profile';
-import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
+import { AutoHideDirective } from '../directives/auto-hide/auto-hide';
+import { SearchPage } from '../pages/search/search';
+import { JobInfo2Page } from '../pages/job-info2/job-info2';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
     OffersPage,
     EditProfilePage,
     AutoHideDirective,
+    SearchPage,
+    JobInfo2Page
   ],
   imports: [
     BrowserModule,
@@ -75,6 +79,8 @@ import { AutoHideDirective} from "../directives/auto-hide/auto-hide";
     OwnJobsPage,
     OffersPage,
     EditProfilePage,
+    SearchPage,
+    JobInfo2Page
   ],
   providers: [
     StatusBar,

@@ -127,4 +127,15 @@ export class JobProvider {
     return this.http.get<Media[]>('http://media.mw.metropolia.fi/wbma/media/user/' + id,
       httpOptions)
   }
+
+  // get offers sent by user
+  getOffers () {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'x-access-token': localStorage.getItem('token'),
+      }),
+    };
+    return this.http.get<any>('http://media.mw.metropolia.fi/wbma/comments',
+      httpOptions)
+  }
 }

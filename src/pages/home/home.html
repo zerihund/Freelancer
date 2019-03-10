@@ -1,6 +1,6 @@
 <ion-header >
     <ion-navbar>
-    <ion-searchbar color="secondary" placeholder="What are you looking for?" name="Search" id="home-search1"></ion-searchbar>
+    <ion-searchbar (keyup.enter)="searchJobs($event)" [(ngModel)]="searchQuery" color="secondary" placeholder="What are you looking for?" name="Search" id="home-search1"></ion-searchbar>
   </ion-navbar>
 </ion-header>
 <ion-content auto-hide padding id="page3">
@@ -48,7 +48,7 @@
       </ion-item>
       <ion-item-options side="left">
         <button ion-button color="balanced">
-          Offer
+          Save
         </button>
       </ion-item-options>
     </ion-item-sliding>

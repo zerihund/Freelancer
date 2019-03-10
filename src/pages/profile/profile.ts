@@ -36,8 +36,7 @@ export class ProfilePage {
     if (this.user === null) {
       this.user = JSON.parse(localStorage.getItem('user'));
     }
-    console.log('username is: ');
-    console.log(this.user.username);
+    console.log(this.user);
     this.getProfileInfo();
   }
 
