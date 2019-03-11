@@ -29,6 +29,7 @@ export class OwnJobsPage {
 
   // filter own jobs to exclude avatar file
   private getUserOwnJobs(filesObject) {
+    this.ownJobsArray = [];
     // generate an array of jobs
     Object.keys(filesObject).map(key => {
       this.ownJobsArray.push(filesObject[key]);

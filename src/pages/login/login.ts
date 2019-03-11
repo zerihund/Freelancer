@@ -1,11 +1,9 @@
 import {Component, ViewChild} from '@angular/core';
 import {AlertController, NavController} from 'ionic-angular';
 import {HomePage} from '../home/home';
-import {JobInfoPage} from '../job-info/job-info';
 import {SignupPage} from '../signup/signup';
 import {UserProvider} from "../../providers/user/user";
-import {LoginResponse, RegisterResponse, User} from '../../interfaces/Media';
-import {NewPostPage} from "../new-post/new-post";
+import {LoginResponse, User} from '../../interfaces/Media';
 import {NgForm} from "@angular/forms";
 
 
@@ -16,26 +14,15 @@ import {NgForm} from "@angular/forms";
 export class LoginPage {
   @ViewChild('lf') loginForm: NgForm;
   user: User = {username: null};
-  tokenExist;
 
-  constructor(public navCtrl: NavController, private mediaProvider: UserProvider, private alertController: AlertController) {
-  }
-
-  ionViewWillEnter() {
-    /*this.mediaProvider.login(this.user).subscribe((res)=>{
-      this.tokenExist=localStorage.setItem('token',res.token);
-    });
-  if(this.tokenExist){
-    this.mediaProvider.loggedIn=true;
-    this.navCtrl.parent.select(1);
-  }*/
+  constructor(public navCtrl: NavController, private userProvider: UserProvider, private alertController: AlertController) {
   }
 
   login() {
-    this.mediaProvider.login(this.user).subscribe(
+    this.userProvider.login(this.user).subscribe(
       (response: LoginResponse) => {
         console.log(response);
-        this.mediaProvider.loggedIn = true;
+        this.userProvider.loggedIn = true;
         localStorage.setItem('user', JSON.stringify(response.user));
         localStorage.setItem('token', response.token);
         localStorage.setItem('username', response.user.username);
@@ -44,7 +31,6 @@ export class LoginPage {
         console.log('UserId');
         console.log(localStorage.getItem('user_id'));
         this.navCtrl.parent.select(1);
-
       },
       error => {
         console.log(error);
@@ -58,7 +44,7 @@ export class LoginPage {
       buttons: ['OK'],
       cssClass: 'alertCustomCss'
     });
-    alert.present();
+    alert.present().catch();
   };
 
   // go to sign up page
@@ -70,5 +56,4 @@ export class LoginPage {
   goHome() {
     this.navCtrl.popTo(HomePage).catch();
   }
-
 }

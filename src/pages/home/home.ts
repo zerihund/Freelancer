@@ -34,13 +34,18 @@ export class HomePage {
 
   totalJob = [];
   jobArray = [];
-  jobs_per_page: number = 3;
+  jobs_per_page: number = 5;
   current_page = 1;
   previous_page = 0;
   searchQuery = '';
 
   ionViewDidEnter() {
     this.getAllJob();
+    if (localStorage.getItem('token')) {
+      this.userProvider.loggedIn = true;
+      this.navCtrl.parent.select(1);
+      console.log('has token');
+    }
   }
 
   avatar: string;
@@ -56,7 +61,7 @@ export class HomePage {
       this.totalJob = res.reverse().
         filter(job => !job.title.includes('_accepted'));
       this.jobArray = this.jobArray.concat(
-        this.totalJob.slice(this.previous_page, this.current_page * 3));
+        this.totalJob.slice(this.previous_page, this.current_page * 5));
     });
   };
 
@@ -79,10 +84,10 @@ export class HomePage {
   loadMoreJobs = (event) => {
     if (this.current_page < this.numPages()) {
       setTimeout(() => {
-        this.previous_page = this.current_page * 3;
+        this.previous_page = this.current_page * 5;
         this.current_page++;
         this.jobArray = this.jobArray.concat(
-          this.totalJob.slice(this.previous_page, this.current_page * 3));
+          this.totalJob.slice(this.previous_page, this.current_page * 5));
         event.complete();
       }, 1000);
     } else {
@@ -107,10 +112,11 @@ export class HomePage {
 
   // filter job with searchQuery and go to Search page
   searchJobs = (event) => {
+    console.log(this.totalJob);
     const searchFiles = this.totalJob.filter(
       job => {
         return job.title.includes(this.searchQuery.toLowerCase()) ||
-          this.getDescription(job.description).dscription.
+          this.getDescription(job.description).description.
             includes(this.searchQuery.toLowerCase()) || job.title === this.searchQuery.trim()
       });
     this.searchQuery = '';

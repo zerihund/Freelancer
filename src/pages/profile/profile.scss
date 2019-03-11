@@ -1,76 +1,119 @@
 page-my-profile {
 
+  .profile-pic {
+    height: 45%;
+    width: 100%;
+    margin: 0;
+  }
 
-
-  /*ion-content {
-    .fixed-content {
-      @include linear-gradient(right, $dusk);
-      -webkit-background-size: cover;
-      -moz-background-size: cover;
-      background-size: cover;
-    }
-
-  }*/
-
-.profile-pic{
-  height: 45%;
-  width: 100%;
-  margin: 0;
-}
-  .saved-job{
+  .saved-job {
     height: 25%;
-    width: 99.6%;
-    margin: 0.2%;
-    margin-right: 1px;
+    width: 100%;
+    margin: 0;
     position: relative;
     text-align: center;
-    background-color: #0CE847;
   }
-.own-job{
-  height: 30%;
-  width: 49.6%;
-  float: left;
-  margin:0.2% 0.1% 0.2% 0.2%;
-  position: relative;
-  text-align: center;
-  background-color: #0CE847;
-}
-  .sent-offer{
-    height:30%;
-    width: 49.6%;
+
+  .own-job {
+    height: 30%;
+    width: 50%;
+    float: left;
+    margin: 0;
+    position: relative;
+    text-align: center;
+  }
+
+  .sent-offer {
+    height: 30%;
+    width: 50%;
     float: right;
-    margin: 0.2% 0.2% 0.2% 0.1%;
+    margin: 0;
     position: relative;
     text-align: center;
-    background: #0CE847;
   }
-  .sign-out{
+
+  .sign-out {
     width: 100%;
     margin: 1px;
 
   }
-  img{
-    width :auto !important;
-    height:auto !important;
-    margin: auto;
-   // margin-top: 5%;
+
+  #myProfile-list-item25 {
+    width: 100%;
+    height: 80%;
+    display: flex;
     align-items: center;
+    margin: auto;
+    padding-left: 0;
   }
 
-  #myProfile-list-item25{
-    width :100%;
-    height: 80%;
+  #myProfile-list-item26 {
+    padding-left: 0;
   }
-  #myProfile-list-item25{
-    margin: auto;
-    align-items: center;
+
+  #myProfile-list-item26 h2 {
+    text-align: center;
+    color: color($colors, primary);
+    font-weight: bold;
+    font-size: 20px;
   }
-  .job-title{
+
+  .item-md.item-block .item-inner {
+    padding-right: 0;
+  }
+
+  .job-title {
     position: absolute;
-    top: 36%;
+    height: 100%;
     width: 100%;
     font-size: 1.8em;
     font-weight: bold;
     color: #ffffff;
+  }
+
+  .card p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+  .option {
+    filter: brightness(50%);
+    height: 100%;
+  }
+
+  .item-md ion-avatar img {
+    width: 30%;
+    height: 10%;
+  }
+
+  .item-md ion-avatar {
+    margin-top: 20px;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+  }
+
+  .bar-buttons-md {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .button {
+    border: 2px solid color($colors, primary);
+    border-radius: 10px;
+  }
+
+  .label-md {
+    margin: 0;
+  }
+
+  #logout {
+    color: color($colors, primary);
   }
 }
