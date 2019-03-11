@@ -1,39 +1,41 @@
 <ion-content id="page2" class="background">
   <ion-card class="profile-pic">
-    <ion-item color="none" id="myProfile-list-item25">
-      <ion-avatar  *ngIf="avatar">
+    <ion-item id="myProfile-list-item25">
+      <ion-avatar *ngIf="avatar">
         <img [src]="avatar | thumbnail: 'small' | async" id="avatar">
       </ion-avatar>
-      </ion-item>
-      <ion-item myProfile-list-item26>
+      <ion-buttons item-right (click)="goToEditProfile()" ><button ion-button clear><ion-icon name="create" color="primary"> Edit</ion-icon></button></ion-buttons>
+    </ion-item>
+    <ion-item id="myProfile-list-item26">
       <ng-container
         *ngIf="user != null && user.full_name != null; then showFullname; else showUsername">
       </ng-container>
 
       <ng-template #showFullname><h2>{{user.full_name}}</h2></ng-template>
       <ng-template #showUsername><h2>{{user.username}}</h2></ng-template>
-      <ion-buttons item-right (click)="goToEditProfile()" ><button ion-button clear color="dark"><ion-icon name="create" color="primary"> Edit</ion-icon></button></ion-buttons>
-
     </ion-item>
   </ion-card>
-  <ion-card class="saved-job " >
-    <div (click)="goToSavedAdds()" class="job-title" >
-     Saved job adds
+  <ion-card class="saved-job ">
+    <div (click)="goToSavedAdds()" class="job-title">
+      <img class="option" src="assets/img/saved_jobs.jpg">
+      <p>Saved job adds</p>
     </div>
   </ion-card>
-  <ion-card class="own-job ">
+  <ion-card class="own-job">
     <div class="job-title" (click)="goToMyOwnJobs(userFiles)">
-      My own jobs
+      <img class="option" src="assets/img/my_saved_jobs.jpg">
+      <p>My own jobs</p>
     </div>
   </ion-card>
-  <ion-card class="sent-offer ">
+  <ion-card class="sent-offer">
     <div class="job-title" (click)="goToMySentOffers()">
-      My sent offers
+      <img class="option" src="assets/img/sent_offers.jpg">
+      <p>My sent offers</p>
     </div>
   </ion-card>
   <ion-card class="sign-out">
-    <ion-item color="none"  (click)="logout()" id="myProfile-list-item132">
-      <ion-icon color="secondary" name="log-out" item-left size="small"> </ion-icon>
+    <ion-item (click)="logout()" id="logout">
+      <ion-icon color="secondary" name="log-out" item-left size="small"></ion-icon>
       Sign out
     </ion-item>
   </ion-card>

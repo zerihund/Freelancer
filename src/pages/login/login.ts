@@ -14,28 +14,15 @@ import {NgForm} from "@angular/forms";
 export class LoginPage {
   @ViewChild('lf') loginForm: NgForm;
   user: User = {username: null};
-  tokenExist;
 
-  constructor(public navCtrl: NavController,
-              private mediaProvider: UserProvider,
-              private alertController: AlertController) {
-  }
-
-  ionViewWillEnter() {
-    /*this.mediaProvider.login(this.user).subscribe((res)=>{
-      this.tokenExist=localStorage.setItem('token',res.token);
-    });
-  if(this.tokenExist){
-    this.mediaProvider.loggedIn=true;
-    this.navCtrl.parent.select(1);
-  }*/
+  constructor(public navCtrl: NavController, private userProvider: UserProvider, private alertController: AlertController) {
   }
 
   login() {
-    this.mediaProvider.login(this.user).subscribe(
+    this.userProvider.login(this.user).subscribe(
       (response: LoginResponse) => {
         console.log(response);
-        this.mediaProvider.loggedIn = true;
+        this.userProvider.loggedIn = true;
         localStorage.setItem('user', JSON.stringify(response.user));
         localStorage.setItem('token', response.token);
         localStorage.setItem('username', response.user.username);
@@ -44,7 +31,6 @@ export class LoginPage {
         console.log('UserId');
         console.log(localStorage.getItem('user_id'));
         this.navCtrl.parent.select(1);
-
       },
       error => {
         console.log(error);
@@ -58,14 +44,11 @@ export class LoginPage {
       buttons: ['OK'],
       cssClass: 'alertCustomCss'
     });
-    alert.present();
+    alert.present().catch();
   };
 
   // go to sign up page
   goSignUp() {
     this.navCtrl.push(SignupPage).catch();
   }
-
-  // go to home page
-
 }
