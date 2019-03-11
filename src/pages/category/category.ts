@@ -10,10 +10,11 @@ import { JobInfoPage } from '../job-info/job-info';
 export class CategoryPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public jobProvider: JobProvider) {
+    this.category = this.navParams.get('category')
   }
 
   jobArray = [];
-  mediaFilePath = 'http://media.mw.metropolia.fi/wbma/uploads/';
+  category: string;
 
   ionViewDidEnter() {
     this.jobArray = [];
@@ -24,7 +25,7 @@ export class CategoryPage {
   getAllJob = () => {
     this.jobProvider.getFilesByTag('freelancer').subscribe(res => {
       res.forEach(job => {
-        if(this.getDescription(job.description).category === this.navParams.get('category'))
+        if(this.getDescription(job.description).category === this.category)
           this.jobArray.push(job);
         this.jobArray = this.jobArray.filter(job => !job.title.includes('_accepted'));
       });

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { HomePage } from '../home/home';
-import { JobInfoPage } from '../job-info/job-info';
 import { UserProvider } from '../../providers/user/user';
 import {
   LoginResponse,
@@ -9,16 +7,13 @@ import {
   User,
   UserExists,
 } from '../../interfaces/Media';
-import { NewPostPage } from '../new-post/new-post';
-import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',
 })
 export class SignupPage {
-  // this tells the tabs component which Pages
-  // should be each tab's root Page
+
   userAlert = false;
   usernameInput;
   passwordMatch;
@@ -41,16 +36,13 @@ export class SignupPage {
         // log user in
         this.mediaProvider.login(this.user).subscribe(
           (response: LoginResponse) => {
-            console.log(response);
             this.mediaProvider.loggedIn = true;
-
             // store user values in local storage
-            localStorage.setItem('user', JSON.stringify(response.user));
+            localStorage.setItem('user', JSON.stringify(response));
             localStorage.setItem('token', response.token);
             localStorage.setItem('username', response.user.username);
             localStorage.setItem('email', response.user.email);
             localStorage.setItem('user_id', String(response.user.user_id));
-
             // navigate to home page
             this.navCtrl.parent.select(1);
           },
@@ -65,11 +57,7 @@ export class SignupPage {
 
   validName() {
     const pattern = /[a-zA-z]$/;
-    if (!pattern.test(this.user.full_name)) {
-      this.validFullName = true;
-    } else {
-      this.validFullName = false;
-    }
+    this.validFullName = !pattern.test(this.user.full_name);
   }
 
   checkUserExists() {
@@ -85,40 +73,24 @@ export class SignupPage {
           this.usernameInput = false;
         }
       });
-    if (this.user.username.length < 3) {
-      this.validUsername = true;
-    } else {
-      this.validUsername = false;
-    }
+    this.validUsername = this.user.username.length < 3;
   }
 
   emailCheck() {
     const pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
-    if (this.user.email.length < 5 || !pattern.test(this.user.email)) {
-      this.validEmail = true;
-    } else {
-      this.validEmail = false;
-    }
+    this.validEmail = this.user.email.length < 5 ||
+      !pattern.test(this.user.email);
   }
 
   passwordCheck() {
-    if (this.user.password.length < 5) {
-      this.validPassword = true;
-    } else {
-      this.validPassword = false;
-    }
+    this.validPassword = this.user.password.length < 5;
   }
 
   passWordMatch() {
-    if (this.user.password !== this.confirmPassword) {
-      //this.showAlert('Password do not match!');
-      this.passwordMatch = true;
-    } else {
-      this.passwordMatch = false;
-    }
+    this.passwordMatch = this.user.password !== this.confirmPassword;
   }
 
   goToLogin() {
-    this.navCtrl.pop();
+    this.navCtrl.pop().catch();
   }
 }

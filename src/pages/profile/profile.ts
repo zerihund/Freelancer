@@ -19,7 +19,6 @@ export class ProfilePage {
   private username: string;
   private userId: number;
   private email: string;
-  private projectFilesArray: TagReponse[];
   private avatar: string;
   private numberOfOwnJobs: number;
   private userFiles: any;
@@ -29,77 +28,72 @@ export class ProfilePage {
     public userProvider: UserProvider,
     public jobProvider: JobProvider,
   ) {
-    this.user = JSON.parse(localStorage.getItem('user'));
+    this.user = JSON.parse(localStorage.getItem('user')).user;
   }
 
   ionViewWillEnter() {
     if (this.user === null) {
-      this.user = JSON.parse(localStorage.getItem('user'));
+      this.user = JSON.parse(localStorage.getItem('user')).user;
     }
     console.log(this.user);
     this.getProfileInfo();
   }
 
   // go to saved add
-  goToSavedAdds(params) {
-    if (!params) params = {};
+  goToSavedAdds = () => {
     this.navCtrl.push(SavedAddsPage, {
       userId: this.user.user_id,
     }).catch();
-  }
+  };
 
   //go to own jobs page
-  goToMyOwnJobs(files) {
+  goToMyOwnJobs = (files) => {
     this.navCtrl.push(OwnJobsPage, {
       files: files,
       avatar: this.avatar,
     }).catch();
-  }
+  };
 
-  goToMySentOffers(params) {
-    if (!params) params = {};
-    this.navCtrl.push(SentOffersPage);
-  }
+  // go to sent offer page
+  goToMySentOffers = () => {
+    this.navCtrl.push(SentOffersPage).catch();
+  };
 
-  goToEditProfile(params) {
+  // go to edit page
+  goToEditProfile = () => {
     this.navCtrl.push(EditProfilePage, {
       userId: this.user.user_id,
       avatar: this.avatar,
     }).catch();
-  }
+  };
 
-  logout() {
+  // log user out
+  logout = () => {
     localStorage.clear();
     this.userProvider.loggedIn = false;
     this.user = null;
     console.log('logout btn pressed');
     console.log(this.userProvider.loggedIn);
     this.navCtrl.parent.select(1);
-  }
+  };
 
-  getProfileInfo() {
+  // get user info from local storage
+  getProfileInfo = () => {
     this.username = localStorage.getItem('username');
     this.userId = parseInt(localStorage.getItem('user_id'));
     this.email = localStorage.getItem('email');
     this.getProfileImage();
     this.getUserFiles();
-  }
-
-  private getProjectFiles() {
-    this.jobProvider.getFilesByTag('freelancer').subscribe(
-      (response: TagReponse[]) => {
-        this.projectFilesArray = response;
-        console.log('User id in profile page = ' + this.userId);
-      },
-    );
-  }
+  };
 
   // get user avatar
-  private getProfileImage() {
+  getProfileImage = () => {
     this.jobProvider.getFilesByTag('profile_freelancer').subscribe(
       (response: TagReponse[]) => {
+        console.log(response);
         response.forEach(file => {
           if (file.user_id === this.userId) {
+            console.log(file.user_id);
             this.avatar = file.file_id.toString();
             console.log('avatar id is: ' + this.avatar);
           }
@@ -109,10 +103,10 @@ export class ProfilePage {
         console.log(error);
       },
     );
-  }
+  };
 
   // get user's own jobs
-  private getUserFiles() {
+  private getUserFiles = () => {
     this.jobProvider.getJobByUserId(this.userId).subscribe(
       result => {
         this.numberOfOwnJobs = Object.keys(result).length - 1;

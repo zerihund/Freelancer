@@ -3,9 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { JobProvider } from '../../providers/job/job';
 import { AlertController } from 'ionic-angular';
 import { TagReponse } from '../../interfaces/Media';
-import { ModalController } from 'ionic-angular';
 import { OnMapPage } from '../on-map/on-map';
-import { SentOffersPage } from '../sent-offers/sent-offers';
 
 @Component({
   selector: 'page-job-info',
@@ -18,7 +16,6 @@ export class JobInfoPage {
     public navParams: NavParams,
     public jobProvider: JobProvider,
     private alertController: AlertController,
-    public modalCtrl: ModalController,
   ) {
     this.job = this.navParams.get('job');
     this.getProfileImage();
