@@ -56,6 +56,11 @@ export class JobProvider {
       bid, httpOptions);
   };
 
+  // check if bid exists
+  checkBid = (id) => {
+    return this.http.get<any>('http://media.mw.metropolia.fi/wbma/comments/file/' + id);
+  };
+
   // delete bid
   deleteBid = (id) => {
     const httpOptions = {
@@ -74,7 +79,7 @@ export class JobProvider {
         'x-access-token': localStorage.getItem('token'),
       }),
     };
-    return this.http.delete<any>('http://media.mw.metropolia.fi/wbma/media/699',
+    return this.http.delete<any>('http://media.mw.metropolia.fi/wbma/media/'+id,
       httpOptions);
   };
 

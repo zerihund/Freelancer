@@ -43,7 +43,6 @@ export class HomePage {
     this.getAllJob();
     if (localStorage.getItem('token')) {
       this.userProvider.loggedIn = true;
-      this.navCtrl.parent.select(1);
       console.log('has token');
     }
   }
@@ -62,6 +61,7 @@ export class HomePage {
         filter(job => !job.title.includes('_accepted'));
       this.jobArray = this.jobArray.concat(
         this.totalJob.slice(this.previous_page, this.current_page * 5));
+      console.log(this.jobArray);
     });
   };
 
