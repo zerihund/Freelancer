@@ -19,7 +19,7 @@ export class JobInfoPage {
     public jobProvider: JobProvider,
     private alertController: AlertController,
     public modalCtrl: ModalController,
-    ) {
+  ) {
     this.job = this.navParams.get('job');
     this.getProfileImage();
     this.descriptionJSON = this.getDescription(this.job.description);
@@ -32,6 +32,7 @@ export class JobInfoPage {
   priceOffer = 500;
   comment = '';
   avatar: string;
+  isOffered = false;
 
   // parse description json
   getDescription = (description) => {
@@ -55,15 +56,24 @@ export class JobInfoPage {
       price: this.priceOffer,
       comment: this.comment,
     };
-    console.log(localStorage.getItem('token'));
     const bid = {
       file_id: this.job.file_id,
       comment: JSON.stringify(comment),
     };
-    this.jobProvider.bidJob(bid).subscribe(res => {
-      console.log(res);
-      this.showAlert('Bidding successfully');
-      this.goToHome();
+    this.jobProvider.checkBid(this.job.file_id).subscribe(res => {
+      res.forEach(item => {
+        if (item.user_id === parseInt(comment.user_id)) {
+          this.showAlert('You already offered this job');
+          this.isOffered = true;
+        }
+      });
+      if (!this.isOffered) {
+        this.jobProvider.bidJob(bid).subscribe(res => {
+          console.log(res);
+          this.showAlert('Bidding successfully');
+          this.goToHome();
+        });
+      }
     });
   };
 
@@ -94,6 +104,6 @@ export class JobInfoPage {
   };
 
   openMap() {
-    this.navCtrl.push(OnMapPage).catch();
+    this.navCtrl.push(OnMapPage, {address: this.descriptionJSON.place}).catch();
   }
 }

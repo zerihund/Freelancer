@@ -35,5 +35,4 @@ export class SentOffersPage {
   goToJobInfo = (offer) => {
     this.navCtrl.push(JobInfo2Page, { offer: offer }).catch();
   };
-
 }

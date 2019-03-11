@@ -31,6 +31,7 @@ export class SavedAddsPage {
 
   // Fetches all saved jobs of a user
   private getSavedJobs() {
+    this.savedJobsArray = [];
     // Gets list of saved jobs
     this.jobProvider.getSavedJobs().subscribe(
       (result: FavouriteResponse[]) => {
