@@ -23,7 +23,7 @@ export class MyApp {
       splashScreen.hide();
 
       timer(3000).subscribe(() => {
-        this, this.showSplash = false;
+        this.showSplash = false;
       });
     });
   }
