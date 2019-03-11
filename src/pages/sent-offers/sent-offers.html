@@ -6,9 +6,7 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding id="page15" class="background">
-  <div class="spacer" style="width:300px;height:33px;" id="myOpenOffers-spacer54"></div>
   <ion-list id="myOpenOffers-list23">
-
     <ion-item (click)="goToJobInfo(offer)" *ngFor="let offer of offersArray">
       <ion-thumbnail item-left>
         <img [src]="offer.file_id | thumbnail: 'small' | async"/>

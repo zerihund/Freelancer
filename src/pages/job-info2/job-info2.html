@@ -1,4 +1,4 @@
-<ion-content padding id="page21" style="background-color:#E3FFDF;">
+<ion-content padding id="page21" class="background">
   <ion-card id="jobInfoOffered-card211">
     <ion-list>
       <form id="jobInfoOffered-form10">
@@ -15,7 +15,7 @@
   <ion-card id="jobInfoOffered-card210">
     <ion-list>
       <ion-item color="none" (click)="goToMyOffer()" id="jobInfoOffered-list-item123">
-        <ion-icon name="close" item-right></ion-icon>
+        <ion-icon color="secondary" name="close-circle" item-right></ion-icon>
       </ion-item>
       <div class="spacer" style="width:300px;height:11px;" id="jobInfoOffered-spacer22"></div>
       <div id="jobInfoOffered-markdown23" style="text-align:center;" class="show-list-numbers-and-dots">
@@ -29,9 +29,9 @@
       <img [src]="mediaPath + myOffer.info.thumbnails.w160" />
       <ion-item id="jobInfoOffered-list-item-container24">
         <div id="jobInfoOffered-markdown24" class="show-list-numbers-and-dots">
-          <p style="margin-top:0px;color:#000000;">
+          <div text-wrap style="margin-top:1px;color:#000000;" text-justify="">
             {{descriptionJSON.description}}
-          </p>
+          </div>
         </div>
       </ion-item>
       <ion-item color="none" id="jobInfoOffered-list-item124">
@@ -44,11 +44,11 @@
       </ion-item>
       <ion-item color="none" id="jobInfoOffered-list-item125">
         Valid until: {{descriptionJSON.deadline}}
-        <ion-icon name="calendar" item-right></ion-icon>
+        <ion-icon color="secondary" name="calendar" item-right></ion-icon>
       </ion-item>
       <ion-item color="none" id="jobInfoOffered-list-item141">
         Show on map
-        <ion-icon name="map" item-right></ion-icon>
+        <ion-icon color="secondary" name="map" item-right></ion-icon>
       </ion-item>
     </ion-list>
   </ion-card>

@@ -51,9 +51,4 @@ export class LoginPage {
   goSignUp() {
     this.navCtrl.push(SignupPage).catch();
   }
-
-  // go to home page
-  goHome() {
-    this.navCtrl.popTo(HomePage).catch();
-  }
 }

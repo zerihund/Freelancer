@@ -2,16 +2,27 @@ page-my-open-jobs {
 
   ion-content {
     .fixed-content {
-      /*@include linear-gradient(right, $dusk);*/
       -webkit-background-size: cover;
       -moz-background-size: cover;
       background-size: cover;
     }
   }
-
+ ion-card.card{
+   margin-bottom: 1px;
+   margin-left: 1px;
+   margin-right: 1px;
+ }
   .accept {
-    color: color($colors, danger);
+    color: color($colors, primary);
   }
-
+  #main-card{
+    height: auto;
+    width: auto;
+    margin: auto;
+  }
+  #myOpenJobs-list14{
+    width: 100%;
+    height: 1%;
+  }
 }
 
