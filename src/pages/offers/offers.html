@@ -16,7 +16,7 @@
             <img [src]="((bid.user_id | avatarId | async ) | thumbnail: 'small' | async)" id="avatar">
           </ion-avatar>
           {{bid.user.username}}
-          <p item-right="">{{bid.comment.price}} euros</p>
+          <div id="my-price"item-right color="primary">{{bid.comment.price}} euros</div>
         </ion-item>
         <ion-item-options side="left">
           <button (click)="acceptOffer(bid.file_id)" ion-button color="balanced">
