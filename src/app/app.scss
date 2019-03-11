@@ -53,3 +53,13 @@ ion-app .nav-decor {
   color: #32db64 ;
   font-size: large;
 }
+
+.splash {
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}

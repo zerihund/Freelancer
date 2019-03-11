@@ -13,6 +13,7 @@ import {
   MarkerOptions,
   Marker,
 } from '@ionic-native/google-maps';
+import { HttpClient } from '@angular/common/http';
 
 //declare let google: any;
 
@@ -25,41 +26,6 @@ import {
 
 export class OnMapPage {
 
-  /*@ViewChild('map') mapRef: ElementRef;
-
-  map: any;
-
-  constructor(
-    public navCtrl: NavController,
-  ) {}
-
-  ionViewDidLoad() {
-    this.showMap();
-    console.log(this.mapRef);
-  }
-
-  showMap() {
-    // Location Lat Long
-    const location = new google.maps.LatLng(60.2055, 24.6559);
-
-    // map options
-    const options = {
-      center: location,
-      zoom: 15,
-    };
-
-    this.map = new google.maps.Map(this.mapRef.nativeElement, options);
-
-  }
-
-  addMarker(){
-
-  }
-
-  closeMap() {
-    this.navCtrl.pop().catch();
-  }*/
-
   @ViewChild('map') element;
 
   constructor(
@@ -68,22 +34,28 @@ export class OnMapPage {
     public googleMaps: GoogleMaps,
     public plt: Platform,
     public viewCtrl: ViewController,
+    public http: HttpClient
   ) {
   }
 
   ngAfterViewInit() {
     this.plt.ready().then(() => {
-      this.initMap();
+      let address = this.navParams.get('address');
+      this.http.get<any>('https://maps.googleapis.com/maps/api/geocode/json?address='+address+'&key=AIzaSyDBR4WyLw-4u1DZYsIb2-nD6Eaigz5FVtw').subscribe(res => {
+        console.log(res);
+        let coordinates: LatLng = new LatLng(res.results[0].geometry.location.lat, res.results[0].geometry.location.lng);
+        this.initMap(coordinates);
+      });
     });
   }
 
-  initMap() {
+  initMap(coordinates) {
+
 
     let map: GoogleMap = this.googleMaps.create(this.element.nativeElement);
 
     map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
 
-      let coordinates: LatLng = new LatLng(60.2055, 24.6559);
 
       let position = {
         target: coordinates,
