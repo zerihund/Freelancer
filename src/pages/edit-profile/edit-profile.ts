@@ -11,6 +11,9 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { stringify, unescape } from 'querystring';
 import { JobProvider } from '../../providers/job/job';
 import { UserProvider } from '../../providers/user/user';
+import { Chooser } from '@ionic-native/chooser';
+import { NgZone } from '@angular/core';
+import { Events } from 'ionic-angular';
 
 @Component({
   selector: 'page-edit-profile',
@@ -35,6 +38,9 @@ export class EditProfilePage {
     public loadingCtrl: LoadingController,
     public userProvider: UserProvider,
     public alertCtrl: AlertController,
+    public chooser: Chooser,
+    public events: Events,
+    private zone: NgZone,
   ) {
 
     // gets current user object & info passed from profile page
@@ -57,14 +63,14 @@ export class EditProfilePage {
           role: 'choose photo',
           handler: () => {
             this.choosePhoto();
-            console.log('Choose Photo Clicked!');
+            console.log('Choose Photo selected!');
           },
         }, {
           text: 'Take New Photo',
           role: 'take new photo',
           handler: () => {
             this.takePhoto();
-            console.log('Take New Photo Clicked!');
+            console.log('Take New Photo selected!');
           },
         }, {
           text: 'Cancel',
@@ -75,7 +81,7 @@ export class EditProfilePage {
         },
       ],
     });
-    actionSheet.present();
+    actionSheet.present().catch();
   }
 
   // Updates profile info
@@ -94,7 +100,13 @@ export class EditProfilePage {
 
   // chooses photo from local storage
   private choosePhoto() {
-    // TODO chooser comes here
+    this.chooser.getFile('image').then(
+      file => {
+        this.file = new Blob([file.data], {type: file.mediaType});
+        this.filePath = file.dataURI;
+        this.changeAvatar();
+        console.log(file ? file.name : 'canceled');
+      }).catch((error: any) => console.error(error));
   }
 
   // takes new photo with camera
@@ -112,25 +124,23 @@ export class EditProfilePage {
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       this.filePath = base64Image;
       this.file = EditProfilePage.dataURItoBlob(base64Image);
-      //this.fileSelected = true;
-    }, (error) => {
-      console.log(error);
-    }).then(response => {
       this.changeAvatar();
-    }, error => {
+    }, (error) => {
       console.log(error);
     });
   }
 
   // Changes the old avatar with the new one
   private changeAvatar() {
-    console.log('changeAvatar():');
+    console.log('Changing Avatar');
 
-    // TODO upload avatar with skills
     this.uploadNewAvatar();
 
-    // TODO delete old avatar
+    this.refreshAvatar();
+
     this.deleteOldAvatar();
+
+    this.showSpinner('Updating photo...', 1500);
   }
 
   // Uploads image to server
@@ -140,14 +150,16 @@ export class EditProfilePage {
     formData.append('description', this.skills);
     formData.append('file', this.file);
     this.jobProvider.uploadAvatar(formData).subscribe(res => {
+      this.avatar = res.file_id;
       console.log('File uploaded. file id: ' + res.file_id);
+      console.log('this.avatar type: ' + typeof this.avatar);
+      console.log('res.file_id type: ' + typeof res.file_id);
       // Attaching the profile tag
       this.jobProvider.attachTag(res.file_id, 'profile_freelancer').
         subscribe(res => {
           console.log(res);
         });
     });
-    this.showSpinner('Updating profile...', 1500);
   }
 
   // Deletes the old avatar image from serve
@@ -158,6 +170,7 @@ export class EditProfilePage {
 
     this.jobProvider.deleteJob(oldAvatar).subscribe(res => {
         console.log('Old avatar Deleted');
+        console.log(res);
       },
       error => {
         console.log(error);
@@ -236,7 +249,7 @@ export class EditProfilePage {
     this.userProvider.requestUserInfo(id).
       subscribe(
         result => {
-            this.editEmail = result.email;
+          this.editEmail = result.email;
         }, error => {
           console.log(error);
         });
@@ -247,9 +260,13 @@ export class EditProfilePage {
     const alert = this.alertCtrl.create({
       title: 'Saved',
       subTitle: 'Profile information is updated.',
-      buttons: ['OK']
+      buttons: ['OK'],
     });
     alert.present().catch();
+  }
+
+  private refreshAvatar() {
+    //TODO
   }
 }
 
