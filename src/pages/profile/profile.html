@@ -1,7 +1,7 @@
 <ion-content id="page2" class="background">
   <ion-card class="profile-pic">
     <ion-item id="myProfile-list-item25">
-      <ion-avatar *ngIf="avatar">
+      <ion-avatar *ngIf="avatar" class="profile-image-cropper">
         <img [src]="avatar | thumbnail: 'small' | async" id="avatar">
       </ion-avatar>
       <ion-buttons item-right (click)="goToEditProfile()" ><button ion-button clear><ion-icon name="create" color="primary"> Edit</ion-icon></button></ion-buttons>

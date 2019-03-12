@@ -86,8 +86,8 @@ page-my-profile {
   }
 
   .item-md ion-avatar img {
-    width: 30%;
-    height: 10%;
+    width: 100%;
+    height: 100%;
   }
 
   .item-md ion-avatar {
@@ -115,4 +115,21 @@ page-my-profile {
   #logout {
     color: color($colors, primary);
   }
+  .profile-image-cropper {
+    margin: 0 auto;
+    display: inline-block;
+    position: relative;
+    width: 180px !important;
+    height: 180px !important;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 4px solid #0CE847;
+  }
+
+  .profile-image-cropper img {
+    width: 100%;
+    height: 100%;
+   // border-radius: 50%;
+  }
+
 }
