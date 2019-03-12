@@ -44,6 +44,7 @@ export class SignupPage {
             localStorage.setItem('user_id', String(response.user.user_id));
             // navigate to home page
             this.navCtrl.parent.select(1);
+            this.user = {username: null};
           },
           error => {
             console.log(error);

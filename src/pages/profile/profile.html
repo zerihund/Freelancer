@@ -2,12 +2,7 @@
   <ion-card class="profile-pic">
     <ion-item id="myProfile-list-item25">
       <ion-avatar class="profile-image-cropper">
-        <ng-container
-          *ngIf="avatarExist; then avatarOk; else avatarNot">
-        </ng-container>
-        <ng-template #avatarOk>
-          <img [src]="avatar | thumbnail: 'small' | async" id="avatar">
-        </ng-template>
+        <img *ngIf="avatarExist; else avatarNot" [src]="avatar | thumbnail: 'small' | async" id="avatar">
         <ng-template #avatarNot>
           <img src="https://i.ibb.co/qkdb13p/avatar1.png" alt="avatar">
         </ng-template>

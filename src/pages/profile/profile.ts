@@ -93,6 +93,7 @@ export class ProfilePage {
           if (file.user_id === this.userId) {
             this.avatar = file.file_id.toString();
             this.avatarExist = true;
+            console.log(this.avatarExist);
           } else {
             this.avatarExist = false;
           }

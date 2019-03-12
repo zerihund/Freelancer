@@ -124,29 +124,34 @@ export class HomePage {
   };
 
   // save a job for later review
-  saveJob = (fileId: number, slidingItem: ItemSliding) => {
+  saveJob = (job, slidingItem: ItemSliding) => {
     // check if user is logged in
     // only logged in user can save a job
+    // cannot save your own job
     if (!this.userProvider.loggedIn) {
       this.showToast('Sign in first, then save it!');
     } else {
-      let id = {'file_id': fileId};
-      this.jobProvider.saveJob(id).subscribe(
-        (result: AddFavourite) => {
-          if (result.message === 'Favourite added') {
-            this.showToast('Saved to your list!');
-          }
-        },
-        // shows error reason in case of error
-        error => {
-          console.log(error);
-          if (error.error.reason.includes('Duplicate entry')) {
-            this.showToast('Item is already in your list!');
-          } else {
-            this.showToast('Try again! item was not saved.');
-          }
-        },
-      );
+      if(job.user_id === parseInt(localStorage.getItem('user_id'))) {
+        this.showToast('Cannot save your own job');
+      } else {
+        let id = {'file_id': job.file_id};
+        this.jobProvider.saveJob(id).subscribe(
+          (result: AddFavourite) => {
+            if (result.message === 'Favourite added') {
+              this.showToast('Saved to your list!');
+            }
+          },
+          // shows error reason in case of error
+          error => {
+            console.log(error);
+            if (error.error.reason.includes('Duplicate entry')) {
+              this.showToast('Item is already in your list!');
+            } else {
+              this.showToast('Try again! item was not saved.');
+            }
+          },
+        );
+      }
     }
     slidingItem.close();
   };
