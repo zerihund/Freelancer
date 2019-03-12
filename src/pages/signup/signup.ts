@@ -17,7 +17,12 @@ export class SignupPage {
   userAlert = false;
   usernameInput;
   passwordMatch;
-  user: User = {username: null};
+  user: User = {
+    username: '',
+    full_name: '',
+    email: '',
+    password: ''
+  };
   confirmPassword = '';
   validUsername = false;
   validFullName = false;
@@ -44,6 +49,13 @@ export class SignupPage {
             localStorage.setItem('user_id', String(response.user.user_id));
             // navigate to home page
             this.navCtrl.parent.select(1);
+            this.user = {
+              username: '',
+              full_name: '',
+              email: '',
+              password: ''
+            };
+            this.confirmPassword = '';
           },
           error => {
             console.log(error);

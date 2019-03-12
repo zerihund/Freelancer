@@ -12,7 +12,6 @@ import { stringify, unescape } from 'querystring';
 import { JobProvider } from '../../providers/job/job';
 import { UserProvider } from '../../providers/user/user';
 import { Chooser } from '@ionic-native/chooser';
-import { NgZone } from '@angular/core';
 import { Events } from 'ionic-angular';
 
 @Component({
@@ -29,6 +28,7 @@ export class EditProfilePage {
   private filePath = '';
   private skills: string;
   private oldAvatar: string;
+  private haveAvatar = false;
 
   constructor(
     public navCtrl: NavController,
@@ -46,6 +46,7 @@ export class EditProfilePage {
     // gets current user object & info passed from profile page
     this.fetchUserData();
     this.avatar = this.navParams.get('avatar');
+    this.haveAvatar = this.avatar !== null;
     this.editPhone = '0440508282';
   }
 
@@ -82,31 +83,35 @@ export class EditProfilePage {
   }
 
   // Updates profile info
-  private updateProfile() {
-    let id = parseInt(this.avatar);
-    let skills = {'description': this.skills};
-    let profileData = {
-      'email': this.editEmail,
-      // TODO add phone later
-    };
+  private updateProfile = () => {
+    if(this.avatar === null) {
+      this.showAlert('You have to upload your avatar')
+    } else {
+      let id = parseInt(this.avatar);
+      let skills = {'description': this.skills};
+      let profileData = {
+        'email': this.editEmail,
+        // TODO add phone later
+      };
 
-    this.updateContactInfo(profileData);
-    this.updateSkills(skills, id);
-    this.showAlert();
-  }
+      this.updateContactInfo(profileData);
+      this.updateSkills(skills, id);
+      this.showAlert('Profile information is updated');
+    }
+  };
 
   // chooses photo from local storage
-  private choosePhoto() {
+  private choosePhoto = () => {
     this.chooser.getFile('image').then(
       file => {
         this.file = new Blob([file.data], {type: file.mediaType});
         this.filePath = file.dataURI;
         this.changeAvatar();
       }).catch((error: any) => console.error(error));
-  }
+  };
 
   // takes new photo with camera
-  private takePhoto() {
+  private takePhoto = () => {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -122,19 +127,16 @@ export class EditProfilePage {
     }, (error) => {
       console.log(error);
     });
-  }
+  };
 
   // Changes the old avatar with the new one
-  private changeAvatar() {
-
+  private changeAvatar = () => {
     this.uploadNewAvatar();
-
     this.deleteOldAvatar();
-
-  }
+  };
 
   // Uploads image to server
-  private uploadNewAvatar() {
+  private uploadNewAvatar = () => {
     this.oldAvatar = this.avatar;
     const formData = new FormData();
     formData.append('title', 'avatar');
@@ -143,14 +145,13 @@ export class EditProfilePage {
     this.jobProvider.uploadAvatar(formData).subscribe(res => {
       this.avatar = res.file_id;
       this.showSpinner('Updating photo...', 2000);
-
       // Attaching the profile tag
       this.jobProvider.attachTag(res.file_id, 'profile_freelancer').
-        subscribe(error => {
-          console.log(error);
+        subscribe(res => {
+          console.log(res);
         });
     });
-  }
+  };
 
   // Deletes the old avatar image from serve
   private deleteOldAvatar = () => {
@@ -162,15 +163,19 @@ export class EditProfilePage {
   };
 
   // Gets skills of current user
-  private getSkills(id: number) {
-    // getting description property of old avatar
-    this.userProvider.getProfileImage(id).subscribe(
-      (response: Media) => {
-      }, error => {
-        console.log(error);
-      },
-    );
-  }
+  private getSkills = (id: number) => {
+    if (id === null) this.skills = '';
+    else {
+      // getting description property of old avatar
+      this.userProvider.getProfileImage(id).subscribe(
+        (response: Media) => {
+          this.skills = response.description;
+        }, error => {
+          console.log(error);
+        },
+      );
+    }
+  };
 
   // Converts dataURI to blob
   static dataURItoBlob(dataURI) {
@@ -190,7 +195,7 @@ export class EditProfilePage {
   }
 
   // shows spinner while uploading photo
-  private showSpinner(msg: string, time: number) {
+  private showSpinner = (msg: string, time: number) => {
     let loading = this.loadingCtrl.create({
       spinner: 'ios',
       content: msg,
@@ -200,30 +205,32 @@ export class EditProfilePage {
     setTimeout(() => {
       // hide spinner
       loading.dismiss().catch();
-
       this.navCtrl.pop().catch();
     }, time);
-  }
+  };
 
   // Update userInfo / Email & Phone
-  private updateContactInfo(profileData) {
+  private updateContactInfo = (profileData) => {
     this.userProvider.updateUserInfo(profileData).subscribe(
-      error => {
+      () => {
+      }, error => {
         console.log(error);
       });
-  }
+  };
 
   // Update skills
-  private updateSkills(skills, id) {
+  private updateSkills = (skills, id) =>{
     this.userProvider.updateAvatarInfo(skills, id).subscribe(
+      () => {
+      },
       error => {
         console.log(error);
       },
     );
-  }
+  };
 
   // Requests user information from serve
-  private fetchUserData() {
+  private fetchUserData = () => {
     let id = this.navParams.get('userId');
     this.userProvider.requestUserInfo(id).
       subscribe(
@@ -232,15 +239,14 @@ export class EditProfilePage {
         }, error => {
           console.log(error);
         });
-  }
+  };
 
   // Shows alert that user information is updates
-  showAlert() {
+  showAlert = (notice) => {
     const alert = this.alertCtrl.create({
-      title: 'Saved',
-      subTitle: 'Profile information has been updated.',
+      title: 'Notice',
+      subTitle: notice,
       buttons: ['OK'],
-      cssClass: 'alertCustomCss'
     });
     alert.present().catch();
   }

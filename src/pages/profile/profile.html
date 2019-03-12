@@ -1,8 +1,11 @@
 <ion-content id="page2" class="background">
   <ion-card class="profile-pic">
     <ion-item id="myProfile-list-item25">
-      <ion-avatar *ngIf="avatar" class="profile-image-cropper">
-        <img [src]="avatar | thumbnail: 'small' | async" id="avatar">
+      <ion-avatar class="profile-image-cropper">
+        <img *ngIf="avatarExist; else avatarNot" [src]="avatar | thumbnail: 'small' | async" id="avatar">
+        <ng-template #avatarNot>
+          <img src="https://i.ibb.co/qkdb13p/avatar1.png" alt="avatar">
+        </ng-template>
       </ion-avatar>
       <ion-buttons item-right (click)="goToEditProfile()" item-end>
         <button ion-button clear>

@@ -9,10 +9,7 @@ import { TabsControllerPage } from '../pages/tabs-controller/tabs-controller';
 import { LoginPage } from '../pages/login/login';
 import { SignupPage } from '../pages/signup/signup';
 import { JobInfoPage } from '../pages/job-info/job-info';
-import { NewOfferPage } from '../pages/new-offer/new-offer';
-import { UploadImagePage } from '../pages/upload-image/upload-image';
 import { ProfileViewPage } from '../pages/profile-view/profile-view';
-import { ReviewsPage } from '../pages/reviews/reviews';
 import { HttpClientModule } from '@angular/common/http';
 import { PipesModule } from '../pipes/pipes.module';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -44,10 +41,7 @@ import { Chooser } from '@ionic-native/chooser';
     LoginPage,
     SignupPage,
     JobInfoPage,
-    NewOfferPage,
-    UploadImagePage,
     ProfileViewPage,
-    ReviewsPage,
     CategoryPage,
     SavedAddsPage,
     SentOffersPage,
@@ -76,10 +70,7 @@ import { Chooser } from '@ionic-native/chooser';
     LoginPage,
     SignupPage,
     JobInfoPage,
-    NewOfferPage,
-    UploadImagePage,
     ProfileViewPage,
-    ReviewsPage,
     CategoryPage,
     SavedAddsPage,
     SentOffersPage,

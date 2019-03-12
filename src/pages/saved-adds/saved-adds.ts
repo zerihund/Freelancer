@@ -21,7 +21,6 @@ export class SavedAddsPage {
     private toastCtrl: ToastController,
     public navCtrl: NavController,
     public jobProvider: JobProvider,
-    public navParams: NavParams,
   ) {
   }
 
@@ -30,7 +29,7 @@ export class SavedAddsPage {
   }
 
   // Fetches all saved jobs of a user
-  private getSavedJobs() {
+    getSavedJobs = () => {
     this.savedJobsArray = [];
     // Gets list of saved jobs
     this.jobProvider.getSavedJobs().subscribe(
@@ -48,7 +47,7 @@ export class SavedAddsPage {
         });
       },
     );
-  }
+  };
 
   // removes a job from saved list
   unSaveJob = (fileId: number, slidingItem: ItemSliding, index: number) => {
@@ -86,9 +85,9 @@ export class SavedAddsPage {
   };
 
   // removes the unsaved job from the list view
-  removeJobFromList(index) {
+  removeJobFromList = (index) => {
     if (index > -1) {
       this.savedJobsArray.splice(index, 1);
     }
-  }
+  };
 }
