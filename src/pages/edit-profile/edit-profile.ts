@@ -28,6 +28,7 @@ export class EditProfilePage {
   private file: any;
   private filePath = '';
   private skills: string;
+  private oldAvatar: string;
 
   constructor(
     public navCtrl: NavController,
@@ -40,7 +41,6 @@ export class EditProfilePage {
     public alertCtrl: AlertController,
     public chooser: Chooser,
     public events: Events,
-    private zone: NgZone,
   ) {
 
     // gets current user object & info passed from profile page
@@ -63,20 +63,17 @@ export class EditProfilePage {
           role: 'choose photo',
           handler: () => {
             this.choosePhoto();
-            console.log('Choose Photo selected!');
           },
         }, {
           text: 'Take New Photo',
           role: 'take new photo',
           handler: () => {
             this.takePhoto();
-            console.log('Take New Photo selected!');
           },
         }, {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked!');
           },
         },
       ],
@@ -105,14 +102,11 @@ export class EditProfilePage {
         this.file = new Blob([file.data], {type: file.mediaType});
         this.filePath = file.dataURI;
         this.changeAvatar();
-        console.log(file ? file.name : 'canceled');
       }).catch((error: any) => console.error(error));
   }
 
   // takes new photo with camera
   private takePhoto() {
-    console.log('takephoto():');
-
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
@@ -132,46 +126,36 @@ export class EditProfilePage {
 
   // Changes the old avatar with the new one
   private changeAvatar() {
-    console.log('Changing Avatar');
 
     this.uploadNewAvatar();
 
-    this.refreshAvatar();
-
     this.deleteOldAvatar();
 
-    this.showSpinner('Updating photo...', 1500);
   }
 
   // Uploads image to server
   private uploadNewAvatar() {
+    this.oldAvatar = this.avatar;
     const formData = new FormData();
     formData.append('title', 'avatar');
     formData.append('description', this.skills);
     formData.append('file', this.file);
     this.jobProvider.uploadAvatar(formData).subscribe(res => {
       this.avatar = res.file_id;
-      console.log('File uploaded. file id: ' + res.file_id);
-      console.log('this.avatar type: ' + typeof this.avatar);
-      console.log('res.file_id type: ' + typeof res.file_id);
+      this.showSpinner('Updating photo...', 2000);
+
       // Attaching the profile tag
       this.jobProvider.attachTag(res.file_id, 'profile_freelancer').
-        subscribe(res => {
-          console.log(res);
+        subscribe(error => {
+          console.log(error);
         });
     });
   }
 
   // Deletes the old avatar image from serve
   private deleteOldAvatar = () => {
-    console.log('deleteOldAvatar():');
-    let oldAvatar = parseInt(this.avatar);
-    console.log('old avatar: ' + oldAvatar + ' type: ' + typeof oldAvatar);
-
-    this.jobProvider.deleteJob(oldAvatar).subscribe(res => {
-        console.log('Old avatar Deleted');
-        console.log(res);
-      },
+    let oldAvatar = parseInt(this.oldAvatar);
+    this.jobProvider.deleteJob(oldAvatar).subscribe(
       error => {
         console.log(error);
       });
@@ -182,7 +166,6 @@ export class EditProfilePage {
     // getting description property of old avatar
     this.userProvider.getProfileImage(id).subscribe(
       (response: Media) => {
-        this.skills = response.description;
       }, error => {
         console.log(error);
       },
@@ -217,6 +200,7 @@ export class EditProfilePage {
     setTimeout(() => {
       // hide spinner
       loading.dismiss().catch();
+
       this.navCtrl.pop().catch();
     }, time);
   }
@@ -224,9 +208,7 @@ export class EditProfilePage {
   // Update userInfo / Email & Phone
   private updateContactInfo(profileData) {
     this.userProvider.updateUserInfo(profileData).subscribe(
-      result => {
-        console.log(result);
-      }, error => {
+      error => {
         console.log(error);
       });
   }
@@ -234,9 +216,6 @@ export class EditProfilePage {
   // Update skills
   private updateSkills(skills, id) {
     this.userProvider.updateAvatarInfo(skills, id).subscribe(
-      result => {
-        console.log(result);
-      },
       error => {
         console.log(error);
       },
@@ -263,10 +242,6 @@ export class EditProfilePage {
       buttons: ['OK'],
     });
     alert.present().catch();
-  }
-
-  private refreshAvatar() {
-    //TODO
   }
 }
 
