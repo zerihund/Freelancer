@@ -65,9 +65,9 @@ export class OwnJobsPage {
   // showing alert when delete successfully
   showAlert = (notice: string) => {
     let alert = this.alertController.create({
-      title: 'NOTICE',
       subTitle: notice,
       buttons: ['OK'],
+      cssClass: 'alertCustomCss'
     });
     alert.present().catch();
   };

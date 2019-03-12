@@ -238,8 +238,9 @@ export class EditProfilePage {
   showAlert() {
     const alert = this.alertCtrl.create({
       title: 'Saved',
-      subTitle: 'Profile information is updated.',
+      subTitle: 'Profile information has been updated.',
       buttons: ['OK'],
+      cssClass: 'alertCustomCss'
     });
     alert.present().catch();
   }

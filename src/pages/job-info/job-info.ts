@@ -60,14 +60,14 @@ export class JobInfoPage {
     this.jobProvider.checkBid(this.job.file_id).subscribe(res => {
       res.forEach(item => {
         if (item.user_id === parseInt(comment.user_id)) {
-          this.showAlert('You already offered this job');
+          this.showAlert('You have already offered to this job!');
           this.isOffered = true;
         }
       });
       if (!this.isOffered) {
         this.jobProvider.bidJob(bid).subscribe(res => {
           console.log(res);
-          this.showAlert('Bidding successfully');
+          this.showAlert('You bid has been sent');
           this.goToHome();
         });
       }
@@ -93,9 +93,9 @@ export class JobInfoPage {
   // showing alert when bidding successfully
   showAlert = (notice: string) => {
     let alert = this.alertController.create({
-      title: 'NOTICE',
       subTitle: notice,
       buttons: ['OK'],
+      cssClass: 'alertCustomCss',
     });
     alert.present().catch();
   };
