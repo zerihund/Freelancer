@@ -22,6 +22,7 @@ export class ProfilePage {
   private avatar: string;
   private numberOfOwnJobs: number;
   private userFiles: any;
+  private avatarExist = false;
 
   constructor(
     public navCtrl: NavController,
@@ -35,7 +36,6 @@ export class ProfilePage {
     if (this.user === null) {
       this.user = JSON.parse(localStorage.getItem('user')).user;
     }
-    console.log(this.user);
     this.getProfileInfo();
   }
 
@@ -72,8 +72,7 @@ export class ProfilePage {
     localStorage.clear();
     this.userProvider.loggedIn = false;
     this.user = null;
-    console.log('logout btn pressed');
-    console.log(this.userProvider.loggedIn);
+    this.avatarExist = false;
     this.navCtrl.parent.select(1);
   };
 
@@ -90,12 +89,12 @@ export class ProfilePage {
   getProfileImage = () => {
     this.jobProvider.getFilesByTag('profile_freelancer').subscribe(
       (response: TagReponse[]) => {
-        console.log(response);
         response.forEach(file => {
           if (file.user_id === this.userId) {
-            console.log(file.user_id);
             this.avatar = file.file_id.toString();
-            console.log('avatar id is: ' + this.avatar);
+            this.avatarExist = true;
+          } else {
+            this.avatarExist = false;
           }
         });
       },
@@ -115,5 +114,5 @@ export class ProfilePage {
         console.log(error);
       },
     );
-  }
+  };
 }
