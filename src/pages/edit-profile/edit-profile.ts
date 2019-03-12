@@ -12,7 +12,6 @@ import { stringify, unescape } from 'querystring';
 import { JobProvider } from '../../providers/job/job';
 import { UserProvider } from '../../providers/user/user';
 import { Chooser } from '@ionic-native/chooser';
-import { NgZone } from '@angular/core';
 import { Events } from 'ionic-angular';
 
 @Component({
@@ -28,6 +27,7 @@ export class EditProfilePage {
   private file: any;
   private filePath = '';
   private skills: string;
+  private oldAvatar: string;
 
   constructor(
     public navCtrl: NavController,
@@ -40,7 +40,6 @@ export class EditProfilePage {
     public alertCtrl: AlertController,
     public chooser: Chooser,
     public events: Events,
-    private zone: NgZone,
   ) {
 
     // gets current user object & info passed from profile page
@@ -132,27 +131,26 @@ export class EditProfilePage {
 
   // Uploads image to server
   private uploadNewAvatar() {
+    this.oldAvatar = this.avatar;
     const formData = new FormData();
     formData.append('title', 'avatar');
     formData.append('description', this.skills);
     formData.append('file', this.file);
     this.jobProvider.uploadAvatar(formData).subscribe(res => {
       this.avatar = res.file_id;
+      this.showSpinner('Updating photo...', 2000);
       // Attaching the profile tag
       this.jobProvider.attachTag(res.file_id, 'profile_freelancer').
         subscribe(res => {
           console.log(res);
         });
-      this.showSpinner('Updating photo...', 1500);
     });
   }
 
   // Deletes the old avatar image from serve
   private deleteOldAvatar = () => {
-    let oldAvatar = parseInt(this.avatar);
-    this.jobProvider.deleteJob(oldAvatar).subscribe(res => {
-        console.log(res);
-      },
+    let oldAvatar = parseInt(this.oldAvatar);
+    this.jobProvider.deleteJob(oldAvatar).subscribe(
       error => {
         console.log(error);
       });

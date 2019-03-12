@@ -9,34 +9,34 @@
 
   <form id="newPost-form18" (ngSubmit)="onUpload()">
     <ion-item id="newPost-input13">
-      <ion-label stacked>
+      <ion-label stacked style="font-size: large">
         Title:
       </ion-label>
-      <ion-input name="Title" [(ngModel)]="title" type="text" placeholder="Give a title for your job"></ion-input>
+      <ion-input name="Title" [(ngModel)]="title" type="text" placeholder="Give a title for your job" style="border-bottom:1px solid #32db64"></ion-input>
     </ion-item>
     <ion-item id="newPost-input14">
-      <ion-label stacked>
+      <ion-label stacked style="font-size: large" >
         Description:
       </ion-label>
-      <ion-textarea rows="3" name="Description" [(ngModel)]="description" type="text" placeholder="Explain what you need to be done"></ion-textarea>
+      <ion-textarea style="border:1px solid #32db64; border-radius:4px " rows="3" name="Description" [(ngModel)]="description" type="text" placeholder="Explain what you need to be done"></ion-textarea>
     </ion-item>
     <ion-item id="newPost-input15">
-      <ion-label stacked>
+      <ion-label stacked style="font-size: large">
         Place:
       </ion-label>
-      <ion-input name="Place" [(ngModel)]="place" type="text" placeholder="Area/Address..."></ion-input>
+      <ion-input name="Place" [(ngModel)]="place" type="text" placeholder="Area/Address..." style="border-bottom:1px solid #32db64" ></ion-input>
     </ion-item>
     <ion-item id="newPost-input16">
-      <ion-label stacked>
+      <ion-label stacked style="font-size: large">
         Price:
       </ion-label>
-      <ion-input name="Price" [(ngModel)]="price" type="text" placeholder="Set your price for the job"></ion-input>
+      <ion-input name="Price" [(ngModel)]="price" type="text" placeholder="Set your price for the job" style="border-bottom:1px solid #32db64"></ion-input>
     </ion-item>
     <ion-item id="newPost-select2">
-      <ion-label>
+      <ion-label style="font-size: large">
         Category:
       </ion-label>
-      <ion-select [(ngModel)]="category" name="Category">
+      <ion-select [(ngModel)]="category" name="Category" placeholder="Select the category" style="border-bottom:1px solid #32db64">
         <ion-option>IT and Tech</ion-option>
         <ion-option>Housekeeping</ion-option>
         <ion-option>Home Renovation</ion-option>
@@ -45,21 +45,37 @@
       </ion-select>
     </ion-item>
     <ion-item id="newPost-input17" >
-      <ion-input color="secondary" accept="image/*" (change)="handleChange($event)" name="File" type="file">Choose file</ion-input>
+      <ion-grid>
+        <ion-row>
+     <button id="take-photo1" ion-button color="secondary" block style="border-radius:50px 50px 50px 50px;"
+              type="submit">Take photo
+      </button>
+          <button clear id="take-or" ion-button color="secondary" block style="border-radius:50px 50px 50px 50px;"
+                  type="submit">OR
+          </button>
+      <button id="upload-photo" ion-button color="secondary" block style="border-radius:50px 50px 50px 50px;"
+              type="submit">
+        Upload photo
+      </button>
+        </ion-row>
+      </ion-grid>
     </ion-item>
     <ion-item id="newPost-input18">
-      <ion-label stacked>
+      <ion-label stacked style="font-size: large">
         Deadline:
       </ion-label>
-      <ion-input name="Deadline" [(ngModel)]="deadline" type="date"></ion-input>
+      <ion-input name="Deadline" [(ngModel)]="deadline" type="date" style="border-bottom:1px solid #32db64"></ion-input>
     </ion-item>
+    <ion-card>
+      <img [src]="fileData">
+    </ion-card>
     <button  type="submit" id="newPost-button9" ion-button color="secondary" block style="border-radius:50px 50px 50px 50px;" (click)="goToHome()">
       <ion-icon name="checkmark-circle"></ion-icon>
       Post it!
     </button>
+
+    <ion-input color="secondary" accept="image/*" (change)="handleChange($event)" name="File" type="file">Choose file</ion-input>
   </form>
   </ion-card>
-  <ion-card>
-    <img [src]="fileData">
-  </ion-card>
+
 </ion-content>

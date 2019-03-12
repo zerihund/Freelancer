@@ -32,7 +32,6 @@ export class SignupPage {
     this.mediaProvider.registerUser(this.user).subscribe(
       (response: RegisterResponse) => {
         console.log(response);
-
         // log user in
         this.mediaProvider.login(this.user).subscribe(
           (response: LoginResponse) => {
