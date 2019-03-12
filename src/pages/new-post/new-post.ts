@@ -22,39 +22,53 @@ export class NewPostPage {
   fileData: string = '';
   file: File;
 
-  checkTitle = false;
-  checkDescription = false;
-  checkPlace = false;
-  checkPrice = false;
-  checkDeadline = false;
-  checkCate = false;
-  checkFile = false;
+  checkTitle = true;
+  checkDescription = true;
+  checkPlace = true;
+  checkPrice = true;
+  checkDeadline = true;
+  checkCate = true;
+  checkFile = true;
 
   validTitle = () => {
-    this.title.length === 0 ? this.checkTitle = true : this.checkTitle = false
+    this.title.length === 0 ? this.checkTitle = false : this.checkTitle = true
   };
 
   validDescription = () => {
-    this.description.length === 0 ? this.checkDescription = true : this.checkDescription = false
+    this.description.length === 0 ? this.checkDescription = false : this.checkDescription = true
   };
 
   validPlace = () => {
-    this.place.length === 0 ? this.checkPlace = true : this.checkPlace = false
+    this.place.length === 0 ? this.checkPlace = false : this.checkPlace = true
   };
 
   validPrice = () => {
-    this.price.length === 0 ? this.checkPrice = true : this.checkPrice = false
+    this.price.length === 0 ? this.checkPrice = false : this.checkPrice = true
+  };
+
+  validDeadline = () => {
+    this.deadline.length === 0 ? this.checkDeadline = false : this.checkDeadline = true
+  };
+
+  validCategory = () => {
+    this.category.length === 0 ? this.checkCate = false : this.checkCate = true
+  };
+
+  validFile = () => {
+    this.file === null ? this.checkFile = false : this.checkFile = true
   };
 
   // check input and upload job to server
   onUpload = () => {
-    if(this.title.length === 0) this.checkTitle = true;
-    else if (this.description.length === 0) this.checkDescription = true;
-    else if (this.place.length === 0) this.checkPlace = true;
-    else if (this.price.length === 0) this.checkPrice = true;
-    else if (this.deadline.length === 0) this.checkDeadline = true;
-    else if (this.category.length === 0) this.checkCate = true;
-    else if (this.file === null) this.checkFile = true;
+    if(this.title.length === 0) this.checkTitle = false;
+    else if (this.description.length === 0) this.checkDescription = false;
+    else if (this.place.length === 0) this.checkPlace = false;
+    else if (this.price.length === 0) this.checkPrice = false;
+    else if (this.category.length === 0) this.checkCate = false;
+    else if (this.deadline.length === 0) this.checkDeadline = false;
+
+    //this is for u Hamed
+    else if (this.file === null) this.checkFile = false;
     else {
       const myObject = {
         description: this.description,
@@ -69,28 +83,12 @@ export class NewPostPage {
       formData.append('description', JSON.stringify(myObject));
       formData.append('file', this.file);
       this.jobProvider.upload(formData).subscribe((res) => {
-        //this.presentLoadingDefault();
-        console.log(res);
-        this.jobProvider.attachTag(res.file_id, 'freelancer').subscribe(res => {
-          console.log(res);
+        this.jobProvider.attachTag(res.file_id, 'freelancer').subscribe(() => {
+          this.goToHome();
         });
       });
     }
   };
-
-  // show loading spinner
-  presentLoadingDefault() {
-    const loading = this.loadingCtrl.create({
-      content: 'Please wait...',
-    });
-
-    loading.present().catch();
-
-    setTimeout(() => {
-      loading.dismiss().catch();
-      this.navCtrl.pop().catch();
-    }, 5000);
-  }
 
   // change event in file input
   handleChange = ($event) => {

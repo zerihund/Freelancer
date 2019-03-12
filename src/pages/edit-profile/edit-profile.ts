@@ -203,8 +203,7 @@ export class EditProfilePage {
   // Update userInfo / Email & Phone
   private updateContactInfo(profileData) {
     this.userProvider.updateUserInfo(profileData).subscribe(
-      result => {
-        console.log(result);
+      () => {
       }, error => {
         console.log(error);
       });
@@ -213,8 +212,7 @@ export class EditProfilePage {
   // Update skills
   private updateSkills(skills, id) {
     this.userProvider.updateAvatarInfo(skills, id).subscribe(
-      result => {
-        console.log(result);
+      () => {
       },
       error => {
         console.log(error);
