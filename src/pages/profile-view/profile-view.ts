@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { ReviewsPage } from '../reviews/reviews';
 
 @Component({
   selector: 'page-profile-view',
@@ -11,8 +10,5 @@ export class ProfileViewPage {
   // should be each tab's root Page
   constructor(public navCtrl: NavController) {
   }
-  goToReviews(params){
-    if (!params) params = {};
-    this.navCtrl.push(ReviewsPage);
-  }
+
 }

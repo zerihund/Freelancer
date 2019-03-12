@@ -48,30 +48,40 @@ export class JobInfoPage {
 
   // send offer to server
   goToSendOffer = () => {
-    const comment = {
-      user_id: localStorage.getItem('user_id'),
-      price: this.priceOffer,
-      comment: this.comment,
-    };
-    const bid = {
-      file_id: this.job.file_id,
-      comment: JSON.stringify(comment),
-    };
-    this.jobProvider.checkBid(this.job.file_id).subscribe(res => {
-      res.forEach(item => {
-        if (item.user_id === parseInt(comment.user_id)) {
-          this.showAlert('You already offered this job');
-          this.isOffered = true;
-        }
-      });
-      if (!this.isOffered) {
-        this.jobProvider.bidJob(bid).subscribe(res => {
-          console.log(res);
-          this.showAlert('Bidding successfully');
-          this.goToHome();
+    //check if user is logged in
+    if(localStorage.getItem('token') === null) {
+      this.askLogin('You have to login to bid this job');
+    } else {
+      //check if user bid their own job
+      if(this.job.user_id === parseInt(localStorage.getItem('user_id'))) {
+        this.showAlert('You cannot bid your own job');
+      } else {
+        const comment = {
+          user_id: localStorage.getItem('user_id'),
+          price: this.priceOffer,
+          comment: this.comment,
+        };
+        const bid = {
+          file_id: this.job.file_id,
+          comment: JSON.stringify(comment),
+        };
+        this.jobProvider.checkBid(this.job.file_id).subscribe(res => {
+          res.forEach(item => {
+            if (item.user_id === parseInt(comment.user_id)) {
+              this.showAlert('You already offered this job');
+              this.isOffered = true;
+            }
+          });
+          if (!this.isOffered) {
+            this.jobProvider.bidJob(bid).subscribe(res => {
+              console.log(res);
+              this.showAlert('Bidding successfully');
+              this.goToHome();
+            });
+          }
         });
       }
-    });
+    }
   };
 
   // get user avatar
@@ -94,8 +104,32 @@ export class JobInfoPage {
   showAlert = (notice: string) => {
     let alert = this.alertController.create({
       title: 'NOTICE',
-      subTitle: notice,
+      message: notice,
       buttons: ['OK'],
+    });
+    alert.present().catch();
+  };
+
+  // showing alert when not login and want to bid
+  askLogin = (notice: string) => {
+    let alert = this.alertController.create({
+      title: 'NOTICE',
+      message: notice,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Okay',
+          handler: () => {
+            this.navCtrl.parent.select(2);
+          }
+        }
+      ]
     });
     alert.present().catch();
   };
