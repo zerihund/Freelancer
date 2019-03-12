@@ -15,10 +15,10 @@ export class NewPostPage {
 
   title: string = '';
   description: string = '';
-  place: string = 'Vantaa';
-  price: string = '1000 euros';
-  deadline: string = '28/2/2019';
-  category: string = 'Home Renovation';
+  place: string = '';
+  price: string = '';
+  deadline: string = '';
+  category: string = '';
   fileData = '';
   file: File;
 
@@ -31,8 +31,6 @@ export class NewPostPage {
       category: this.category,
       user: localStorage.getItem('user'),
     };
-    console.log(myObject);
-
     const formData = new FormData();
     formData.append('title', this.title);
     formData.append('description', JSON.stringify(myObject));

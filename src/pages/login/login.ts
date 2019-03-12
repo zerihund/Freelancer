@@ -1,6 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
 import {AlertController, NavController} from 'ionic-angular';
-import {HomePage} from '../home/home';
 import {SignupPage} from '../signup/signup';
 import {UserProvider} from "../../providers/user/user";
 import {LoginResponse, User} from '../../interfaces/Media';
@@ -23,13 +22,11 @@ export class LoginPage {
       (response: LoginResponse) => {
         console.log(response);
         this.userProvider.loggedIn = true;
-        localStorage.setItem('user', JSON.stringify(response.user));
+        localStorage.setItem('user', JSON.stringify(response));
         localStorage.setItem('token', response.token);
         localStorage.setItem('username', response.user.username);
         localStorage.setItem('email', response.user.email);
         localStorage.setItem('user_id', String(response.user.user_id));
-        console.log('UserId');
-        console.log(localStorage.getItem('user_id'));
         this.navCtrl.parent.select(1);
       },
       error => {

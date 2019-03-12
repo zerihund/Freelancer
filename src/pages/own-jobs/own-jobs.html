@@ -16,11 +16,12 @@
         <h2 *ngIf="job.title.includes('_accepted') ;else other_content">
           {{job.title | acceptTitle}}
         </h2>
-        <ng-template #other_content>{{job.title}}</ng-template>
-        <p class="accept" *ngIf="job.title.includes('_accepted')">Accepted</p>
+        <ng-template #other_content><h2>{{job.title}}</h2></ng-template>
+        <p id="accept" *ngIf="job.title.includes('_accepted')">Accepted</p>
       </ion-item>
-      <ion-item color="positive" (click)="goToOffers(job)" id="myOpenJobs-list-item84">
-        <div class="my-font">{{job.file_id | bidnumber | async}} bid(s)</div>
+      <ion-item color="positive" id="myOpenJobs-list-item84">
+        <button ion-button (click)="goToOffers(job)">{{job.file_id | bidnumber | async}} bid(s)</button>
+        <button ion-button item-right="true" (click)="deleteJob(job.file_id)">Delete</button>
       </ion-item>
     </ion-card>
   </ion-card>

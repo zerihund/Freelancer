@@ -3,6 +3,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { JobProvider } from '../../providers/job/job';
 import { OffersPage } from '../offers/offers';
 import { JobInfoPage } from '../job-info/job-info';
+import { AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-my-open-jobs',
@@ -18,6 +19,7 @@ export class OwnJobsPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public jobProvider: JobProvider,
+    public alertController: AlertController
   ) {
   }
 
@@ -41,13 +43,32 @@ export class OwnJobsPage {
   // go to job info page
   goToJobInfo = (job) => {
     console.log(job);
-    this.navCtrl.push(JobInfoPage,{ job: job }).catch();
+    this.navCtrl.push(JobInfoPage, { job: job }).catch();
   };
 
   // go to Offer page
   goToOffers = (job) => {
     this.jobProvider.getNumBid(job.file_id).subscribe(res => {
-      this.navCtrl.push(OffersPage, { bidsArray: res, job: job}).catch();
+      this.navCtrl.push(OffersPage, { bidsArray: res, job: job }).catch();
     });
+  };
+
+  // delete own job
+  deleteJob = (id) => {
+    this.jobProvider.deleteJob(id).subscribe(res => {
+      this.showAlert('Delete successfully');
+      this.navCtrl.pop().catch();
+      console.log(res);
+    });
+  };
+
+  // showing alert when delete successfully
+  showAlert = (notice: string) => {
+    let alert = this.alertController.create({
+      title: 'NOTICE',
+      subTitle: notice,
+      buttons: ['OK'],
+    });
+    alert.present().catch();
   };
 }

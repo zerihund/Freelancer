@@ -32,6 +32,7 @@ import { OnMapPage } from "../pages/on-map/on-map";
 import { GoogleMaps } from "@ionic-native/google-maps";
 import { SearchPage } from '../pages/search/search';
 import { JobInfo2Page } from '../pages/job-info2/job-info2';
+import { Chooser } from '@ionic-native/chooser';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { JobInfo2Page } from '../pages/job-info2/job-info2';
     UserProvider,
     Camera,
     GoogleMaps,
+    Chooser,
   ],
 })
 export class AppModule {
