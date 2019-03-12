@@ -95,6 +95,7 @@ export class ProfilePage {
             this.avatarExist = true;
             console.log(this.avatarExist);
           } else {
+            this.avatar = null;
             this.avatarExist = false;
           }
         });
