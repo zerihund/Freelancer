@@ -12,7 +12,10 @@ import {NgForm} from "@angular/forms";
 })
 export class LoginPage {
   @ViewChild('lf') loginForm: NgForm;
-  user: User = {username: null};
+  user: User = {
+    username: '',
+    password: ''
+  };
 
   constructor(public navCtrl: NavController, private userProvider: UserProvider, private alertController: AlertController) {
   }
@@ -28,6 +31,10 @@ export class LoginPage {
         localStorage.setItem('email', response.user.email);
         localStorage.setItem('user_id', String(response.user.user_id));
         this.navCtrl.parent.select(1);
+        this.user = {
+          username: '',
+          password: ''
+        };
       },
       error => {
         console.log(error);

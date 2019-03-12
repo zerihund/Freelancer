@@ -26,7 +26,7 @@ export class EditProfilePage {
   private editEmail: string;
   private file: any;
   private filePath = '';
-  private skills: string;
+  private skills: string = '';
   private oldAvatar: string;
   private haveAvatar = false;
 
