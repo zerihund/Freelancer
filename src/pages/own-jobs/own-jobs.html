@@ -17,7 +17,7 @@
           {{job.title | acceptTitle}}
         </h2>
         <ng-template #other_content><h2>{{job.title}}</h2></ng-template>
-        <p id="accept" *ngIf="job.title.includes('_accepted')">Accepted</p>
+        <p id="accept" *ngIf="job.title.includes('_accepted')" style="color:#32db64">Accepted</p>
       </ion-item>
       <ion-item color="positive" id="myOpenJobs-list-item84">
         <button ion-button (click)="goToOffers(job)">{{job.file_id | bidnumber | async}} bid(s)</button>

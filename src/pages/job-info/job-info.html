@@ -6,11 +6,16 @@
       </ion-item>
 
       <div id="jobInfo-markdown13" style="text-align:center;" class="show-list-numbers-and-dots">
-        <p style="color:#000000;font-size:24px;">
+        <p *ngIf="job.title.includes('_accepted') ;else other_content" style="color:#000000;font-size:24px;">
           <strong>
-            {{job.title}}
+            {{job.title | acceptTitle}}
           </strong>
         </p>
+        <ng-template #other_content>
+          <p style="color:#000000;font-size:24px;">
+            <strong>{{job.title}}</strong>
+          </p>
+        </ng-template>
         <P class="price">{{descriptionJSON.price}}</P>
       </div>
 
@@ -43,7 +48,7 @@
   </ion-card>
   <ion-card id="jobInfo-card23">
     <ion-list>
-      <h2 margin-top="2px"  id="jobInfo-heading1" style="color:#32db64;text-align:center;">
+      <h2 margin-top="2px" id="jobInfo-heading1" style="color:#32db64;text-align:center;">
         Set your price:
       </h2>
       <form id="jobInfo-form15">
