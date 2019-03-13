@@ -34,7 +34,7 @@
         <ion-label>
           <ion-icon name="lock" color="secondary"></ion-icon>
         </ion-label>
-        <ion-input (ionBlur)="passwordCheck()" [(ngModel)]="user.password" required name="password" type="password" placeholder="Password"></ion-input>
+        <ion-input (ionBlur)="passwordCheck()" [(ngModel)]="user.password" required name="password" type="password" placeholder="Password" style="margin-left: 2px"></ion-input>
       </ion-item>
       <ion-label *ngIf="validPassword" color="danger" >The password must be at least 5 characters</ion-label>
       <ion-item id="signup-input9">
