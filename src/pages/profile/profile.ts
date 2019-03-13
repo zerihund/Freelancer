@@ -94,11 +94,12 @@ export class ProfilePage {
             this.avatar = file.file_id.toString();
             this.avatarExist = true;
             console.log(this.avatarExist);
-          } else {
-            this.avatar = null;
-            this.avatarExist = false;
           }
         });
+        if(!this.avatarExist) {
+          this.avatar = null;
+          this.avatarExist = false;
+        }
       },
       error => {
         console.log(error);
