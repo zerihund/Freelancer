@@ -20,15 +20,14 @@ ion-card.card{
   #take-photo1{
     width: 40%;
     margin-right: 3%;
-    margin-left: 5%;
+    margin-left: 3%;
   }
   #upload-photo{
     width: 40%;
     margin-left: 3%;
   }
   #newPost-form18{
-    margin: auto;
-    margin-right: 4px;
+    margin: auto 4px auto auto;
   }
   #take-or{
     width: 5%;
@@ -46,5 +45,8 @@ ion-card.card{
     margin-bottom: 3%;
   }
 
+  #newPost-input17 {
+    padding-left: 0;
+  }
 
 }

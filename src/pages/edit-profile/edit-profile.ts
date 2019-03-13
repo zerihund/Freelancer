@@ -164,7 +164,7 @@ export class EditProfilePage {
 
   // Gets skills of current user
   private getSkills = (id: number) => {
-    if (id === null) this.skills = '';
+    if (isNaN(id)) this.skills = '';
     else {
       // getting description property of old avatar
       this.userProvider.getProfileImage(id).subscribe(
