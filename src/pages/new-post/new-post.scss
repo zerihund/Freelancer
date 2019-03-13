@@ -18,12 +18,13 @@ ion-card.card{
     height: auto;
   }
   #take-photo1{
-    width: 40%;
+    width: 25%;
+
     margin-right: 3%;
-    margin-left: 3%;
+    margin-left: 18%;
   }
   #upload-photo{
-    width: 40%;
+    width: 25%;
     margin-left: 3%;
   }
   #newPost-form18{
@@ -44,9 +45,9 @@ ion-card.card{
   #newPost-input16{
     margin-bottom: 3%;
   }
-
-  #newPost-input17 {
-    padding-left: 0;
+  .larger{
+    font-size: 100%;
   }
+
 
 }
