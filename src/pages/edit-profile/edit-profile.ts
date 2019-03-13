@@ -105,7 +105,7 @@ export class EditProfilePage {
     this.chooser.getFile('image').then(
       file => {
         this.file = new Blob([file.data], {type: file.mediaType});
-        this.filePath = file.dataURI;
+        // this.filePath = file.dataURI;
         this.changeAvatar();
       }).catch((error: any) => console.error(error));
   };
@@ -121,7 +121,7 @@ export class EditProfilePage {
 
     this.camera.getPicture(options).then((imageData) => {
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.filePath = base64Image;
+      // this.filePath = base64Image;
       this.file = EditProfilePage.dataURItoBlob(base64Image);
       this.changeAvatar();
     }, (error) => {

@@ -3,6 +3,8 @@ import { LoadingController, NavController } from 'ionic-angular';
 import { JobProvider } from '../../providers/job/job';
 import { Chooser } from '@ionic-native/chooser';
 import { ToastController } from 'ionic-angular';
+import { Camera, CameraOptions } from '@ionic-native/camera';
+import { stringify, unescape } from 'querystring';
 
 @Component({
   selector: 'page-new-post',
@@ -12,7 +14,10 @@ export class NewPostPage {
 
   constructor(
     public loadingCtrl: LoadingController, public navCtrl: NavController,
-    public jobProvider: JobProvider, public chooser: Chooser, public toastController: ToastController) {
+    public jobProvider: JobProvider, public chooser: Chooser,
+    public toastController: ToastController,
+    public camera: Camera,
+  ) {
   }
 
   title: string = '';
@@ -97,13 +102,50 @@ export class NewPostPage {
 
   onChoose = () => {
     this.chooser.getFile('image/jpeg/png/jpg/*').then(file => {
-      if (!file.mediaType.includes('image')) this.showToast('Please choose only image file')
+      if (!file.mediaType.includes('image')) this.showToast(
+        'Please choose only image file');
       else if (file.mediaType.includes('image')) {
         this.fileData = file.dataURI;
+        console.log(this.fileData);
       }
       this.myBlob = new Blob([file.data], { type: file.mediaType });
     }).catch((error: any) => console.error(error));
   };
+
+  // takes new photo with camera
+  takePhoto = () => {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+    };
+
+    this.camera.getPicture(options).then((imageData) => {
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.fileData = base64Image;
+      this.myBlob = NewPostPage.dataURItoBlob(base64Image);
+    }, (error) => {
+      console.log(error);
+    });
+  };
+
+  // Converts dataURI to blob
+  static dataURItoBlob(dataURI) {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    let byteString = dataURI.split(',')[0].indexOf('base64') >= 0 ? atob(
+      dataURI.split(',')[1]) : unescape(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    const ia = new Uint8Array(byteString.length);
+    for (let i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ia], {type: mimeString});
+  }
 
   // shows a toast with provided message
   showToast = (msg: string) => {
