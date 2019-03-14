@@ -6,7 +6,7 @@
 
 <ion-content padding class="background">
   <ion-list id="home-list4">
-    <ion-item-sliding *ngFor="let job of jobArray">
+    <ion-item-sliding *ngFor="let job of jobArray" #slidingItem>
       <ion-item color="none" (click)="goToJobInfo(job)" id="home-list-item9">
         <ion-thumbnail item-left>
           <img [src]="job.file_id | thumbnail: 'small' | async">
@@ -16,8 +16,8 @@
         <p>{{getDescription(job.description).description}}</p>
       </ion-item>
       <ion-item-options side="left">
-        <button ion-button color="balanced">
-          Offer
+        <button (click)="saveJob(job, slidingItem)" ion-button expandable color="balanced">
+          <ion-icon name="star"></ion-icon>
         </button>
       </ion-item-options>
     </ion-item-sliding>
